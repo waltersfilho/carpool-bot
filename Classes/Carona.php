@@ -18,7 +18,6 @@
 			$this->location = $data["location"];
 			$this->route = $data["route"];
         }
-		x
 		public function __toString(){
 			return substr($this->travel_hour, 0, -3) . " - @" . $this->username . " - " . $this.spots . " vagas - " . $location;
 		}
