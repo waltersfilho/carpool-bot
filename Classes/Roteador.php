@@ -109,10 +109,8 @@
 
 					/*Comandos de viagem*/
 					case 'ida':
-						error_log("Nova carona de ida");
 						if (!isset($args[3])) {
 							error_log("if ");
-							$resultado = $dao->getListaIda($chat_id);
 
 							$texto = "<b>Ida para o Fundão</b>\n";
 							foreach ($resultado as $carona){
@@ -122,7 +120,6 @@
 							TelegramConnect::sendMessage($chat_id, $texto);
 						}
 						elseif (isset($args[3])) {
-							error_log("else if");
 							$horarioRaw = $args[1];
 							$horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
 
@@ -132,16 +129,11 @@
 							$location = $args[3];
 
 							if ($horarioValido){
-								error_log("Horario valido");
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
 								$travel_hour = $hora . ":" . $minuto;
 				
-								error_log("Horario: " . $travel_hour);
-								error_log("spots: " . $spots);
-								error_log("location: " . $location);
-
 								$dao->adicionarIda($chat_id, $user_id, $username, $travel_hour, $spots, $location);
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
@@ -177,7 +169,7 @@
 
 								$travel_hour = $hora . ":" . $minuto;
 
-								$dao->adicionarVolta($chat_id, $user_id, $username, $travel_hour);
+								$dao->adicionarVolta($chat_id, $user_id, $username, $travel_hour, $spots, $location);
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
 

@@ -36,12 +36,6 @@
 		public function adicionarIda($chat_id, $user_id, $username, $travel_hour, $spots, $location){
 			$travel_hour = $this->acertarStringHora($travel_hour);
 			
-			error_log("Adicionar ida");
-
-			error_log("horario: " . $travel_hour);
-			error_log("spots: " . $spots);
-			error_log("location: " . $location);
-
 			$this->db->query(CaronaDAO::INSERT_QUERY_IDA);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
@@ -50,8 +44,6 @@
 			$this->db->bind(":spots", $spots);
 			$this->db->bind(":location", $location);
 
-			error_log("Before execute: ");
-						
 			$this->db->execute();
 			error_log("Erro: " . $this->db->getError());
 		}
