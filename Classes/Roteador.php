@@ -109,7 +109,7 @@
 
 					/*Comandos de viagem*/
 					case 'ida':
-						error_log("Erro: Nova carona de ida");
+						error_log("Nova carona de ida");
 						if (!isset($args[3])) {
 							error_log("if ");
 							$resultado = $dao->getListaIda($chat_id);
@@ -132,10 +132,15 @@
 							$location = $args[3];
 
 							if ($horarioValido){
+								error_log("Horario valido");
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
 								$travel_hour = $hora . ":" . $minuto;
+				
+								error_log("Horario: " . $travel_hour);
+								error_log("spots: " . $spots);
+								error_log("location: " . $location);
 
 								$dao->adicionarIda($chat_id, $user_id, $username, $travel_hour, $spots, $location);
 
