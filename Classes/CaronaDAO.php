@@ -94,6 +94,9 @@
 		}
 		
 		private function montaListaCaronas($resultSet){
+
+			error_log("montaListaCaronas");
+
 			$resultado = array();
 			
 			foreach ($resultSet as $entrada)
