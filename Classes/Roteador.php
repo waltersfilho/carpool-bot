@@ -118,7 +118,7 @@
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						}
-						elseif (isset($args[1])) {
+						elseif (isset($args[3])) {
 							$horarioRaw = $args[1];
 							$horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
 
@@ -153,7 +153,7 @@
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						}
-						elseif (isset($args[1])) {
+						elseif (isset($args[3])) {
 							$horarioRaw = $args[1];
 							$horarioRegex = '/^(?P<hora>[0-2]?\d)(:(?P<minuto>[0-5]\d))?$/';
 
