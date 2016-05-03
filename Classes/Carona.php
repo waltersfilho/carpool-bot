@@ -6,6 +6,7 @@
         private $user_id;
         private $username;
         private $travel_hour;
+	private $spots;
         private $route;
 
         public function __construct($data){
@@ -13,11 +14,13 @@
 			$this->user_id = $data["user_id"];
 			$this->username = $data["username"];
 			$this->travel_hour = $data["travel_hour"];
+			$this->spots = $data["spots"];
+			$this->location = $data["location"];
 			$this->route = $data["route"];
         }
-		
+		x
 		public function __toString(){
-			return substr($this->travel_hour, 0, -3) . " - @" . $this->username;
+			return substr($this->travel_hour, 0, -3) . " - @" . $this->username . " - " . $this.spots . " vagas - " . $location;
 		}
 		
 		public function ehIda(){
