@@ -3,9 +3,6 @@
     require_once "Classes/Roteador.php";
     require_once "Classes/Connection.php";
 
-    error_log("Log test");
-
-	
 
     $update = file_get_contents('php://input');
     $updateArray = json_decode($update, TRUE);

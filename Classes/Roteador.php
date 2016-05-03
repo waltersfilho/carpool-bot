@@ -95,6 +95,7 @@
 						break;
 						
 					case 'teste':
+						error_log("teste");
 						$texto = "Versão 1.0 - ChatId: $chat_id";
 
 						TelegramConnect::sendMessage($chat_id, $texto);
@@ -108,7 +109,9 @@
 
 					/*Comandos de viagem*/
 					case 'ida':
+						error_log("Erro: Nova carona de ida");
 						if (!isset($args[3])) {
+							error_log("if ");
 							$resultado = $dao->getListaIda($chat_id);
 
 							$texto = "<b>Ida para o Fundão</b>\n";
@@ -119,6 +122,7 @@
 							TelegramConnect::sendMessage($chat_id, $texto);
 						}
 						elseif (isset($args[3])) {
+							error_log("else if");
 							$horarioRaw = $args[1];
 							$horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
 
