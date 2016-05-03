@@ -152,7 +152,7 @@
 						break;
 
 					case 'volta':
-						if (!isset($args[1])) {
+						if (!isset($args[3])) {
 							$resultado = $dao->getListaVolta($chat_id);
 
 							$texto = "<b>Volta do Fundão</b>\n";
@@ -162,7 +162,7 @@
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						}
-						elseif (isset($args[1])) {
+						elseif (isset($args[3])) {
 							$horarioRaw = $args[1];
 							$horarioRegex = '/^(?P<hora>[0-2]?\d)(:(?P<minuto>[0-5]\d))?$/';
 
