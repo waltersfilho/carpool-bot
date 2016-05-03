@@ -20,7 +20,8 @@
         }
 		public function __toString(){
 			/* return substr($this->travel_hour, 0, -3) . " - @" . $this->username . " - " . $this.spots . " vagas - " . $location; */
-			return substr($this->travel_hour, 0, -3) . " - @" . $this->username;
+			/* return substr($this->travel_hour, 0, -3) . " - @" . $this->username; */
+			return substr($this->travel_hour, 0, -3) . " - @" . $this->username . " - " . /$this.spots;
 		}
 		
 		public function ehIda(){
