@@ -7,7 +7,7 @@ Funcionalidades:
   - Exibir lista com as caronas
 
 ### Version
-1.0
+1.1
 
 ### Tech
 
@@ -15,7 +15,7 @@ Todo o código foi escrito em Php.
 
 ### Desenvolvimento
 
-Quer contribuir? Ótimo!
+Alterações feitas a partir do código original em [https://github.com/henriquemaio/CaronasBot]: <https://github.com/henriquemaio/CaronasBot>. Novas funcionalidades como o número de vagas disponíveis e o trajeto.
 Adicione uma issue ou faça um pull request.
 
 ### Devs
@@ -24,6 +24,8 @@ Adicione uma issue ou faça um pull request.
  - [leogoncalves]
  - [VBustamante]
  - [doravante]
+
+- [filipebarretto]
 
 License
 ----
