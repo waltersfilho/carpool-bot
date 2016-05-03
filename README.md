@@ -15,7 +15,7 @@ Todo o código foi escrito em Php.
 
 ### Desenvolvimento
 
-Alterações feitas a partir do código original em [https://github.com/henriquemaio/CaronasBot]: <https://github.com/henriquemaio/CaronasBot>. Novas funcionalidades como o número de vagas disponíveis e o trajeto.
+Alterações feitas a partir do código original em https://github.com/henriquemaio/CaronasBot. Novas funcionalidades como o número de vagas disponíveis e o trajeto.
 Adicione uma issue ou faça um pull request.
 
 ### Devs
@@ -24,8 +24,7 @@ Adicione uma issue ou faça um pull request.
  - [leogoncalves]
  - [VBustamante]
  - [doravante]
-
-- [filipebarretto]
+ - [filipebarretto]
 
 License
 ----
@@ -42,5 +41,6 @@ MIT
    [leogoncalves]: <https://github.com/leogoncalves>
    [VBustamante]: <https://github.com/VBustamante>
    [doravante]: <https://github.com/doravante>
+   [filipebarretto]: <https://github.com/filipebarretto>
 
 

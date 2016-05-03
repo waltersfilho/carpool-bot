@@ -100,6 +100,12 @@
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
+					case 'stop':
+						$texto = "Galera, olha a zoeira...";
+
+						TelegramConnect::sendMessage($chat_id, $texto);
+						break;
+
 					/*Comandos de viagem*/
 					case 'ida':
 						if (!isset($args[1])) {
