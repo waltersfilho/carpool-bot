@@ -146,7 +146,7 @@
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \n Ex: /ida 10:00 2 jardim)
+							TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \n Ex: /ida 10:00 2 jardim);
 						}
 						break;
 
@@ -184,7 +184,7 @@
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \n Ex: /volta 15:00 2 jardim)
+							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \n Ex: /volta 15:00 2 jardim);
 						}
 						break;
 
