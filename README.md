@@ -1,3 +1,29 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Caronas Bot](#caronas-bot)
+  - [Sobre](#sobre)
+    - [Version](#version)
+    - [Tecnologias](#tecnologias)
+    - [Desenvolvimento](#desenvolvimento)
+    - [Devs](#devs)
+  - [Getting Started](#getting-started)
+    - [Criação de um Bot](#cria%C3%A7%C3%A3o-de-um-bot)
+    - [Configuração do servidor PHP no [Heroku]](#configura%C3%A7%C3%A3o-do-servidor-php-no-heroku)
+      - [Criação de conta no [Heroku]](#cria%C3%A7%C3%A3o-de-conta-no-heroku)
+      - [Criação do Banco de Dados](#cria%C3%A7%C3%A3o-do-banco-de-dados)
+      - [Configuração do Banco de Dados](#configura%C3%A7%C3%A3o-do-banco-de-dados)
+      - [Criação de aplicação](#cria%C3%A7%C3%A3o-de-aplica%C3%A7%C3%A3o)
+      - [Configuração das variáveis de ambiente](#configura%C3%A7%C3%A3o-das-vari%C3%A1veis-de-ambiente)
+      - [Deploy](#deploy)
+      - [Configuração de webhooks](#configura%C3%A7%C3%A3o-de-webhooks)
+    - [Configuração de comandos do Bot](#configura%C3%A7%C3%A3o-de-comandos-do-bot)
+    - [Comece a usar](#comece-a-usar)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Caronas Bot
 
 ## Sobre 
@@ -5,15 +31,15 @@
 Bot para gerenciar caronas usado no [Telegram].
 
 Funcionalidades:
-  - Adicionar/Remover caronas
-  - Exibir lista com as caronas
+  - Adicionar/Remover caronas com horário, número de vagas e origm/destino
+  - Exibir lista com as caronas de ida e volta
 
 ### Version
-1.1
+1.2.0
 
-### Tech
+### Tecnologias
 
-Todo o código foi escrito em PHP.
+Todo o código foi escrito em PHP integrando com a Bot API do [Telegram].
 
 ### Desenvolvimento
 
@@ -33,7 +59,7 @@ Adicione uma issue ou faça um pull request.
 
 Tutorial de como utilizar esse código para implementar um novo bot no [Telegram] com configurações próprias.
 
-### 1 Criação de um Bot
+### Criação de um Bot
 
 Para criar um bot, você deve iniciar uma conversa com o [BotFather]. Para conhecer os comandos, utilize o comando:
 ```
@@ -50,19 +76,19 @@ O BotFather vai solicitar que digite um nome e um username para o seu Bot. Ao fi
 <img src="https://dl.dropboxusercontent.com/u/33812048/telegram-create-bot-tutorial.png" width=“48”>
 
 
-### 2 Configuração do servidor PHP no [Heroku]
+### Configuração do servidor PHP no [Heroku]
 
-#### 2.1 Criação de conta no [Heroku]
+####  Criação de conta no [Heroku]
 
 Caso não possua conta, cria uma conta gratuita em https://signup.heroku.com/
 
-#### 2.2 Criação do Banco de Dados
+#### Criação do Banco de Dados
 
 No canto superior esquerdo, ao lado de **Dashboard**, clique no botão de menu e selecione **Databases**. Na dela de Databases, clique em **Create Database**. Escolha a opção **Other plans: Dev Plan (Free)** e em **Add Database**.
 
 Quando o Banco estiver **Available**, clique em seu nome. Nessa tela, guarde as informações de **host**, **database**, **password** e **user**.
 
-#### 2.3 Configuração do Banco de Dados
+#### Configuração do Banco de Dados
 
 Para acessar o Banco de Dados, você deve ter o [Postgres] instalado localmente.
 
@@ -85,13 +111,13 @@ Ao logar, copie o comando em database/script.sql e execute:
 );
 ```
 
-#### 2.4 Criação de aplicação
+#### Criação de aplicação
 
 No dashboard, clique no sinal de + no canto superior direito para criar uma nova aplicação.
 
 Digite o nome de sua escolha e clique em criar.
 
-#### 2.5 Configuração das variáveis de ambiente
+#### Configuração das variáveis de ambiente
 
 Acesse **Settings** e clique em **Reveal Config Vars**. Adicione:
 
@@ -101,12 +127,13 @@ Acesse **Settings** e clique em **Reveal Config Vars**. Adicione:
  - KEY: DB_NAME, VALUE: [**database**]
  - KEY: DB_PASS, VALUE: [**password**]
  - KEY: DB_USER, VALUE: [**user**]
+ - KEY: SOURCE, VALUE: Local das caronas (Ex: Fundão)
 
-#### 2.6 Deploy
+#### Deploy
 
 No menu superior, selecione **Deploy**. Selecione **GitHub** como Deployment Method e conecte ao repositório. Selecione o branch master e faça o deploy.
 
-#### 2.7 Configuração de webhooks
+#### Configuração de webhooks
 
 Acesse no navegador a url: https://api.telegram.org/bot[token]/setwebhook?url=[api]
 Onde [token] é o token fornecido pelo BotFather e [api] é o domínio da aplicação no Heroku. Você deve visualizar algo do tipo:
@@ -118,7 +145,7 @@ description: "Webhook was set"
 }
 ```
 
-### 3 Configuração de comandos do Bot
+### Configuração de comandos do Bot
 
 Abra novamente a conversa com o BotFather e execute o comando:
 ```
@@ -143,7 +170,7 @@ remover - Remover ida ou volta
 regras - Visualizar regras de uso do grupo
 ```
 
-### 4 Comece a usar
+### Comece a usar
 
 Adicione o Bot no grupo e comece a usar
 
