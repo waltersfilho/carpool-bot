@@ -1,5 +1,7 @@
 # Caronas Bot
 
+## Sobre 
+
 Bot para gerenciar caronas usado no [Telegram].
 
 Funcionalidades:
@@ -11,7 +13,7 @@ Funcionalidades:
 
 ### Tech
 
-Todo o código foi escrito em Php.
+Todo o código foi escrito em PHP.
 
 ### Desenvolvimento
 
@@ -25,6 +27,32 @@ Adicione uma issue ou faça um pull request.
  - [VBustamante]
  - [doravante]
  - [filipebarretto]
+
+
+## Getting Started
+
+Tutorial de como utilizar esse código para implementar um novo bot no telegram com configurações próprias
+
+### 1. Criação de um Bot
+
+Para criar um bot, você deve iniciar uma conversa com o [BotFather]. Para conhecer os comandos, utilize o comando:
+'''
+/help
+'''
+
+Para criar um novo Bot, utilize o comando:
+'''
+/newbot
+'''
+
+O BotFather vai solicitar que digite um nome e um username para o seu Bot. Ao finalizar, será retornado um token para utilizar a API.
+
+### 2. Configuração do BackEnd
+
+#### 2.1 Configuração do servidor PHP no [Heroku]
+
+
+#### 2.2 Configuração do Banco de Dados no [Heroku]
 
 License
 ----
@@ -42,5 +70,7 @@ MIT
    [VBustamante]: <https://github.com/VBustamante>
    [doravante]: <https://github.com/doravante>
    [filipebarretto]: <https://github.com/filipebarretto>
+   [BotFather]: <https://telegram.me/botfather>
+   [Heroku]L <https://heroku.com>
 
 
