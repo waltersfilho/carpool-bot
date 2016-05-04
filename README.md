@@ -1,3 +1,9 @@
+# Caronas Bot
+
+## Sobre 
+
+Bot para gerenciar caronas usado no [Telegram].
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
@@ -24,13 +30,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Caronas Bot
-
-## Sobre 
-
-Bot para gerenciar caronas usado no [Telegram].
-
-Funcionalidades:
+### Funcionalidades:
   - Adicionar/Remover caronas com horário, número de vagas e origm/destino
   - Exibir lista com as caronas de ida e volta
 
