@@ -105,7 +105,7 @@ No menu superior, selecione **Deploy**. Selecione **GitHub** como Deployment Met
 
 #### 2.7 Configuração de webhooks
 
-Acesse no navegador a url: https://api.telegram.org/bot171332016:[token]/setwebhook?url=[api]
+Acesse no navegador a url: https://api.telegram.org/bot[token]/setwebhook?url=[api]
 Onde [token] é o token fornecido pelo BotFather e [api] é o domínio da aplicação no Heroku. Você deve visualizar algo do tipo:
 ```
 {
