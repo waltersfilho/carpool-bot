@@ -47,7 +47,7 @@ Para criar um novo Bot, utilize o comando:
 
 O BotFather vai solicitar que digite um nome e um username para o seu Bot. Ao finalizar, será retornado um token para utilizar a API.
 
-![alt tag](https://dl.dropboxusercontent.com/u/33812048/telegram-create-bot-tutorial.png)
+![alt tag](https://dl.dropboxusercontent.com/u/33812048/telegram-create-bot-tutorial.png =250x)
 
 ### 2 Configuração do servidor PHP no [Heroku]
 
