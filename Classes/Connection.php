@@ -36,7 +36,9 @@
         }
 
         public function query($query){
-            $this->stmt = $this->dbh->prepare($query);
+		error_log("Query: ");
+		error_log($query);
+		$this->stmt = $this->dbh->prepare($query);
         }
 
         public function bind($param, $value, $type = null){

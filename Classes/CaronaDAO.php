@@ -43,7 +43,7 @@
 			$this->db->bind(":travel_hour", $travel_hour);
 			$this->db->bind(":spots", $spots);
 			$this->db->bind(":location", $location);
-						
+
 			$this->db->execute();
 			error_log("Erro: " . $this->db->getError());
 		}
@@ -86,6 +86,9 @@
 		}
 		
 		private function montaListaCaronas($resultSet){
+
+			error_log("montaListaCaronas");
+
 			$resultado = array();
 			
 			foreach ($resultSet as $entrada)
