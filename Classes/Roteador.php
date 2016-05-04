@@ -83,10 +83,10 @@
 					case 'help':
 						$help = "Utilize este Bot para agendar as caronas. A utilização é super simples e através de comandos:
 
-								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO. Ex: /ida 10:00
+								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO. Ex: /ida 10:00 2 jardim
 								Caso não seja colocado o parâmetro do horário (Ex: /ida) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
-								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. Ex: /volta 10:00
+								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. Ex: /volta 15:00 3 jardim
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
 								/remover [ida/volta] --> Comando utilizado para remover a carona da lista. SEMPRE REMOVA a carona depois dela ter sido realizada. O sistema não faz isso automaticamente. Ex: /remover ida";
@@ -148,7 +148,7 @@
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \n Ex: /ida 10:00 2 jardim");
+							TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 jardim");
 						}
 						break;
 
@@ -186,7 +186,7 @@
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \n Ex: /volta 15:00 2 jardim");
+							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 jardim");
 						}
 						break;
 
