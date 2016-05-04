@@ -115,7 +115,8 @@
 
 					/*Comandos de viagem*/
 					case 'ida':
-						if (isset($args[1])) {
+						/* if (isset($args[1])) { */
+						if (count($args) == 1) {
 
 							$texto = "<b>Ida para o Fundão</b>\n";
 							foreach ($resultado as $carona){
@@ -124,7 +125,8 @@
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						}
-						elseif (isset($args[3])) {
+						elseif (count($args) == 4) {
+						/*elseif (isset($args[3])) {*/
 							$horarioRaw = $args[1];
 							$horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
 
