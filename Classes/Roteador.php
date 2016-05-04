@@ -107,10 +107,15 @@
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
+					case 'luiza':
+						$texto = "Luis, me espera! Só vou atrasar uns minutinhos!";
+
+						TelegramConnect::sendMessage($chat_id, $texto);
+						break;
+
 					/*Comandos de viagem*/
 					case 'ida':
-						if (!isset($args[3])) {
-							error_log("if ");
+						if (isset($args[1])) {
 
 							$texto = "<b>Ida para o Fundão</b>\n";
 							foreach ($resultado as $carona){
@@ -140,11 +145,13 @@
 							}else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
+						} else {
+							TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \n Ex: /ida 10:00 2 jardim)
 						}
 						break;
 
 					case 'volta':
-						if (!isset($args[3])) {
+						if (isset($args[1])) {
 							$resultado = $dao->getListaVolta($chat_id);
 
 							$texto = "<b>Volta do Fundão</b>\n";
@@ -176,6 +183,8 @@
 							}else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
+						} else {
+							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \n Ex: /volta 15:00 2 jardim)
 						}
 						break;
 
