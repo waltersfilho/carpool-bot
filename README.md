@@ -68,7 +68,7 @@ No terminal, execute o comando, onde [db_name] é o nome e o [db_type] é um tip
 heroku pg:psql --app [db_name] [db_type]
 ```
 
-Ao logar, copie os comandos em database/script.sql e execute:
+Ao logar, copie o comando em database/script.sql e execute:
 ```
 => create table Caroneiros(
         id bigserial UNIQUE PRIMARY KEY,
