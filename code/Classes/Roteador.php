@@ -120,7 +120,7 @@
 							$resultado = $dao->getListaIda($chat_id);
 
 							$source = Config::getBotConfig("source");
-							$texto = "<b>Ida para o " . $source . "</b>\n";
+							$texto = "<b>Ida para " . $source . "</b>\n";
 							foreach ($resultado as $carona){
 								$texto .= (string)$carona . "\n";
 							}
@@ -158,7 +158,8 @@
 						if (count($args) == 1) {
 							$resultado = $dao->getListaVolta($chat_id);
 
-							$texto = "<b>Volta do Fundão</b>\n";
+							$source = Config::getBotConfig("source");
+							$texto = "<b>Volta de " . $source . "</b>\n";
 							foreach ($resultado as $carona){
 								$texto .= (string)$carona . "\n";
 							}
