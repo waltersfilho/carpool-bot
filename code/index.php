@@ -10,4 +10,5 @@
     Roteador::direcionar($updateArray);
 ?>
 
-<h2>Version 0.16</h2>
+<h2>CaronasBot</h2>
+<h4>More @ <a href="https://github.com/filipebarretto/CaronasBot">https://github.com/filipebarretto/CaronasBot</a></h4>

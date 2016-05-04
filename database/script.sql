@@ -5,7 +5,6 @@ create table Caroneiros(
 	username varchar(128),
 	spots varchar(128),
 	location varchar(128),
-	travel_hour time
+	travel_hour time,
+	route bit not null
 );
-
-alter table add route bit not null;
