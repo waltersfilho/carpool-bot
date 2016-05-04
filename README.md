@@ -36,14 +36,14 @@ Tutorial de como utilizar esse código para implementar um novo bot no [Telegram
 ### 1. Criação de um Bot
 
 Para criar um bot, você deve iniciar uma conversa com o [BotFather]. Para conhecer os comandos, utilize o comando:
-’’’
+```
 /help
-‘’’
+```
 
 Para criar um novo Bot, utilize o comando:
-‘’’
+```
 /newbot
-‘’’
+```
 
 O BotFather vai solicitar que digite um nome e um username para o seu Bot. Ao finalizar, será retornado um token para utilizar a API.
 
@@ -87,13 +87,13 @@ No menu superior, selecione **Deploy**. Selecione **GitHub** como Deployment Met
 
 Acesse no navegador a url: https://api.telegram.org/bot171332016:[token]/setwebhook?url=[api]
 Onde [token] é o token fornecido pelo BotFather e [api] é o domínio da aplicação no Heroku. Você deve visualizar algo do tipo:
-‘’’
+```
 {
 ok: true,
 result: true,
 description: "Webhook was set"
 }
-‘’’
+```
 
 License
 ----
