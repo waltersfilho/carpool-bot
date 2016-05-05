@@ -45,7 +45,7 @@
 
 			$this->db->execute();
 			
-			error_log("Array length: " . strval(count($this->db->resultSet())))
+			error_log("Array length: " . count($this->db->resultSet()))
 
 			error_log($this->db->resultSet());
 
