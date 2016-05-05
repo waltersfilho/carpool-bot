@@ -11,7 +11,7 @@
 		const QUERY_UPDATE_RETURNING = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = '1'::bit(1)";
 
 		const QUERY_SEARCH_GOING = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
-		const QUERY_SEARCH_RETURNING = "select * from public.caroneiros where chat_id = :chat_id and and user_id = :user_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
+		const QUERY_SEARCH_RETURNING = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
 
 		const LISTA_QUERY_IDA = "select * from public.caroneiros where chat_id = :chat_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
 		const LISTA_QUERY_VOLTA = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
@@ -90,17 +90,12 @@
 		public function adicionarVolta($chat_id, $user_id, $username, $travel_hour, $spots, $location){
 			$travel_hour = $this->acertarStringHora($travel_hour);
 			
-			error_log($chat_id);
-			error_log($user_id);
-
 			$this->db->query(CaronaDAO::QUERY_SEARCH_RETURNING);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
 
 			$this->db->execute();
 		
-			error_log(count($this->db->resultSet());
-
 
 			if (count($this->db->resultSet()) == 0) {
 				error_log("insterting new carpool returning");
