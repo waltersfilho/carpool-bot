@@ -54,28 +54,32 @@
 				switch ($comando){
 					/*comandos padrão*/
 					case 'regras':
-						$regras = "<b>Preencha o Formulário abaixo</b>
-									Formulário: http://goo.gl/forms/OsTKcSLW2O
-
+						$regras = "Este grupo tem como intuito principal facilitar o deslocamento entre Ilha e Fundão. Não visamos criar um serviço paralelo nem tirar algum lucro com isso.
 									Este documento descreve como o grupo costuma funcionar para não ficar muito bagunçado. São conselhos baseados no bom senso e experiência adquirida.
 
-									-Nome e foto: libere a exibição do nome e foto no Telegram. Isso oferece mais segurança para os motoristas. Caso não exiba, existe grande chance de você ser removido por engano considerado inativo.
+									-Nome e foto: libere a exibição do nome e foto no Telegram. Isso oferece mais segurança para os motoristas e caroneiros. Caso não exiba, existe grande chance de você ser removido por engano ou considerado inativo.
 
-									-Horários: Ao oferecer carona para ir ao fundão, diga o horário que você pretende chegar no fundão. Ao oferecer carona para voltar ao Méier, diga o horário que você pretende sair do fundão.
+									-Horários: Ao oferecer carona, informe o horário que vai sair do seu destino.
 
-									-Carona para o dia seguinte: espere um horário que não atrapalhe quem está  pedindo carona para voltar da faculdade. Sugestão: ofereça após as 19h
+									-Carona para o dia seguinte: espere um horário que não atrapalhe quem está pedindo carona para voltar da faculdade. Sugestão: ofereça após as 19h.
 
-									-Valor: Não é pagamento, ninguém é obrigado a pagar como também ninguém é obrigado a dar carona. É uma ajuda de custos. O valor que a maioria doa é 3,50. Alguns 4, outros 3. Sugiro o valor de 3,50 por passageiro, independente se for 1 ou 5 no carro, pra não gerar concorrência desnecessária.
+									-Valor: Não é pagamento, ninguém é obrigado a pagar como também ninguém é obrigado a dar carona. É uma ajuda de custos. Chegamos, em comum acordo, em uma contribuição de 3,00 por trajeto. (Já são mais 3 anos de grupo e nunca tivemos maiores problemas com isso).
 
 									-Não seja ganancioso, seu carro não é táxi.
 
-									-Não seja mesquinho, você está indo para a  faculdade no conforto e rapidez, colabore com o motorista.
+									-Não seja mesquinho, você está indo para a faculdade no conforto e rapidez, colabore com o motorista.
 
-									-Ao oferecer ou pedir carona, utilize o verbo 'ir' se o sentido for meier-Fundão e o verbo 'voltar' se o sentido for fundao-Méier.
+									-Utilize o bot como forma principal de anunciar as caronas.
+
+									-Evite conversar e fugir do tema do grupo. Este grupo é destinado apenas à carona. Para demais assuntos temos o grupo da zoeira (Para os interessados, mandar inbox para @LuisOctavioCosta)
 
 									-Participe ativamente do grupo: seja ativo e pegue ou ofereça caronas constantemente, caso contrário você estará tirando a vaga de alguém que pode precisar mais que você.
 
-									-Se for removido: não fique chateado. Se foi algum equívoco, fale com algum admin e te colocam de volta.";
+									-Se for removido: não fique chateado. Se foi algum equívoco, fale com algum admin e te colocam de volta.
+
+									-Qualquer dúvida sobre o funcionamento do grupo, sugestão ou reclamação, podem me pr¹curar por inbox (@LuisOctavioCosta).
+
+									Obrigado";
 
 						TelegramConnect::sendMessage($chat_id, $regras);
 						break;
