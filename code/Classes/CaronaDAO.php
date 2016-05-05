@@ -16,6 +16,8 @@
 		const LISTA_QUERY_IDA = "select * from public.caroneiros where chat_id = :chat_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
 		const LISTA_QUERY_VOLTA = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
 	
+		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+
 		const REMOVE_QUERY_IDA = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '0'::bit(1)";
 		const REMOVE_QUERY_VOLTA = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '1'::bit(1)";
 	
@@ -91,6 +93,16 @@
 
 		}
 		
+		public function removeCarpool($chat_id, $user_id, $route) {
+			$this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
+			$this->db->bind(":chat_id", $chat_id);
+			$this->db->bind(":user_id", $user_id);
+			$this->db->bind(":route", $route);
+			
+			$this->db->execute();
+			error_log("Erro: " . $this->db->getError());
+		}
+
 		public function removerIda($chat_id, $user_id){
 			$this->db->query(CaronaDAO::REMOVE_QUERY_IDA);
 			$this->db->bind(":chat_id", $chat_id);

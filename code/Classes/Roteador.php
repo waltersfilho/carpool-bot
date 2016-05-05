@@ -199,44 +199,39 @@
 
 					case 'vagas':
 						if (count($args) == 3) {
-
 							$spots = $args[2];
 							if($args[1] == 'ida') {
-							
 								$dao->updateSpots($chat_id, $user_id, $spots, '0');
-
-								TelegramConnect::sendMessage($chat_id, "Numero de vagas para ida atualizado para " . $spots);
+								TelegramConnect::sendMessage($chat_id, "Numero de vagas de ida atualizado para " . $spots);
 							} elseif ($args[1] == 'volta') {
-								$dao->updateSpots($chat_id, $user_id, $spots, '0');
-								TelegramConnect::sendMessage($chat_id, "Numero de vagas para volta atualizado para " . $spots);
+								$dao->updateSpots($chat_id, $user_id, $spots, '1');
+								TelegramConnect::sendMessage($chat_id, "Numero de vagas de volta atualizado para " . $spots);
 							} else {
 								TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
 							}
-						
 						} else {
 							TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
 						}
-
 						break;
 
 					case 'remover':
-						if($args[1] == 'ida'){
-							$dao->removerIda($chat_id, $user_id);
-
-							TelegramConnect::sendMessage($chat_id, "Sua ida foi removida");
-						}
-						elseif ($args[1] == 'volta'){
-							$dao->removerVolta($chat_id, $user_id);
-
-							TelegramConnect::sendMessage($chat_id, "Sua volta foi removida");
-
+						if (count($args) == 2) {
+							if($args[1] == 'ida') {
+								$dao->removeCarpool($chat_id, $user_id, '0');
+								TelegramConnect::sendMessage($chat_id, "Sua ida foi removida");
+							} elseif ($args[1] == 'volta') {
+								$dao->removeCarpool($chat_id, $user_id, '1');
+								TelegramConnect::sendMessage($chat_id, "Sua volta foi removida");
+							} else {
+								TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
+							}
 						} else {
 							TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
 						}
 
 						break;
 				}
-			}else{
+			} else {
 				TelegramConnect::sendMessage($chat_id, "Registre seu username nas configurações do Telegram para utilizar o Bot.");
 			}
 		}
