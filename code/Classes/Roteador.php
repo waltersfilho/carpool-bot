@@ -54,7 +54,7 @@
 				switch ($comando){
 					/*comandos padrão*/
 					case 'regras':
-						$regras = "Este grupo tem como intuito principal facilitar o deslocamento entre Ilha e Fundão. Não visamos criar um serviço paralelo nem tirar algum lucro com isso.
+						$regras = "	Este grupo tem como intuito principal facilitar o deslocamento entre Ilha e Fundão. Não visamos criar um serviço paralelo nem tirar algum lucro com isso.
 									Este documento descreve como o grupo costuma funcionar para não ficar muito bagunçado. São conselhos baseados no bom senso e experiência adquirida.
 
 									-Nome e foto: libere a exibição do nome e foto no Telegram. Isso oferece mais segurança para os motoristas e caroneiros. Caso não exiba, existe grande chance de você ser removido por engano ou considerado inativo.
@@ -71,11 +71,9 @@
 
 									-Utilize o bot como forma principal de anunciar as caronas.
 
+									-Sempre utilize os padrões propostos pelo comando /help. Eles foram escolhidos de forma a melhorar a exibição das caronas.
+
 									-Evite conversar e fugir do tema do grupo. Este grupo é destinado apenas à carona. Para demais assuntos temos o grupo da zoeira (Para os interessados, mandar inbox para @LuisOctavioCosta)
-
-									-Participe ativamente do grupo: seja ativo e pegue ou ofereça caronas constantemente, caso contrário você estará tirando a vaga de alguém que pode precisar mais que você.
-
-									-Se for removido: não fique chateado. Se foi algum equívoco, fale com algum admin e te colocam de volta.
 
 									-Qualquer dúvida sobre o funcionamento do grupo, sugestão ou reclamação, podem me procurar por inbox (@LuisOctavioCosta).
 
@@ -87,32 +85,38 @@
 					case 'help':
 						$help = "Utilize este Bot para agendar as caronas. A utilização é super simples e através de comandos:
 
-								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO. Ex: /ida 10:00 2 jardim
+								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO. Ex: /ida 10:00 2 jardim  (Inclui uma carona de ida às 10:00 com 2 vagas saindo do jardim)
 								Caso não seja colocado o parâmetro do horário (Ex: /ida) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
-								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. Ex: /volta 15:00 3 jardim
+								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. Ex: /volta 15:00 3 jardim (Inclui uma carona de volta às 15:00 com 3 vagas para o jardim)
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
-								/remover [ida/volta] --> Comando utilizado para remover a carona da lista. SEMPRE REMOVA a carona depois dela ter sido realizada. O sistema não faz isso automaticamente. Ex: /remover ida";
+								OBS --> Para o local utilize sempre letras minúsculas e para mais de um local siga o padrão : local01/local02 
+									Ex: cacuia/cocotá/tauá/bancários
+
+								/remover [ida|volta] --> Comando utilizado para remover a carona da lista. SEMPRE REMOVA a carona depois dela ter sido realizada. O sistema não faz isso automaticamente. Ex: /remover ida
+
+								/vagas [ida|volta] [vagas] --> Este comando serve para atualizar o número de vagas de uma carona
+									Ex: /vagas ida 2 (Altera o número de vagas da ida para 2)";
 						
 						TelegramConnect::sendMessage($chat_id, $help);
 						break;
 						
 					case 'teste':
 						error_log("teste");
-						$texto = "Versão 1.0 - ChatId: $chat_id";
+						$texto = "Versão 1.2 - ChatId: $chat_id";
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
 					case 'stop':
-						$texto = "Galera, olha a zoeira...";
+						$texto = "GALERA, OLHA A ZOEIRA...";
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
 					case 'luiza':
-						$texto = "Luis, me espera! Só vou atrasar uns minutinhos!";
+						$texto = "Luiiiis, me espera! Só vou atrasar uns minutinhos!";
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
