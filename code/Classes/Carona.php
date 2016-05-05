@@ -18,8 +18,12 @@
 			$this->location = $data["location"];
 			$this->route = $data["route"];
         }
-		public function __toString(){
-			return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
+		public function __toString() {
+			if (isset($this->spots) && isset($this->location)) {
+				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
+			} else {
+				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username;
+			}
 		}
 		
 		public function ehIda(){
