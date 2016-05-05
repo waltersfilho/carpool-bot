@@ -19,6 +19,10 @@
 			$this->route = $data["route"];
         }
 		public function __toString() {
+
+			error_log($this->spots);
+			error_log($this->location);
+
 			if (isset($this->spots) && isset($this->location)) {
 				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
 			} else {
