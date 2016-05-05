@@ -166,10 +166,11 @@ Selecione o Bot desejado e envie a lista:
 ```
 teste - Teste da Aplicação
 help - Manual de como utilizar o Bot
-ida - Cadastrar nova ida ou ver idas existentes
-volta - Cadastrar nova volta ou ver idas existentes
+ida - Cadastrar nova ida, atualizar ida ou ver idas existentes
+volta - Cadastrar nova volta, atualizar volta ou ver idas existentes
 remover - Remover ida ou volta
 regras - Visualizar regras de uso do grupo
+volta - Atualiza o numero de vagas
 ```
 
 ### Comece a usar
