@@ -77,7 +77,7 @@
 
 									-Se for removido: não fique chateado. Se foi algum equívoco, fale com algum admin e te colocam de volta.
 
-									-Qualquer dúvida sobre o funcionamento do grupo, sugestão ou reclamação, podem me pr¹curar por inbox (@LuisOctavioCosta).
+									-Qualquer dúvida sobre o funcionamento do grupo, sugestão ou reclamação, podem me procurar por inbox (@LuisOctavioCosta).
 
 									Obrigado";
 
