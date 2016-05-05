@@ -90,16 +90,38 @@
 		public function adicionarVolta($chat_id, $user_id, $username, $travel_hour, $spots, $location){
 			$travel_hour = $this->acertarStringHora($travel_hour);
 			
-			$this->db->query(CaronaDAO::INSERT_QUERY_VOLTA);
+			$this->db->query(CaronaDAO::QUERY_SEARCH_RETURNING);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
-			$this->db->bind(":username", $username);
-			$this->db->bind(":travel_hour", $travel_hour);
-			$this->db->bind(":spots", $spots);
-			$this->db->bind(":location", $location);
-						
+
 			$this->db->execute();
-			error_log("Erro: " . $this->db->getError());
+		
+			if (count($this->db->resultSet()) == 0) {
+				error_log("insterting new carpool returning");
+				$this->db->query(CaronaDAO::INSERT_QUERY_VOLTA);
+				$this->db->bind(":chat_id", $chat_id);
+				$this->db->bind(":user_id", $user_id);
+				$this->db->bind(":username", $username);
+				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":spots", $spots);
+				$this->db->bind(":location", $location);
+
+				$this->db->execute();
+				error_log("Erro: " . $this->db->getError());
+
+			} else {
+				error_log("updating existing carpool returning");
+				$this->db->query(CaronaDAO::QUERY_UPDATE_RETURNING);
+				$this->db->bind(":chat_id", $chat_id);
+				$this->db->bind(":user_id", $user_id);
+				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":spots", $spots);
+				$this->db->bind(":location", $location);
+
+				$this->db->execute();
+				error_log("Erro: " . $this->db->getError());
+			}
+
 		}
 		
 		public function removerVolta($chat_id, $user_id){
