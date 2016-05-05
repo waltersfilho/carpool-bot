@@ -57,7 +57,7 @@
 		}
 
 		
-		public function createCarpool($chat_id, $user_id, $username, $travel_hour,  $route) {
+		public function createCarpool($chat_id, $user_id, $username, $travel_hour, $route) {
 
 			$travel_hour = $this->setStringTime($travel_hour);
 			
@@ -74,6 +74,7 @@
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":username", $username);
 				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":route", $route);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
@@ -84,7 +85,7 @@
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":travel_hour", $travel_hour);
-				$this->db->bind(":route", '0');
+				$this->db->bind(":route", $route);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
