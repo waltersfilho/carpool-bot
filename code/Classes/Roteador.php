@@ -197,6 +197,28 @@
 						}
 						break;
 
+					case 'vagas':
+						if (count($args) == 3) {
+
+							$spots = $args[2];
+							if($args[1] == 'ida') {
+							
+								$dao->updateSpots($chat_id, $user_id, $spots, '0');
+
+								TelegramConnect::sendMessage($chat_id, "Numero de vagas para ida atualizado para " . $spots);
+							} elseif ($args[1] == 'volta') {
+								$dao->updateSpots($chat_id, $user_id, $spots, '0');
+								TelegramConnect::sendMessage($chat_id, "Numero de vagas para volta atualizado para " . $spots);
+							} else {
+								TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
+							}
+						
+						} else {
+							TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
+						}
+
+						break;
+
 					case 'remover':
 						if($args[1] == 'ida'){
 							$dao->removerIda($chat_id, $user_id);
