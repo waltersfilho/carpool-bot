@@ -44,6 +44,9 @@
 			$this->db->bind(":user_id", $user_id);
 
 			$this->db->execute();
+			
+			error_log("Array length: " . strval(count($this->db->resultSet())))
+
 			error_log($this->db->resultSet());
 
 
