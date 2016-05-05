@@ -19,7 +19,7 @@
 			$this->route = $data["route"];
         }
 		public function __toString(){
-			return ":: " . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n    " . $this->spots . " vagas (" . $this->location . ")";
+			return "\n:: " . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n    " . $this->spots . " vagas (" . $this->location . ")";
 		}
 		
 		public function ehIda(){
