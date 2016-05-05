@@ -10,7 +10,8 @@
 		const QUERY_CREATE_CARPOOL = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, route) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1))";
 		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, :route::bit(1))";
 
-		const QUERY_UPDATE = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '' where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE_WITH_DETAILS = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots  where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
 		const QUERY_SEARCH_GOING = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
@@ -59,17 +60,21 @@
 		
 		public function createCarpool($chat_id, $user_id, $username, $travel_hour, $route) {
 
+			error_log("createCarpool");
 			$travel_hour = $this->setStringTime($travel_hour);
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH_GOING);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
 
+			error_log($chat_id);
+			error_log($uer_id);
+
 			$this->db->execute();
 
 			if (count($this->db->resultSet()) == 0) {
 				error_log("insterting new carpool going");
-				$this->db->query(CaronaDAO::INSERT_QUERY_IDA);
+				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":username", $username);
@@ -106,26 +111,27 @@
 
 			if (count($this->db->resultSet()) == 0) {
 				error_log("insterting new carpool going");
-				$this->db->query(CaronaDAO::INSERT_QUERY_IDA);
+				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":username", $username);
 				$this->db->bind(":travel_hour", $travel_hour);
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
+				$this->db->bind(":route", $route);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
 
 			} else {
 				error_log("updating existing carpool going");
-				$this->db->query(CaronaDAO::QUERY_UPDATE);
+				$this->db->query(CaronaDAO::QUERY_UPDATE_WITH_DETAILS);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":travel_hour", $travel_hour);
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
-				$this->db->bind(":route", '0');
+				$this->db->bind(":route", $route);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
