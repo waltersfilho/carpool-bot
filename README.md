@@ -170,7 +170,7 @@ ida - Cadastrar nova ida, atualizar ida ou ver idas existentes
 volta - Cadastrar nova volta, atualizar volta ou ver idas existentes
 remover - Remover ida ou volta
 regras - Visualizar regras de uso do grupo
-volta - Atualiza o numero de vagas
+vagas - Atualiza o numero de vagas
 ```
 
 ### Comece a usar
