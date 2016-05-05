@@ -20,13 +20,6 @@
         }
 		public function __toString() {
 
-			error_log($this->spots);
-			error_log($this->location);
-
-			error_log("teste");
-			error_log(!empty($this->spots));
-			error_log(!empty($this->location));
-
 			if (!empty($this->spots) && !empty($this->location)) {
 				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
 			} else {
