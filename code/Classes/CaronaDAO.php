@@ -14,8 +14,7 @@
 		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots  where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
-		const QUERY_SEARCH_GOING = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
-		const QUERY_SEARCH_RETURNING = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
+		const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) ORDER BY travel_hour ASC;";
 
 		const LISTA_QUERY_IDA = "select * from public.caroneiros where chat_id = :chat_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
 		const LISTA_QUERY_VOLTA = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
@@ -63,9 +62,10 @@
 			error_log("createCarpool");
 			$travel_hour = $this->setStringTime($travel_hour);
 			
-			$this->db->query(CaronaDAO::QUERY_SEARCH_GOING);
+			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
+			$this->db->bind(":route", $route);
 
 			error_log($chat_id);
 			error_log($uer_id);
@@ -105,9 +105,10 @@
 
 			$travel_hour = $this->setStringTime($travel_hour);
 			
-			$this->db->query(CaronaDAO::QUERY_SEARCH_GOING);
+			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
+			$this->db->bind(":route", $route);
 
 			$this->db->execute();
 
@@ -127,6 +128,7 @@
 
 			} else {
 				error_log("updating existing carpool with details going");
+
 				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
