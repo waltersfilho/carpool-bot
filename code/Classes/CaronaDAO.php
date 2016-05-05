@@ -44,10 +44,13 @@
 			$this->db->bind(":user_id", $user_id);
 
 			$this->db->execute();
-			
-			error_log("Array length: " . count($this->db->resultSet()))
+		
+			if (count($this->db->resultSet()) == 0) {
+				error_log("IS 0");
+			} else {
+				error_log("GREATER THAN 0");
+			}
 
-			error_log($this->db->resultSet());
 
 
 			$this->db->query(CaronaDAO::INSERT_QUERY_IDA);
