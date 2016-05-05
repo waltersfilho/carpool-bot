@@ -66,7 +66,6 @@
 				$this->db->query(CaronaDAO::QUERY_UPDATE_GOING);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
-				$this->db->bind(":username", $username);
 				$this->db->bind(":travel_hour", $travel_hour);
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
