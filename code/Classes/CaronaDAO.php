@@ -36,6 +36,14 @@
 		public function adicionarIda($chat_id, $user_id, $username, $travel_hour, $spots, $location){
 			$travel_hour = $this->acertarStringHora($travel_hour);
 			
+			$this->db->query(CaronaDAO::LISTA_QUERY_IDA);
+			$this->db->bind(":chat_id", $chat_id);
+			$this->db->bind(":user_id", $user_id);
+
+			$this->db->execute();
+			error_log($this->db->resultSet());
+
+
 			$this->db->query(CaronaDAO::INSERT_QUERY_IDA);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
