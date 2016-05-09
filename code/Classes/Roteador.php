@@ -263,10 +263,10 @@
 							$spots = $args[2];
 							if($args[1] == 'ida') {
 								$dao->updateSpots($chat_id, $user_id, $spots, '0');
-								TelegramConnect::sendMessage($chat_id, "Numero de vagas de ida atualizado para " . $spots);
+								TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas de ida para " . $spots);
 							} elseif ($args[1] == 'volta') {
 								$dao->updateSpots($chat_id, $user_id, $spots, '1');
-								TelegramConnect::sendMessage($chat_id, "Numero de vagas de volta atualizado para " . $spots);
+								TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas de volta para " . $spots);
 							} else {
 								TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
 							}
@@ -279,10 +279,10 @@
 						if (count($args) == 2) {
 							if($args[1] == 'ida') {
 								$dao->removeCarpool($chat_id, $user_id, '0');
-								TelegramConnect::sendMessage($chat_id, "Sua ida foi removida");
+								TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua ida");
 							} elseif ($args[1] == 'volta') {
 								$dao->removeCarpool($chat_id, $user_id, '1');
-								TelegramConnect::sendMessage($chat_id, "Sua volta foi removida");
+								TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua volta");
 							} else {
 								TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
 							}
