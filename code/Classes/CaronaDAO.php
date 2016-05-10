@@ -2,10 +2,7 @@
 	require_once "Connection.php";
 	require_once "Carona.php";
 
-    $diff1Day = new DateInterval('P1D');
-    $diffDay = new DateInterval('PT25H30M');
-    $diffHour = new DateInterval('PT30M');
-
+    
     class CaronaDAO{
 
 		
@@ -122,6 +119,8 @@
 			error_log("create carpool with details");
 
 			$travel_hour = $this->setStringTime($travel_hour);
+            
+            $expiration = $this->getExpirationTimestamp($travel_hour);
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
@@ -176,6 +175,9 @@
 		}
 
         private function getExpirationTimestamp($travel_hour) {
+            $diff1Day = new DateInterval('P1D');
+            $diffDay = new DateInterval('PT25H30M');
+            $diffHour = new DateInterval('PT30M');
 
             $today = date("Y-m-d");
 
