@@ -21,7 +21,7 @@
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
 		
-        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration > :now";
+        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
         
         private $db;	
 		
@@ -234,9 +234,6 @@
             $now = date_create(date("Y-m-d G:i P"), timezone_open('America/Sao_Paulo'));
             $nowTimestamp = $now->getTimestamp();
             
-            error_log("removeExpiredCarpools");
-            error_log($nowTimestamp);
-                
             $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
 			$this->db->bind(":now", $nowTimestamp);
 
