@@ -41,7 +41,7 @@
 		public static function direcionar($request){
 			$args = array();
 			$command = self::processCommand($request['message']['text'], $args);
-			$dados = self::processarDados($request);
+			$dados = self::processData($request);
 
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
