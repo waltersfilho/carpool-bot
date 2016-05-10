@@ -51,7 +51,7 @@
 			if($username){
 				$dao = new CaronaDAO();
 
-				switch (strtolower($command){
+				switch (strtolower($command)) {
 					/*comandos padrão*/
 					case 'regras':
 						$regras = "	Este grupo tem como intuito principal facilitar o deslocamento entre Ilha e Fundão. Não visamos criar um serviço paralelo nem tirar algum lucro com isso.
