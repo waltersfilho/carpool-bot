@@ -7,41 +7,41 @@
 	class Roteador{
 
 		/*Espera o objeto 'message' já como array*/
-		private static function processarDados($dados){
-			$dadosProcessados = array();
+		private static function processData($data){
+			$processedData = array();
 
 			/*TODO inicializar objeto telegramConnect com dados da mensagem*/
-			$dadosProcessados['username'] = $dados["message"]["from"]["username"];
-			$dadosProcessados['chatId'] = $dados["message"]["chat"]["id"];
-			$dadosProcessados['userId'] = $dados["message"]["from"]["id"];
+			$processedData['username'] = $data["message"]["from"]["username"];
+			$processedData['chatId'] = $data["message"]["chat"]["id"];
+			$processedData['userId'] = $data["message"]["from"]["id"];
 
-			error_log( print_r( $dadosProcessados, true ) );
+			error_log( print_r( $processedData, true ) );
 
-			return $dadosProcessados;
+			return $processedData;
 		}
 
-		private static function processarComando($stringComando, &$args){
+		private static function processCommand($stringComando, &$args){
 			/* Trata uma string que começa com '/', seguido por no maximo 32 numeros, letras ou '_', seguido ou não de '@nomeDoBot */
 			$regexComando = '~^/(?P<comando>[\d\w_]{1,32})(?:@'. Config::getBotConfig('botName') .')?~';
-			$comando = NULL;
+			$command = NULL;
 			$args = NULL;
 
 			if(preg_match($regexComando, $stringComando, $match)){
-				$comando = $match['comando'];
+				$command = $match['comando'];
 				$stringComando = str_replace($match[0], "", $stringComando);
 				$args = explode(" ", $stringComando);
 			}
 
-			error_log( print_r( $comando, true ) );
+			error_log( print_r( $command, true ) );
 			error_log( print_r( $args, true ) );
 			error_log( strlen($args[1]) );
-			return $comando;
+			return $command;
 		}
 
-		public static function direcionar($requestObj){
+		public static function direcionar($request){
 			$args = array();
-			$comando = self::processarComando($requestObj['message']['text'], $args);
-			$dados = self::processarDados($requestObj);
+			$command = self::processCommand($request['message']['text'], $args);
+			$dados = self::processarDados($request);
 
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
@@ -51,7 +51,7 @@
 			if($username){
 				$dao = new CaronaDAO();
 
-				switch ($comando){
+				switch (strtolower($command){
 					/*comandos padrão*/
 					case 'regras':
 						$regras = "	Este grupo tem como intuito principal facilitar o deslocamento entre Ilha e Fundão. Não visamos criar um serviço paralelo nem tirar algum lucro com isso.
