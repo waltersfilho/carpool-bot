@@ -2,6 +2,10 @@
 	require_once "Connection.php";
 	require_once "Carona.php";
 
+    $diff1Day = new DateInterval('P1D');
+    $diffDay = new DateInterval('PT25H30M');
+    $diffHour = new DateInterval('PT30M');
+
     class CaronaDAO{
 
 		const INSERT_QUERY_IDA = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, '0'::bit(1))";
@@ -57,10 +61,18 @@
 		}
 
 		
+        /*
+         * CREATES A NEW CARPOOL ON A SPECIFIC CHAT, OFFERED BY A SINGLE USER
+         * LINKED TO HIS USER NAME ON A SPECIFIC TIME EITHER GOING OR RETURNING
+         */
+        
 		public function createCarpool($chat_id, $user_id, $username, $travel_hour, $route) {
 
-			error_log("createCarpool");
 			$travel_hour = $this->setStringTime($travel_hour);
+            
+            $expiration = getExpirationTimestamp($travel_hour);
+			error_log("createCarpool");
+            
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
@@ -80,6 +92,7 @@
 				$this->db->bind(":username", $username);
 				$this->db->bind(":travel_hour", $travel_hour);
 				$this->db->bind(":route", $route);
+                $this->db->bind(":expiration", $expiration);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
@@ -91,6 +104,7 @@
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":travel_hour", $travel_hour);
 				$this->db->bind(":route", $route);
+                $this->db->bind(":expiration", $expiration);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
@@ -99,6 +113,12 @@
 
 		}
 
+        /*
+         * CREATES A NEW CARPOOL ON A SPECIFIC CHAT, OFFERED BY A SINGLE USER
+         * LINKED TO HIS USER NAME ON A SPECIFIC TIME EITHER GOING OR RETURNING
+         * WITH LOCATION AS REFERENCE AND NUMBER OF SPOTS
+         */
+        
 		public function createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $spots, $location, $route) {
 
 			error_log("create carpool with details");
@@ -120,7 +140,7 @@
 				$this->db->bind(":username", $username);
 				$this->db->bind(":travel_hour", $travel_hour);
 				$this->db->bind(":spots", $spots);
-				$this->db->bind(":location", $location);
+				$this->db->bind(":location", strtolower($location));
 				$this->db->bind(":route", $route);
 
 				$this->db->execute();
@@ -155,6 +175,37 @@
 			error_log("Erro: " . $this->db->getError());
 		}
 
+        private function getExpirationTimestamp($travel_hour) {
+
+            $today = date("Y-m-d");
+
+            $timezone = date_default_timezone_get();
+            $now = date_create(date("Y-m-d G:i P"));
+            $nowTimestamp = $now->getTimestamp();
+
+            $hour = explode(":", $travel_hour)[0];
+            $minutes = explode(":", $travel_hour)[1];
+
+
+            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
+            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+            
+
+            /*
+             * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
+             * DAY OR THE NEXT DAY AND
+             * SETS CARPOOL EXPIRATION TIME
+             */
+            if ($nowTimestamp > $carpoolExpirationTimestamp) {
+                $carpoolExpiration->add($diffDay);
+            } else {
+                $carpoolExpiration->add($diffHour);
+            }
+
+            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+            
+            return $carpoolExpirationTimestamp;
+        }
 		
 		private function acertarStringHora($travel_hour){
 			return $travel_hour .= ":00";
