@@ -30,6 +30,9 @@
         }
 
 		public function getListaIda($chat_id){
+            
+            $this->removeExpiredCarpools();
+            
 			$this->db->query(CaronaDAO::LISTA_QUERY_IDA);
 			$this->db->bind(":chat_id", $chat_id);
 			
@@ -37,6 +40,9 @@
 		}
 		
 		public function getListaVolta($chat_id){
+            
+            $this->removeExpiredCarpools();
+            
 			$this->db->query(CaronaDAO::LISTA_QUERY_VOLTA);
 			$this->db->bind(":chat_id", $chat_id);
 			
