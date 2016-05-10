@@ -188,7 +188,7 @@
             $today = date("Y-m-d");
 
             $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"));
+            $now = date_create(date("Y-m-d G:i P"), timezone_open('America/Sao_Paulo'));
             $nowTimestamp = $now->getTimestamp();
 
             $hour = explode(":", $travel_hour)[0];
@@ -231,9 +231,11 @@
          */
         private function removeExpiredCarpools() {
             $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"));
+            $now = date_create(date("Y-m-d G:i P"), timezone_open('America/Sao_Paulo'));
             $nowTimestamp = $now->getTimestamp();
             
+            error_log("removeExpiredCarpools");
+            error_log($nowTimestamp);
                 
             $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
 			$this->db->bind(":now", $nowTimestamp);
