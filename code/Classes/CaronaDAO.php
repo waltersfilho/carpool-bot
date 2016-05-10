@@ -70,7 +70,7 @@
 
 			$travel_hour = $this->setStringTime($travel_hour);
             
-            $expiration = getExpirationTimestamp($travel_hour);
+            $expiration = $this->getExpirationTimestamp($travel_hour);
 			error_log("createCarpool");
             
 			
