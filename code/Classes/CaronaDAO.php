@@ -20,9 +20,9 @@
 	
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
-		const REMOVE_QUERY_IDA = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '0'::bit(1)";
-		const REMOVE_QUERY_VOLTA = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = '1'::bit(1)";
-	
+		
+        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration > :now";
+        
         private $db;	
 		
         public function __construct(){
@@ -217,6 +217,24 @@
 		private function setStringTime($travel_hour){
 			return $travel_hour .= ":00";
 		}
+        
+        
+        /*
+         * AUTOMATICALLY DELETES CARPOOLS EXPIRED
+         * MORE THAN 30 MINUTES
+         */
+        private function removeExpiredCarpools() {
+            $timezone = date_default_timezone_get();
+            $now = date_create(date("Y-m-d G:i P"));
+            $nowTimestamp = $now->getTimestamp();
+            
+                
+            $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
+			$this->db->bind(":now", $nowTimestamp);
+
+			$this->db->execute();
+            
+        }
 		
 		private function montaListaCaronas($resultSet){
 
