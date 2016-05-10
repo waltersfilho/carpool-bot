@@ -8,11 +8,9 @@
 
     class CaronaDAO{
 
-		const INSERT_QUERY_IDA = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, '0'::bit(1))";
-		const INSERT_QUERY_VOLTA = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, '1'::bit(1))";
-
-		const QUERY_CREATE_CARPOOL = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, route) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1))";
-		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, :route::bit(1))";
+		
+		const QUERY_CREATE_CARPOOL = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1), :expiration)";
+		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, :route::bit(1), :expiration)";
 
 		const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '' where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
@@ -142,6 +140,7 @@
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", strtolower($location));
 				$this->db->bind(":route", $route);
+                $this->db->bind(":expiration", $expiration);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
@@ -156,6 +155,7 @@
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
 				$this->db->bind(":route", $route);
+                $this->db->bind(":expiration", $expiration);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
