@@ -21,7 +21,6 @@
 	
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
-		
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
         
         private $db;	
@@ -30,6 +29,18 @@
             $this->db = new Database();
         }
 
+        
+        /*
+         * TODO
+         * CREATE SINGLE FUNCTION TO LIST CARPOOL
+         * WITH ROUTE AS PARAMETER
+         */
+        /*
+        public function getCarpoolList($chat_id, $route) {
+            return "";
+        }
+        */
+        
 		public function getListaIda($chat_id){
             
             $this->removeExpiredCarpools();
@@ -182,14 +193,14 @@
 		}
 
         private function getExpirationTimestamp($travel_hour) {
-            $diff1Day = new DateInterval('P1D');
-            $diffDay = new DateInterval('PT25H30M');
+            
+            $diffDay = new DateInterval('PT24H30M');
             $diffHour = new DateInterval('PT30M');
 
             $today = date("Y-m-d");
 
             $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"), timezone_open('America/Sao_Paulo'));
+            $now = date_create(date("Y-m-d G:i P"));
             $nowTimestamp = $now->getTimestamp();
 
             $hour = explode(":", $travel_hour)[0];
@@ -199,7 +210,6 @@
             $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
             
-
             /*
              * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
              * DAY OR THE NEXT DAY AND
@@ -232,7 +242,7 @@
          */
         private function removeExpiredCarpools() {
             $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"), timezone_open('America/Sao_Paulo'));
+            $now = date_create(date("Y-m-d G:i P"));
             $nowTimestamp = $now->getTimestamp();
             
             $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
