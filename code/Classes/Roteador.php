@@ -268,10 +268,10 @@
 								$dao->updateSpots($chat_id, $user_id, $spots, '1');
 								TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas de volta para " . $spots);
 							} else {
-								TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
+								TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /volta ida 2");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Formato: /volta [ida|volta] [vagas]\nEx: /volta ida 2");
+							TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /volta ida 2");
 						}
 						break;
 
