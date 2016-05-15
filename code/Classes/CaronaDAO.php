@@ -94,13 +94,18 @@
 			$this->db->bind(":user_id", $user_id);
 			$this->db->bind(":route", $route);
 
-			error_log($chat_id);
-			error_log($uer_id);
+			error_log("-- info --");
+            error_log($chat_id);
+			error_log($user_id);
+            error_log($username);
+            error_log($travel_hour);
+            error_log($route);
+            error_log($expiration);
 
 			$this->db->execute();
 
 			if (count($this->db->resultSet()) == 0) {
-				error_log("insterting new carpool going");
+				error_log("insterting new carpool going");                
 				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
