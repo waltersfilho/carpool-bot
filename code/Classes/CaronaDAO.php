@@ -12,7 +12,7 @@
 		const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '', expiration = :expiration where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location, expiration = :expiration where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
         
-		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots  where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
 		const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) ORDER BY travel_hour ASC;";
 
@@ -85,6 +85,8 @@
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			error_log("createCarpool");
+            error_log($travel_hour);
+            error_log($expiration);
             
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
@@ -194,6 +196,9 @@
 
         private function getExpirationTimestamp($travel_hour) {
             
+            error_log("getExpirationTimestamp");
+            
+            
             $diffDay = new DateInterval('PT24H30M');
             $diffHour = new DateInterval('PT30M');
 
@@ -205,7 +210,6 @@
 
             $hour = explode(":", $travel_hour)[0];
             $minutes = explode(":", $travel_hour)[1];
-
 
             $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
@@ -222,6 +226,9 @@
             }
 
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+            
+            error_log($nowTimestamp);
+            error_log($carpoolExpirationTimestamp);
             
             return $carpoolExpirationTimestamp;
         }
