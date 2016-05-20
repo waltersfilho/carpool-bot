@@ -37,6 +37,32 @@
 			error_log( strlen($args[1]) );
 			return $command;
 		}
+        
+        private static function sendCarpoolList($chat_id, $route) {
+            $result = $dao->getCarpoolList($chat_id, $route);
+
+            $source = Config::getBotConfig("source");
+            
+            $text = "";
+                
+            switch (strtolower($route)) {
+					/*comandos padrão*/
+                case '0':
+                    $text = "<b>Ida para " . $source . "</b>\n";
+                    break;
+                case '1':
+                    $text = "<b>Volta de " . $source . "</b>\n";
+                    break;
+                default:
+                    $text = "<b>Caronas</b>\n";
+                    break;
+            
+            foreach ($result as $carpool){
+                $text .= (string)$carpool . "\n";
+            }
+
+            TelegramConnect::sendMessage($chat_id, $text);
+        }
 
 		public static function direcionar($request){
 			$args = array();
@@ -141,15 +167,8 @@
 					case 'ida':
 						if (count($args) == 1) {
 
-							$resultado = $dao->getListaIda($chat_id);
-
-							$source = Config::getBotConfig("source");
-							$texto = "<b>Ida para " . $source . "</b>\n";
-							foreach ($resultado as $carona){
-								$texto .= (string)$carona . "\n";
-							}
-
-							TelegramConnect::sendMessage($chat_id, $texto);
+							sendCarpoolList($chat_id, '0');
+                            
 						} elseif (count($args) == 2) {
 
 							$horarioRaw = $args[1];
@@ -199,15 +218,8 @@
 
 					case 'volta':
 						if (count($args) == 1) {
-							$resultado = $dao->getListaVolta($chat_id);
-
-							$source = Config::getBotConfig("source");
-							$texto = "<b>Volta de " . $source . "</b>\n";
-							foreach ($resultado as $carona){
-								$texto .= (string)$carona . "\n";
-							}
-
-							TelegramConnect::sendMessage($chat_id, $texto);
+							
+                            sendCarpoolList($chat_id, '1');
 
 						} elseif (count($args) == 2) {
 

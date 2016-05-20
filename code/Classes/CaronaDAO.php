@@ -16,9 +16,6 @@
 
 		const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) ORDER BY travel_hour ASC;";
 
-		const LISTA_QUERY_IDA = "select * from public.caroneiros where chat_id = :chat_id and route = '0'::bit(1) ORDER BY travel_hour ASC;";
-		const LISTA_QUERY_VOLTA = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
-	
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
@@ -31,35 +28,25 @@
 
         
         /*
-         * TODO
-         * CREATE SINGLE FUNCTION TO LIST CARPOOL
+         * FUNCTION TO LIST CARPOOL
          * WITH ROUTE AS PARAMETER
          */
-        /*
-        public function getCarpoolList($chat_id, $route) {
-            return "";
-        }
-        */
         
-		public function getListaIda($chat_id){
-            
+        public function getCarpoolList($chat_id, $route) {
             $this->removeExpiredCarpools();
             
-			$this->db->query(CaronaDAO::LISTA_QUERY_IDA);
+            $this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
-			
-			return $this->montaListaCaronas($this->db->resultSet());
-		}
-		
-		public function getListaVolta($chat_id){
+            $this->db->bind(":route", route);
             
-            $this->removeExpiredCarpools();
-            
-			$this->db->query(CaronaDAO::LISTA_QUERY_VOLTA);
-			$this->db->bind(":chat_id", $chat_id);
-			
-			return $this->montaListaCaronas($this->db->resultSet());
-		}
+            return $this->createCarpoolList($this->db->resultSet());
+        }
+        
+        
+        /*
+         * UPDATES THE NUMBER OF SPOTS AVAILABLE
+         * FOR THE CARPOOL
+         */
 
 		public function updateSpots($chat_id, $user_id, $spots, $route) {
 			$this->db->query(CaronaDAO::QUERY_UPDATE_SPOTS);
@@ -264,18 +251,15 @@
             
         }
 		
-		private function montaListaCaronas($resultSet){
+		private function createCarpoolList($resultSet){
 
-			error_log("montaListaCaronas");
-
-			$resultado = array();
+			$result = array();
 			
-			foreach ($resultSet as $entrada)
-			{
-				array_push($resultado, new Carona($entrada));
+			foreach ($resultSet as $entrada) {
+				array_push($result, new Carona($entrada));
 			}
 			
-			return $resultado;
+			return $result;
 		}
     }
 
