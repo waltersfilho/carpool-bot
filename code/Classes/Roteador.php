@@ -38,12 +38,15 @@
 			return $command;
 		}
         
-        private static function sendRequests($requests) {
+        private static function sendRequests($chat_id, $requests) {
             
+            error_log("sendRequests");
             $text = "";
             foreach ($requests as $request){
                 $text .= "@" . $request["username"] . " pode ser interessar por essa carona." . "\n";
             }
+            
+            TelegramConnect::sendMessage($chat_id, $text);
         }
         
         private static function sendCarpoolList($dao, $chat_id, $route) {
@@ -248,7 +251,7 @@
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour);
                                 
-                                self::sendRequests($requests);
+                                self::sendRequests($chat_id, $requests);
                                 
 							} else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
