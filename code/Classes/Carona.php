@@ -5,15 +5,15 @@
         private $chat_id;
         private $user_id;
         private $username;
-        private $travel_hour;
-	   private $spots;
+        private $timestamp;
+        private $spots;
         private $route;
 
         public function __construct($data){
             $this->chat_id = $data["chat_id"];
 			$this->user_id = $data["user_id"];
 			$this->username = $data["username"];
-			$this->travel_hour = $data["travel_hour"];
+			$this->timestamp = $data["timestamp"];
 			$this->spots = $data["spots"];
 			$this->location = $data["location"];
 			$this->route = $data["route"];
@@ -21,9 +21,9 @@
 		public function __toString() {
 
 			if (!empty($this->spots) && !empty($this->location)) {
-				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
+				return "\n" . $this->timestamp . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
 			} else {
-				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username;
+				return "\n" . $this->timestamp . " - @" . $this->username;
 			}
 		}
 		

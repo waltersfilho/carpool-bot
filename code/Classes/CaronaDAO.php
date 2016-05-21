@@ -285,7 +285,7 @@
 			return $travel_hour .= ":00";
 		}
         
-        private function timestampToTimeString($travel_hour){
+        private function timestampToTimeString($timestamp){
 			return $travel_hour .= ":00";
 		}
         
