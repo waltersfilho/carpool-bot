@@ -219,7 +219,7 @@
         }
         
         
-        private function getCarpoolTimestamp($time) {
+        private function getCarpoolTimestamp($travel_hour) {
             
             $diffDay = new DateInterval('PT24H00M');
 
@@ -229,8 +229,8 @@
             $now = date_create(date("Y-m-d G:i P"));
             $nowTimestamp = $now->getTimestamp();
 
-            $hour = explode(":", $time)[0];
-            $minutes = explode(":", $time)[1];
+            $hour = explode(":", $travel_hour)[0];
+            $minutes = explode(":", $travel_hour)[1];
 
             $datetime = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
             $timestamp = $datetime->getTimestamp();
