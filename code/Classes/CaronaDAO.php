@@ -192,14 +192,14 @@
         public function createCarpoolRequest($chat_id, $user_id, $username, $timestamp, $route, $location) {
             error_log("create carpool request");
                         
-            $travel_hour = $this->setStringTime($travel_hour);
-            $expiration = $this->getExpirationTimestamp($travel_hour);
+            $travel_hour = $this->setStringTime($timestamp);
+            $expiration = $this->getExpirationTimestamp($timestamp);
             			
             $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
             $this->db->bind(":chat_id", $chat_id);
             $this->db->bind(":user_id", $user_id);
             $this->db->bind(":username", $username);
-            $this->db->bind(":timestamp", $this->getCarpoolTimestamp($travel_hour));
+            $this->db->bind(":timestamp", $this->getCarpoolTimestamp($timestamp));
             $this->db->bind(":location", strtolower($location));
             $this->db->bind(":route", $route);
             $this->db->bind(":expiration", $expiration);
@@ -209,9 +209,9 @@
             
         }
         
-        private function checkRequestedCarpools($chat_id, $user_id) {
-            
-        }
+//        private function checkRequestedCarpools($chat_id, $user_id) {
+//            
+//        }
         
         private function getCarpoolTimestamp($time) {
             
