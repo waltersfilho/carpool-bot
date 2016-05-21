@@ -64,7 +64,7 @@
             TelegramConnect::sendMessage($chat_id, $text);
         }
 
-		public static function direcionar($request){
+		public static function route($request){
 			$args = array();
 			$command = self::processCommand($request['message']['text'], $args);
 			$dados = self::processData($request);
@@ -303,6 +303,23 @@
 						}
 
 						break;
+                        
+                    case 'quero':
+                        if (count($args) == 4) {
+
+                            if($args[1] == 'ida') {
+                                $dao->createCarpoolRequest($chat_id, $user_id, $travel_hour, '0', $location);
+                                TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua ida");
+                            } elseif ($args[1] == 'volta') {
+                                $dao->createCarpoolRequest($chat_id, $user_id, $travel_hour, '1', $location);
+                                TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua volta");
+                            } else {
+                                TelegramConnect::sendMessage($chat_id, "Formato: /quero [ida|volta] [hora] [local]");
+                            }
+                        }  else {
+                            TelegramConnect::sendMessage($chat_id, "Formato: /quero [ida|volta] [hora] [local]");
+                        }
+                        break;
 				}
 			} else {
 				TelegramConnect::sendMessage($chat_id, "Registre seu username nas configurações do Telegram para utilizar o Bot.");

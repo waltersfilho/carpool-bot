@@ -7,8 +7,8 @@
     $update = file_get_contents('php://input');
     $updateArray = json_decode($update, TRUE);
     
-    Roteador::direcionar($updateArray);
+    Roteador::route($updateArray);
 ?>
 
 <h2>CaronasBot</h2>
-<h4>More @ <a href="https://github.com/filipebarretto/CaronasBot">https://github.com/filipebarretto/CaronasBot</a></h4>
+<h4>More @ <a href="https://github.com/filipebarretto/php-carpool-bot">https://github.com/filipebarretto/php-carpool-bot</a></h4>

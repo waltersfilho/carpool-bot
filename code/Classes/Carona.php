@@ -6,7 +6,7 @@
         private $user_id;
         private $username;
         private $travel_hour;
-	private $spots;
+	   private $spots;
         private $route;
 
         public function __construct($data){

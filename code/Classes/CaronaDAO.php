@@ -20,6 +20,12 @@
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
         
+        const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, travel_hour, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1), :expiration)";
+
+        //        const QUERY_CREATE_CARPOOL_REQUEST = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND route = :route::bit(1)";
+        
+        SELECT * FROM public.caroneiros WHERE chat_id = '-128041556' AND route = 0::bit(1)
+        
         private $db;	
 		
         public function __construct(){
@@ -175,7 +181,6 @@
 
 		}
 
-
 		public function removeCarpool($chat_id, $user_id, $route) {
 			$this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
 			$this->db->bind(":chat_id", $chat_id);
@@ -185,6 +190,10 @@
 			$this->db->execute();
 			error_log("Erro: " . $this->db->getError());
 		}
+        
+        private function createCarpoolRequest($chat_id, $user_id, $travel_hour, $route, $location) {
+            
+        }
 
         private function getExpirationTimestamp($travel_hour) {
             
@@ -248,6 +257,28 @@
 			$this->db->bind(":now", $nowTimestamp);
 
 			$this->db->execute();
+            
+        }
+        
+        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $route) {
+            error_log("create carpool request");
+                        
+            $travel_hour = $this->setStringTime($travel_hour);
+            $expiration = $this->getExpirationTimestamp($travel_hour);
+            
+            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
+			
+            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
+            $this->db->bind(":chat_id", $chat_id);
+            $this->db->bind(":user_id", $user_id);
+            $this->db->bind(":username", $username);
+            $this->db->bind(":travel_hour", $travel_hour);
+            $this->db->bind(":location", strtolower($location));
+            $this->db->bind(":route", $route);
+            $this->db->bind(":expiration", $expiration);
+
+            $this->db->execute();
+            error_log("Erro: " . $this->db->getError());
             
         }
 		
