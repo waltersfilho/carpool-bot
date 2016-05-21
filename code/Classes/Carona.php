@@ -21,7 +21,7 @@
         
 		public function __toString() {
             
-            return "\n" . $this->timestamp . " - @" . $this->username;
+            return "\n" . self::timestampToString($this->timestamp) . " - @" . $this->username;
             
             /*
 			if (!empty($this->spots) && !empty($this->location)) {
@@ -35,6 +35,11 @@
 		public function ehIda(){
 			return $this->route == 0;
 		}
+        
+        private function timestampToString($timestamp) {
+            return gmdate("G:i", $timestamp);
+        }
+        
     }
 
     
