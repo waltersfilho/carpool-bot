@@ -14,9 +14,9 @@
         
 		const QUERY_UPDATE_SPOTS = "UPDATE public.caroneiros SET spots = :spots WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1)";
 
-		const QUERY_SEARCH = "SELECT * FROM public.caroneiros WHERE chat_id = \':chat_id\' AND user_id = \':user_id\' AND route = :route::bit(1) ORDER BY timestamp ASC;";
+		const QUERY_SEARCH = "SELECT * FROM public.caroneiros WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1) ORDER BY timestamp ASC;";
 
-		const QUERY_REMOVE_CARPOOL = "DELETE FROM public.caroneiros WHERE chat_id = \':chat_id\' AND user_id = \':user_id\' AND route = :route::bit(1)";
+		const QUERY_REMOVE_CARPOOL = "DELETE FROM public.caroneiros WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1)";
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "DELETE FROM public.caroneiros WHERE expiration < :now";
         
