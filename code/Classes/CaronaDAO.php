@@ -189,7 +189,25 @@
 			error_log("Erro: " . $this->db->getError());
 		}
         
-        private function createCarpoolRequest($chat_id, $user_id, $travel_hour, $route, $location) {
+        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $route) {
+            error_log("create carpool request");
+                        
+            $travel_hour = $this->setStringTime($travel_hour);
+            $expiration = $this->getExpirationTimestamp($travel_hour);
+            
+            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
+			
+            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
+            $this->db->bind(":chat_id", $chat_id);
+            $this->db->bind(":user_id", $user_id);
+            $this->db->bind(":username", $username);
+            $this->db->bind(":travel_hour", $travel_hour);
+            $this->db->bind(":location", strtolower($location));
+            $this->db->bind(":route", $route);
+            $this->db->bind(":expiration", $expiration);
+
+            $this->db->execute();
+            error_log("Erro: " . $this->db->getError());
             
         }
 
@@ -255,28 +273,6 @@
 			$this->db->bind(":now", $nowTimestamp);
 
 			$this->db->execute();
-            
-        }
-        
-        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $route) {
-            error_log("create carpool request");
-                        
-            $travel_hour = $this->setStringTime($travel_hour);
-            $expiration = $this->getExpirationTimestamp($travel_hour);
-            
-            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
-			
-            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
-            $this->db->bind(":chat_id", $chat_id);
-            $this->db->bind(":user_id", $user_id);
-            $this->db->bind(":username", $username);
-            $this->db->bind(":travel_hour", $travel_hour);
-            $this->db->bind(":location", strtolower($location));
-            $this->db->bind(":route", $route);
-            $this->db->bind(":expiration", $expiration);
-
-            $this->db->execute();
-            error_log("Erro: " . $this->db->getError());
             
         }
 		
