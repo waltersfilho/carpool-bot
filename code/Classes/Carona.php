@@ -18,6 +18,7 @@
 			$this->location = $data["location"];
 			$this->route = $data["route"];
         }
+        
 		public function __toString() {
             
             error_log("to string");
