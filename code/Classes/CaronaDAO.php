@@ -208,7 +208,7 @@
             $this->db->bind(":chat_id", strval($chat_id));
 			$this->db->bind(":user_id", strval($user_id));
             $this->db->bind(":username", $username);
-            $this->db->bind(":timestamp", $this->getCarpoolTimestamp($timestamp));
+            $this->db->bind(":timestamp", $timestamp);
             $this->db->bind(":location", strtolower($location));
             $this->db->bind(":route", $route);
             $this->db->bind(":expiration", $expiration);
