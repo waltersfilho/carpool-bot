@@ -6,21 +6,21 @@
     class CaronaDAO{
 
 		
-		const QUERY_CREATE_CARPOOL = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1), :expiration)";
-		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :spots, :location, :route::bit(1), :expiration)";
+		const QUERY_CREATE_CARPOOL = "INSERT INTO public.caroneiros (chat_id, user_id, username, timestamp, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :route::bit(1), :expiration)";
+		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, timestamp, spots, location, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :spots, :location, :route::bit(1), :expiration)";
 
-		const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '', expiration = :expiration where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
-		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = :travel_hour, spots = :spots, location = :location, expiration = :expiration where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE_CARPOOL = "UPDATE public.caroneiros SET timestamp = :timestamp, spots = '', location = '', expiration = :expiration WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1)";
+		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "UPDATE public.caroneiros SET timestamp = :timestamp, spots = :spots, location = :location, expiration = :expiration WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1)";
         
-		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE_SPOTS = "UPDATE public.caroneiros SET spots = :spots WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1)";
 
-		const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) ORDER BY travel_hour ASC;";
+		const QUERY_SEARCH = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1) ORDER BY timestamp ASC;";
 
-		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_REMOVE_CARPOOL = "DELETE FROM public.caroneiros WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1)";
 
-        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
+        const QUERY_REMOVE_EXPIRED_CARPOOLS = "DELETE FROM public.caroneiros WHERE expiration < :now";
         
-        const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, timestamp, location, route, expiration) values (:chat_id, :user_id, :username, :timestamp, :location, :route::bit(1), :expiration)";
+        const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, timestamp, location, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :location, :route::bit(1), :expiration)";
 
         //        const QUERY_CREATE_CARPOOL_REQUEST = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND route = :route::bit(1)";
                 
@@ -73,6 +73,7 @@
 		public function createCarpool($chat_id, $user_id, $username, $travel_hour, $route) {
 
 			$travel_hour = $this->setStringTime($travel_hour);
+            $timestamp = $this->getCarpoolTimestamp($travel_hour);
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			error_log("createCarpool");
@@ -101,7 +102,7 @@
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":username", $username);
-				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":route", $route);
                 $this->db->bind(":expiration", $expiration);
 
@@ -113,7 +114,7 @@
 				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
-				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":route", $route);
                 $this->db->bind(":expiration", $expiration);
 
@@ -135,6 +136,7 @@
 			error_log("create carpool with details");
 
 			$travel_hour = $this->setStringTime($travel_hour);
+            $timestamp = $this->getCarpoolTimestamp($travel_hour);
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			
@@ -151,7 +153,7 @@
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
 				$this->db->bind(":username", $username);
-				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", strtolower($location));
 				$this->db->bind(":route", $route);
@@ -166,7 +168,7 @@
 				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
 				$this->db->bind(":chat_id", $chat_id);
 				$this->db->bind(":user_id", $user_id);
-				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
 				$this->db->bind(":route", $route);
@@ -209,9 +211,6 @@
             
         }
         
-//        private function checkRequestedCarpools($chat_id, $user_id) {
-//            
-//        }
         
         private function getCarpoolTimestamp($time) {
             
