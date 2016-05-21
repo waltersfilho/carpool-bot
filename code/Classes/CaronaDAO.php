@@ -9,14 +9,14 @@
 		const QUERY_CREATE_CARPOOL = "INSERT INTO public.caroneiros (chat_id, user_id, username, timestamp, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :route::bit(1), :expiration)";
 		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, timestamp, spots, location, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :spots, :location, :route::bit(1), :expiration)";
 
-		const QUERY_UPDATE_CARPOOL = "UPDATE public.caroneiros SET timestamp = :timestamp, spots = '', location = '', expiration = :expiration WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1)";
-		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "UPDATE public.caroneiros SET timestamp = :timestamp, spots = :spots, location = :location, expiration = :expiration WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1)";
+		const QUERY_UPDATE_CARPOOL = "UPDATE public.caroneiros SET timestamp = :timestamp, spots = '', location = '', expiration = :expiration WHERE chat_id = :chat_id::varchar(255) AND user_id = :user_id::varchar(255) AND route = :route::bit(1)";
+		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "UPDATE public.caroneiros SET timestamp = :timestamp, spots = :spots, location = :location, expiration = :expiration WHERE chat_id = :chat_id::varchar(255) AND user_id = :user_id::varchar(255) AND route = :route::bit(1)";
         
-		const QUERY_UPDATE_SPOTS = "UPDATE public.caroneiros SET spots = :spots WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1)";
+		const QUERY_UPDATE_SPOTS = "UPDATE public.caroneiros SET spots = :spots WHERE chat_id = :chat_id::varchar(255) AND user_id = :user_id::varchar(255) AND route = :route::bit(1)";
 
-		const QUERY_SEARCH = "SELECT * FROM public.caroneiros WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1) ORDER BY timestamp ASC;";
+		const QUERY_SEARCH = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id::varchar(255) AND user_id = :user_id::varchar(255) AND route = :route::bit(1) ORDER BY timestamp ASC;";
 
-		const QUERY_REMOVE_CARPOOL = "DELETE FROM public.caroneiros WHERE chat_id = ':chat_id' AND user_id = ':user_id' AND route = :route::bit(1)";
+		const QUERY_REMOVE_CARPOOL = "DELETE FROM public.caroneiros WHERE chat_id = :chat_id::varchar(255) AND user_id = :user_id::varchar(255) AND route = :route::bit(1)";
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "DELETE FROM public.caroneiros WHERE expiration < :now";
         
