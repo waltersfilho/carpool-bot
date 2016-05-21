@@ -15,7 +15,7 @@ class Config{
         self::$botConfigs["DBUser"] = array_key_exists("DB_USER", $_ENV) ? $_ENV["DB_USER"] : NULL;
         self::$botConfigs["DBPass"] = array_key_exists("DB_PASS", $_ENV) ? $_ENV["DB_PASS"] : NULL;
         self::$botConfigs["DBName"] = array_key_exists("DB_NAME", $_ENV) ? $_ENV["DB_NAME"] : NULL;
-	self::$botConfigs["source"] = array_key_exists("SOURCE", $_ENV) ? $_ENV["SOURCE"] : NULL;
+        self::$botConfigs["source"] = array_key_exists("SOURCE", $_ENV) ? $_ENV["SOURCE"] : NULL;
     }
 }
 
