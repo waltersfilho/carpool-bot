@@ -24,7 +24,6 @@
         
         const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, timestamp, location, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :location, :route::bit(1), :expiration)";
 
-        //        const QUERY_CREATE_CARPOOL_REQUEST = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND route = :route::bit(1)";
                 
         private $db;	
 		
@@ -50,6 +49,8 @@
             $this->db->query(CaronaDAO::QUERY_LIST_CARPOOLS);
 			$this->db->bind(":chat_id", strval($chat_id));
             $this->db->bind(":route", route);
+            
+            error_log("result: " . count($this->db->resultSet()));
             
             return $this->createCarpoolList($this->db->resultSet());
         }
