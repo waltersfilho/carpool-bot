@@ -42,9 +42,7 @@
             error_log("chat_id: " . $chat_id);
             error_log("route: " . $route);
             
-            /*
             $this->removeExpiredCarpools();
-            */
             
             $this->db->query(CaronaDAO::QUERY_LIST_CARPOOLS);
 			$this->db->bind(":chat_id", $chat_id);
@@ -265,42 +263,10 @@
             
         }
 
-        private function getExpirationTimestamp($travel_hour) {
+        private function getExpirationTimestamp($timestamp) {
             
-            error_log("getExpirationTimestamp");
-            
-            $diffDay = new DateInterval('PT24H30M');
-            $diffHour = new DateInterval('PT30M');
-
-            $today = date("Y-m-d");
-
-            $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"));
-            $nowTimestamp = $now->getTimestamp();
-
-            $hour = explode(":", $travel_hour)[0];
-            $minutes = explode(":", $travel_hour)[1];
-
-            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
-            
-            /*
-             * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
-             * DAY OR THE NEXT DAY AND
-             * SETS CARPOOL EXPIRATION TIME
-             */
-            if ($nowTimestamp > $carpoolExpirationTimestamp) {
-                $carpoolExpiration->add($diffDay);
-            } else {
-                $carpoolExpiration->add($diffHour);
-            }
-
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
-            
-            error_log($nowTimestamp);
-            error_log($carpoolExpirationTimestamp);
-            
-            return $carpoolExpirationTimestamp;
+            error_log("getExpirationTimestamp");            
+            return $timestamp + (30 * 60)
         }
 
 		private function setTimeString($travel_hour){
