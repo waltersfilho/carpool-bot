@@ -169,7 +169,7 @@
 					case 'ida':
 						if (count($args) == 1) {
 
-							sendCarpoolList($chat_id, '0');
+							self::sendCarpoolList($chat_id, '0');
                             
 						} elseif (count($args) == 2) {
 
@@ -221,7 +221,7 @@
 					case 'volta':
 						if (count($args) == 1) {
 							
-                            sendCarpoolList($chat_id, '1');
+                            self::sendCarpoolList($chat_id, '1');
 
 						} elseif (count($args) == 2) {
 
@@ -311,10 +311,10 @@
 
                             if($args[1] == 'ida') {
                                 $dao->createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, '0', $location);
-                                TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua ida");
+                                TelegramConnect::sendMessage($chat_id, "@".$username." quer carona");
                             } elseif ($args[1] == 'volta') {
                                 $dao->createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, '1', $location);
-                                TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua volta");
+                                TelegramConnect::sendMessage($chat_id, "@".$username." quer carona");
                             } else {
                                 TelegramConnect::sendMessage($chat_id, "Formato: /quero [ida|volta] [hora] [local]");
                             }
