@@ -20,7 +20,7 @@
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
         
-        const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, travel_hour, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1), :expiration)";
+        const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, travel_hour, location, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :location, :route::bit(1), :expiration)";
 
         //        const QUERY_CREATE_CARPOOL_REQUEST = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND route = :route::bit(1)";
                 
