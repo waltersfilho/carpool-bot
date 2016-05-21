@@ -189,14 +189,12 @@
 			error_log("Erro: " . $this->db->getError());
 		}
         
-        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $location, $route) {
+        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $route, $location) {
             error_log("create carpool request");
                         
             $travel_hour = $this->setStringTime($travel_hour);
             $expiration = $this->getExpirationTimestamp($travel_hour);
-            
-            $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
-			
+            			
             $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
             $this->db->bind(":chat_id", $chat_id);
             $this->db->bind(":user_id", $user_id);
