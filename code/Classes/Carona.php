@@ -37,7 +37,7 @@
 		}
         
         private function timestampToString($timestamp) {
-            return gmdate("G:i", $timestamp);
+            return gmdate("H:i", $timestamp);
         }
         
     }
