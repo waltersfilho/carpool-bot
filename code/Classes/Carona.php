@@ -34,6 +34,7 @@
 		}
         
         private function timestampToString($timestamp) {
+            date_default_timezone_set('America/Sao_Paulo');
             return date("H:i", $timestamp);
         }
         
