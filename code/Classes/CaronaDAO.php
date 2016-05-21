@@ -16,10 +16,7 @@
 
 		const QUERY_SEARCH = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1) ORDER BY timestamp ASC;";
         
-        /*
         const QUERY_LIST_CARPOOLS = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id AND route = :route::bit(1) ORDER BY timestamp ASC;";
-        */
-        const QUERY_LIST_CARPOOLS = "SELECT * FROM public.caroneiros WHERE chat_id = :chat_id;";
 
 		const QUERY_REMOVE_CARPOOL = "DELETE FROM public.caroneiros WHERE chat_id = :chat_id AND user_id = :user_id AND route = :route::bit(1)";
 
@@ -51,10 +48,7 @@
             
             $this->db->query(CaronaDAO::QUERY_LIST_CARPOOLS);
 			$this->db->bind(":chat_id", $chat_id);
-            
-            /*
             $this->db->bind(":route", route);
-            */
             
             $this->db->execute();
                         
