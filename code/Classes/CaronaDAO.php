@@ -84,8 +84,6 @@
 			$travel_hour = $this->setTimeString($travel_hour);
             $timestamp = $this->getCarpoolTimestamp($travel_hour);
             
-            $this->checkForRequests($chat_id, $route, $timestamp);
-            
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			error_log("createCarpool");
             error_log($travel_hour);
@@ -134,6 +132,7 @@
 				error_log("Erro: " . $this->db->getError());
 			}
 
+            return $this->checkForRequests($chat_id, $route, $timestamp);
 
 		}
 
@@ -310,14 +309,7 @@
             
             $this->db->execute();
             
-            $results = array();
-            
-            foreach ($this->db->resultSet() as $result) {
-                array_push($results, new Carona($result));
-                
-                error_log(new Carona($result));
-            }
-            
+            return $this->db->resultSet();
             
         }
         

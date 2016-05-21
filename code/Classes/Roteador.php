@@ -38,6 +38,14 @@
 			return $command;
 		}
         
+        private static function sendRequests($requests) {
+            
+            $text = "";
+            foreach ($requests as $request){
+                $text .= "@" . $request["username"] . " pode ser interessar por essa carona." . "\n";
+            }
+        }
+        
         private static function sendCarpoolList($dao, $chat_id, $route) {
             $result = $dao->getCarpoolList($chat_id, $route);
 
@@ -236,9 +244,12 @@
 
 								$travel_hour = $hora . ":" . $minuto;
 				
-								$dao->createCarpool($chat_id, $user_id, $username, $travel_hour, '1');
+								$requests = $dao->createCarpool($chat_id, $user_id, $username, $travel_hour, '1');
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour);
+                                
+                                self::sendRequests($requests);
+                                
 							} else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
