@@ -50,8 +50,10 @@
             */
             
             $this->db->query(CaronaDAO::QUERY_LIST_CARPOOLS);
+            /*
 			$this->db->bind(":chat_id" . $chat_id);
             $this->db->bind(":route" . route);
+            */
             
             $this->db->execute();
             
