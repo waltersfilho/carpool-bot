@@ -39,8 +39,8 @@
         
         public function getCarpoolList($chat_id, $route) {
             error_log("getCarpoolList");
-            error_log($chat_id);
-            error_log($route);
+            error_log("chat_id: " . $chat_id);
+            error_log("route: " . $route);
             
             /*
             $this->removeExpiredCarpools();
@@ -49,6 +49,8 @@
             $this->db->query(CaronaDAO::QUERY_LIST_CARPOOLS);
 			$this->db->bind(":chat_id",$chat_id);
             $this->db->bind(":route", route);
+            
+            $this->db->execute();
             
             error_log("result: " . count($this->db->resultSet()));
             
