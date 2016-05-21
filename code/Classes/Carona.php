@@ -21,15 +21,12 @@
         
 		public function __toString() {
             
-            return "\n" . self::timestampToString($this->timestamp) . " - @" . $this->username;
-            
-            /*
 			if (!empty($this->spots) && !empty($this->location)) {
-				return "\n" . gmp_strval(gmp_init($this->timestamp)) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
+				return "\n" . self::timestampToString($this->timestamp) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
 			} else {
-				return "\n" . gmp_strval(gmp_init($this->timestamp)) . " - @" . $this->username;
+				return "\n" . self::timestampToString($this->timestamp) . " - @" . $this->username;
 			}
-            */
+            
 		}
 		
 		public function ehIda(){
@@ -37,7 +34,7 @@
 		}
         
         private function timestampToString($timestamp) {
-            return gmdate("H:i", $timestamp);
+            return date("H:i", $timestamp);
         }
         
     }
