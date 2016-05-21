@@ -169,7 +169,7 @@
 					case 'ida':
 						if (count($args) == 1) {
 
-							self::sendCarpoolList($chat_id, '0');
+							$this->sendCarpoolList($chat_id, '0');
                             
 						} elseif (count($args) == 2) {
 
@@ -221,7 +221,7 @@
 					case 'volta':
 						if (count($args) == 1) {
 							
-                            self::sendCarpoolList($chat_id, '1');
+                            $this->sendCarpoolList($chat_id, '1');
 
 						} elseif (count($args) == 2) {
 
