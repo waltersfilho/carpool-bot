@@ -23,6 +23,8 @@
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "DELETE FROM public.caroneiros WHERE expiration < :now";
         
         const QUERY_CREATE_CARPOOL_REQUEST = "INSERT INTO public.requests (chat_id, user_id, username, timestamp, location, route, expiration) VALUES (:chat_id, :user_id, :username, :timestamp, :location, :route::bit(1), :expiration)";
+        
+        const QUERY_SEARCH_CARPOOL_REQUEST = "SELECT * FROM public.requests WHERE chat_id = :chat_id AND route = :route::bit(1) AND (timestamp >= :minTimestamp OR timestamp <= :maxTimestamp);";
 
                 
         private $db;	
@@ -81,6 +83,8 @@
 
 			$travel_hour = $this->setTimeString($travel_hour);
             $timestamp = $this->getCarpoolTimestamp($travel_hour);
+            
+            checkForRequests($chat_id, $route, $timestamp);
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			error_log("createCarpool");
@@ -263,10 +267,13 @@
             
         }
 
+        /*
+         * SETS THE CARPOOL EXPIRATION TO 30 MINUTES
+         * AFTER ITS TIME
+         */
         private function getExpirationTimestamp($timestamp) {
-            
-            error_log("getExpirationTimestamp");            
-            return $timestamp + (30 * 60);
+            $delta = 30 * 60;
+            return $timestamp + $delta;
         }
 
 		private function setTimeString($travel_hour){
@@ -291,6 +298,37 @@
 
 			$this->db->execute();
             
+        }
+        
+        private function checkForRequests($chat_id, $route, $timestamp) {
+            
+            $this->db->query(CaronaDAO::QUERY_SEARCH_CARPOOL_REQUEST);
+            $this->db->bind(":chat_id", $chat_id);
+            $this->db->bind(":route", $route);
+            $this->db->bind(":minTimestamp", $this->getMinTimestamp($timestamp));
+            $this->db->bind(":maxTimestamp", $this->getMaxTimestamp($timestamp));
+            
+            $this->db->execute();
+            
+            $results = array();
+            
+            foreach ($this->db->resultSet() as $result) {
+                array_push($results, new Carona($result));
+                
+                error_log(new Carona($result));
+            }
+            
+            
+        }
+        
+        private function getMinTimestamp($timestamp) {
+            $delta = 15 * 60;
+            return $timestamp - delta;
+        }
+        
+        private function getMaxTimestamp($timestamp) {
+            $delta = 15 * 60;
+            return $timestamp + delta;
         }
 		
 		private function createCarpoolList($resultSet){
