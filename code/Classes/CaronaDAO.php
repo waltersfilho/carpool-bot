@@ -84,7 +84,7 @@
 			$travel_hour = $this->setTimeString($travel_hour);
             $timestamp = $this->getCarpoolTimestamp($travel_hour);
             
-            checkForRequests($chat_id, $route, $timestamp);
+            $this->checkForRequests($chat_id, $route, $timestamp);
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			error_log("createCarpool");
