@@ -341,7 +341,6 @@
 			
 			foreach ($resultSet as $entrada) {
                 error_log("entrada");
-                error_log($entrada);
 				array_push($result, new Carona($entrada));
 			}
 			
