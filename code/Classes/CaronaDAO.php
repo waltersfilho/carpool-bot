@@ -199,7 +199,7 @@
             $this->db->bind(":chat_id", $chat_id);
             $this->db->bind(":user_id", $user_id);
             $this->db->bind(":username", $username);
-            $this->db->bind(":travel_hour", $travel_hour);
+            $this->db->bind(":travel_hour", $this->getCarpoolTimestamp($travel_hour));
             $this->db->bind(":location", strtolower($location));
             $this->db->bind(":route", $route);
             $this->db->bind(":expiration", $expiration);
@@ -208,11 +208,45 @@
             error_log("Erro: " . $this->db->getError());
             
         }
+        
+        private function checkRequestedCarpools($chat_id, $user_id) {
+            
+        }
+        
+        private function getCarpoolTimestamp($time) {
+            
+            $diffDay = new DateInterval('PT24H00M');
+
+            $today = date("Y-m-d");
+
+            $timezone = date_default_timezone_get();
+            $now = date_create(date("Y-m-d G:i P"));
+            $nowTimestamp = $now->getTimestamp();
+
+            $hour = explode(":", $time)[0];
+            $minutes = explode(":", $time)[1];
+
+            $datetime = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
+            $timestamp = $datetime->getTimestamp();
+            
+            /*
+             * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
+             * DAY OR THE NEXT DAY AND
+             * SETS CARPOOL EXPIRATION TIME
+             */
+            if ($nowTimestamp > $timestamp) {
+                $datetime->add($diffDay);
+            } 
+            
+            $timestamp = $datetime->getTimestamp();
+            
+            return $timestamp;
+            
+        }
 
         private function getExpirationTimestamp($travel_hour) {
             
             error_log("getExpirationTimestamp");
-            
             
             $diffDay = new DateInterval('PT24H30M');
             $diffHour = new DateInterval('PT30M');
@@ -247,11 +281,6 @@
             
             return $carpoolExpirationTimestamp;
         }
-		
-		private function acertarStringHora($travel_hour){
-			return $travel_hour .= ":00";
-		}
-
 
 		private function setStringTime($travel_hour){
 			return $travel_hour .= ":00";

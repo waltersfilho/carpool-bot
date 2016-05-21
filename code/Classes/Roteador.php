@@ -319,13 +319,15 @@
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
 								$travel_hour = $hora . ":" . $minuto;
+                                
+                                $location = $args[3];
 				
 								if($args[1] == 'ida') {
                                     $dao->createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, '0', $location);
-                                    TelegramConnect::sendMessage($chat_id, "@".$username." quer carona");
+                                    TelegramConnect::sendMessage($chat_id, "@" . $username . " quer carona de ida às " . $travel_hour . " passando por " . $location);
                                 } elseif ($args[1] == 'volta') {
                                     $dao->createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, '1', $location);
-                                    TelegramConnect::sendMessage($chat_id, "@".$username." quer carona");
+                                    TelegramConnect::sendMessage($chat_id, "@" . $username . " quer carona de volta às " . $travel_hour . " passando por " . $location);
                                 } else {
                                     TelegramConnect::sendMessage($chat_id, "Formato: /quero [ida|volta] [hora] [local]");
                                 }

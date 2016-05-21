@@ -5,9 +5,9 @@ create table Caroneiros(
 	username varchar(128),
 	spots varchar(128),
 	location varchar(128),
-	travel_hour time,
+	timestamp bigint,
 	route bit not null,
-    expiration int
+    expiration bigint not null
 );
 
 create table requests(
@@ -16,7 +16,7 @@ create table requests(
 	user_id varchar(255) NOT NULL,
 	username varchar(128),
 	location varchar(128),
-	travel_hour time,
+	timestamp bigint,
 	route bit not null,
-    expiration int
+    expiration bigint not null
 );
