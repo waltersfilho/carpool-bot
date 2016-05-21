@@ -189,7 +189,7 @@
 			error_log("Erro: " . $this->db->getError());
 		}
         
-        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $route) {
+        public function createCarpoolRequest($chat_id, $user_id, $username, $travel_hour, $location, $route) {
             error_log("create carpool request");
                         
             $travel_hour = $this->setStringTime($travel_hour);
