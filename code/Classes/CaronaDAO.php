@@ -47,7 +47,7 @@
             */
             
             $this->db->query(CaronaDAO::QUERY_LIST_CARPOOLS);
-			$this->db->bind(":chat_id", strval($chat_id));
+			$this->db->bind(":chat_id",$chat_id);
             $this->db->bind(":route", route);
             
             error_log("result: " . count($this->db->resultSet()));
@@ -109,8 +109,8 @@
 			if (count($this->db->resultSet()) == 0) {
 				error_log("insterting new carpool going");                
 				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL);
-				$this->db->bind(":chat_id", strval($chat_id));
-                $this->db->bind(":user_id", strval($user_id));
+				$this->db->bind(":chat_id",$chat_id);
+                $this->db->bind(":user_id",$user_id);
 				$this->db->bind(":username", $username);
 				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":route", $route);
@@ -122,8 +122,8 @@
 			} else {
 				error_log("updating existing carpool going");
 				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL);
-				$this->db->bind(":chat_id", strval($chat_id));
-                $this->db->bind(":user_id", strval($user_id));
+				$this->db->bind(":chat_id",$chat_id);
+                $this->db->bind(":user_id",$user_id);
 				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":route", $route);
                 $this->db->bind(":expiration", $expiration);
@@ -151,8 +151,8 @@
             $expiration = $this->getExpirationTimestamp($travel_hour);
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
-			$this->db->bind(":chat_id", strval($chat_id));
-			$this->db->bind(":user_id", strval($user_id));
+			$this->db->bind(":chat_id",$chat_id);
+			$this->db->bind(":user_id",$user_id);
 			$this->db->bind(":route", $route);
 
 			$this->db->execute();
@@ -160,8 +160,8 @@
 			if (count($this->db->resultSet()) == 0) {
 				error_log("insterting new carpool with details going");
 				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
-				$this->db->bind(":chat_id", strval($chat_id));
-                $this->db->bind(":user_id", strval($user_id));
+				$this->db->bind(":chat_id",$chat_id);
+                $this->db->bind(":user_id",$user_id);
 				$this->db->bind(":username", $username);
 				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":spots", $spots);
@@ -176,8 +176,8 @@
 				error_log("updating existing carpool with details going");
 
 				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
-				$this->db->bind(":chat_id", strval($chat_id));
-                $this->db->bind(":user_id", strval($user_id));
+				$this->db->bind(":chat_id",$chat_id);
+                $this->db->bind(":user_id",$user_id);
 				$this->db->bind(":timestamp", $timestamp);
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
@@ -194,8 +194,8 @@
 		public function removeCarpool($chat_id, $user_id, $route) {
             error_log(QUERY_REMOVE_CARPOOL);
 			$this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
-			$this->db->bind(":chat_id", strval($chat_id));
-			$this->db->bind(":user_id", strval($user_id));
+			$this->db->bind(":chat_id",$chat_id);
+			$this->db->bind(":user_id",$user_id);
 			$this->db->bind(":route", $route);
 			
 			$this->db->execute();
@@ -214,8 +214,8 @@
             $expiration = $this->getExpirationTimestamp($travel_hour);
             			
             $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
-            $this->db->bind(":chat_id", strval($chat_id));
-			$this->db->bind(":user_id", strval($user_id));
+            $this->db->bind(":chat_id",$chat_id);
+			$this->db->bind(":user_id",$user_id);
             $this->db->bind(":username", $username);
             $this->db->bind(":timestamp", $timestamp);
             $this->db->bind(":location", strtolower($location));
