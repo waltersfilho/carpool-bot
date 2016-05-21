@@ -38,7 +38,7 @@
 			return $command;
 		}
         
-        private static function sendCarpoolList($chat_id, $route) {
+        private static function sendCarpoolList($dao, $chat_id, $route) {
             $result = $dao->getCarpoolList($chat_id, $route);
 
             $source = Config::getBotConfig("source");
@@ -169,7 +169,7 @@
 					case 'ida':
 						if (count($args) == 1) {
 
-							self::sendCarpoolList($chat_id, '0');
+							self::sendCarpoolList($dao, $chat_id, '0');
                             
 						} elseif (count($args) == 2) {
 
@@ -221,7 +221,7 @@
 					case 'volta':
 						if (count($args) == 1) {
 							
-                            self::sendCarpoolList($chat_id, '1');
+                            self::sendCarpoolList($dao, $chat_id, '1');
 
 						} elseif (count($args) == 2) {
 
