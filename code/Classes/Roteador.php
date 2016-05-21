@@ -56,12 +56,14 @@
                 default:
                     $text = "<b>Caronas</b>\n";
                     break;
+            }
             
             foreach ($result as $carpool){
                 $text .= (string)$carpool . "\n";
             }
 
             TelegramConnect::sendMessage($chat_id, $text);
+                    
         }
 
 		public static function route($request){
