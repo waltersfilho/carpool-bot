@@ -266,7 +266,7 @@
         private function getExpirationTimestamp($timestamp) {
             
             error_log("getExpirationTimestamp");            
-            return $timestamp + (30 * 60)
+            return $timestamp + (30 * 60);
         }
 
 		private function setTimeString($travel_hour){
