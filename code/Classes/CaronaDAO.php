@@ -72,7 +72,7 @@
         
 		public function createCarpool($chat_id, $user_id, $username, $travel_hour, $route) {
 
-			$travel_hour = $this->setStringTime($travel_hour);
+			$travel_hour = $this->setTimeString($travel_hour);
             $timestamp = $this->getCarpoolTimestamp($travel_hour);
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
@@ -135,7 +135,7 @@
 
 			error_log("create carpool with details");
 
-			$travel_hour = $this->setStringTime($travel_hour);
+			$travel_hour = $this->setTimeString($travel_hour);
             $timestamp = $this->getCarpoolTimestamp($travel_hour);
             
             $expiration = $this->getExpirationTimestamp($travel_hour);
@@ -194,7 +194,7 @@
         public function createCarpoolRequest($chat_id, $user_id, $username, $timestamp, $route, $location) {
             error_log("create carpool request");
                         
-            $travel_hour = $this->setStringTime($timestamp);
+            $travel_hour = $this->setTimeString($timestamp);
             $expiration = $this->getExpirationTimestamp($timestamp);
             			
             $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_REQUEST);
@@ -281,10 +281,13 @@
             return $carpoolExpirationTimestamp;
         }
 
-		private function setStringTime($travel_hour){
+		private function setTimeString($travel_hour){
 			return $travel_hour .= ":00";
 		}
         
+        private function timestampToTimeString($travel_hour){
+			return $travel_hour .= ":00";
+		}
         
         /*
          * AUTOMATICALLY DELETES CARPOOLS EXPIRED
