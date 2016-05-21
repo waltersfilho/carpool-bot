@@ -21,8 +21,6 @@
         
 		public function __toString() {
             
-            error_log("to string");
-            error_log(gmp_strval(gmp_init($this->timestamp)) . " - @" . $this->username);
             
             return "\n- @" . $this->username;
                 /*
