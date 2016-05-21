@@ -19,6 +19,10 @@
 			$this->route = $data["route"];
         }
 		public function __toString() {
+            
+            error_log("to string");
+            error_log(gmp_strval(gmp_init($this->timestamp)) . " - @" . $this->username);
+            
 			if (!empty($this->spots) && !empty($this->location)) {
 				return "\n" . gmp_strval(gmp_init($this->timestamp)) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
 			} else {
