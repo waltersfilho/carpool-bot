@@ -21,8 +21,8 @@
         
 		public function __toString() {
             
-            
             return "\n" . $this->timestamp . " - @" . $this->username;
+            
             /*
 			if (!empty($this->spots) && !empty($this->location)) {
 				return "\n" . gmp_strval(gmp_init($this->timestamp)) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";

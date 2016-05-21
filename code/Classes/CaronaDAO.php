@@ -56,9 +56,7 @@
             */
             
             $this->db->execute();
-            
-            error_log("result: " . count($this->db->resultSet()));
-            
+                        
             return $this->createCarpoolList($this->db->resultSet());
         }
         
