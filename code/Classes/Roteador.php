@@ -54,11 +54,11 @@
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
 
-            $dataHoje = date('d/m/Y');
-            $dataAmanha = date('d/m/Y', strtotime('+1 days'));
+            $dataHoje = date('d/m');
+            $dataAmanha = date('d/m', strtotime('+1 days'));
 
-            $dataHojeDia = $diasemana[date('w', strtotime($dataHoje))] . " - " . $dataHoje;
-            $dataAmanhaDia = $diasemana[date('w', strtotime($dataAmanha))]  .  " - " . $dataAmanha;
+            $dataHojeDia = $diasemana[date('w', strtotime($dataHoje)) + 3] . " - " . $dataHoje;
+            $dataAmanhaDia = $diasemana[date('w', strtotime($dataAmanha)) + 3]  .  " - " . $dataAmanha;
 
 			/*Dividir cada comando em seu controlador*/
 			if($username){
