@@ -285,8 +285,6 @@
                         $resultadoHoje = $dao->getListaIdaHoje($chat_id);
                         $caronasDiaAtual = array();
                         $caronasDiaSeguinte = array();
-                        $textoHoje = "";
-                        $textoAmanha = "";
                         $source = Config::getBotConfig("source");
 
                         foreach ($resultadoHoje as $carona){
