@@ -130,7 +130,7 @@
 							$resultado = $dao->getListaIda($chat_id);
 
 							$source = Config::getBotConfig("source");
-							$texto = "<b>Ida para o" . $source . "</b>\n";
+							$texto = "<b>Ida para o " . $source . "</b>\n";
 							foreach ($resultado as $carona){
 								$texto .= (string)$carona . "\n";
 							}
