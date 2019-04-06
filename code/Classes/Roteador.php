@@ -340,9 +340,9 @@
                             }
                         }
 
-                        $texto = $textoIdaHoje . "\n" . $textoVoltaHoje . "\n" . $textoIdaAmanha . "\n" . $textoVoltaAmanha;
+                        $texto = isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "" . isset($textoVoltaHoje) ? $textoVoltaHoje . "\n"  : "" . isset($textoIdaAmanha) . "\n"  ?  $textoIdaAmanha : "" . isset($textoVoltaAmanha) . "\n" ? $textoVoltaAmanha : "";
 
-						TelegramConnect::sendMessage($chat_id, $textoAmanha);
+						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
 					case 'vagas':
