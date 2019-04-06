@@ -344,8 +344,8 @@
                             }
                         }
 
-                        $texto = date('d/m') . "\n";
-                        $texto .=  isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
+                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? date('d/m') . "\n" : "";
+                        $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
                         $texto .= date('d/m', strtotime('+1 days')) . "\n ";
