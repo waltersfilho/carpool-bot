@@ -80,24 +80,17 @@
 					
 					case 'help':
 						$help = "Utilize este Bot para agendar as caronas. A utilização é super simples e através de comandos:
-
+								/caronas --> Este comando lista as caronas tanto de ida, quanto de volta do Fundão
+								
 								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO.
 									Ex: /ida 10:00 2 jardim
 									(Inclui uma carona de ida às 10:00 com 2 vagas saindo do jardim)
-
-								/ida [horario] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO. Nessa opção, não é necessário definir vagas e local.
-									Ex: /ida 10:00
-									(Inclui uma carona de ida às 10:00)
 
 								Caso não seja colocado o parâmetro do horário (Ex: /ida) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
 								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. 
 									Ex: /volta 15:00 3 jardim 
 									(Inclui uma carona de volta às 15:00 com 3 vagas para o jardim)
-
-								/volta [horario] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. Nessa opção, não é necessário definir vagas e local.
-									Ex: /volta 15:00
-									(Inclui uma carona de volta às 15:00)
 								
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
