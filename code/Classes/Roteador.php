@@ -154,6 +154,15 @@
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+
+
+                                $date = DateTime::createFromFormat("G:i", time());
+                                
+                                if($date->getTimestamp() < $dtime->getTimestamp())
+                                {
+                                    $dtime->modify('+1 day');
+                                }
+
                                 $timestamp = $dtime->getTimestamp();
 
                                 error_log($timestamp);
