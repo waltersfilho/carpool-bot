@@ -239,7 +239,7 @@
                                 }
                             }
 
-                            $texto = !isset($textoHoje) && !isset($textoHoje) ? "Não há ofertas de carona :(" : "";
+                            $texto = isset($textoHoje) && isset($textoHoje) ? "" : "Não há ofertas de carona :(";
                             $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
