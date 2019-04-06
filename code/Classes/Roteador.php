@@ -348,9 +348,10 @@
                         error_log($textoIdaAmanha . "textoIdaAmanha");
                         error_log($textoVoltaAmanha . "textoVoltaAmanha");
 
-                        $texto = isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "" . isset($textoVoltaHoje) ? $textoVoltaHoje . "\n"  : "" . isset($textoIdaAmanha) . "\n"  ?  $textoIdaAmanha : "" . isset($textoVoltaAmanha) . "\n" ? $textoVoltaAmanha : "";
-
-
+                        $texto =  isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
+                        $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
+                        $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
+                        $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
