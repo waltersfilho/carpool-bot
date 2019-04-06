@@ -161,9 +161,10 @@
                                 }
                             }
 
-                            $texto = (isset($textoHoje) and isset($textoAmanha)) ? "" : "Não há ofertas de carona de ida :(";
-                            $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
+                            $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
+                            
+                            empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						} elseif (count($args) == 4) {
@@ -235,9 +236,10 @@
                                 }
                             }
 
-                            $texto = (isset($textoHoje) and isset($textoAmanha)) ? "" : "Não há ofertas de carona de volta :(";
-                            $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
+                            $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
+
+                            empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 
@@ -348,15 +350,15 @@
                             }
                         }
 
-                        $texto =  (isset($textoIdaHoje) and isset($textoVoltaHoje) and isset($textoIdaAmanha) and isset($textoVoltaAmanha)) ? "" : "Não há ofertas de carona :(";
-
-                        $texto .=  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
+                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
                         $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
                         $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "\n " : "";
                         $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
+
+                        empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
