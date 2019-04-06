@@ -132,11 +132,11 @@
 							$resultado = $dao->getListaIda($chat_id);
                             $caronasDiaAtual = array();
                             $caronasDiaSeguinte = array();
-                            $dateToday = date_create(date("m-d"));
+                            $dateToday = new DateTime();
                             $source = Config::getBotConfig("source");
                             $textoAmanha = $dateToday->modify('+1 day') . "\n<b>Ida para o " . $source . "</b>\n";
 							$textoHoje = $dateToday . "\n<b>Ida para o " . $source . "</b>\n";
-							
+
 							foreach ($resultado as $carona){
                                 if($carona->getTravelHour() === $dateToday){
                                     $caronasDiaAtual[] = $carona;
