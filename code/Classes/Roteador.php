@@ -147,13 +147,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoHoje =  date('d-m') . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoAmanha = date('d-m', strtotime('+1 days')) . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -221,13 +221,13 @@
                             }
 
                             if(!empty($caronasDiaAtual)){
-                                $textoHoje =  "\n<b>Volta do " . $source . "</b>\n";
+                                $textoHoje =  date('d-m') . "\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
                             }
                             if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = "\n<b>Ida do " . $source . "</b>\n";
+                                $textoAmanha = date('d-m', strtotime('+1 days')) . "\n<b>Ida do " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
