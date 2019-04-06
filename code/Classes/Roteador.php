@@ -135,7 +135,7 @@
                             $dateToday = new DateTime();
                             $source = Config::getBotConfig("source");
                             $textoHoje = date( "d-Y", strtotime($dateToday)) . "\n<b>Ida para o " . $source . "</b>\n";
-                            $textoAmanha = date( "d-Y", strtotime($dateToday->modify('+1 day')) . "\n<b>Ida para o " . $source . "</b>\n";
+                            $textoAmanha = date( "d-Y", strtotime($dateToday->modify('+1 day'))) . "\n<b>Ida para o " . $source . "</b>\n";
 
 							foreach ($resultado as $carona){
                                 if($carona->getTravelHour() === $dateToday){
