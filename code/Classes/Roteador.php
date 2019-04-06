@@ -180,7 +180,7 @@
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
 
                                 $date = new DateTime('NOW');
-                                error_log($date->getTimestamp());
+                                error_log($date->getTimestamp() . "teste");
 
                                 if($date->getTimestamp() > $dtime->getTimestamp())
                                 {
