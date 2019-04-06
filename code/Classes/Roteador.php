@@ -58,8 +58,8 @@
             $dataHoje = date('d/m');
             $dataAmanha = date('d/m', strtotime('+1 days'));
 
-            $dataHojeDia = $diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . $dataHoje;
-            $dataAmanhaDia = $diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " . $dataAmanha;
+            $dataHojeDia = /*$diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . */ $dataHoje;
+            $dataAmanhaDia = /*$diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " .*/ $dataAmanha;
 
 			/*Dividir cada comando em seu controlador*/
 			if($username){
