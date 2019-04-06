@@ -49,13 +49,17 @@
 			$args = array();
 			$command = self::processCommand($request['message']['text'], $args);
 			$dados = self::processData($request);
-
+            $diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado');
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
 
-            $date = date('d/m');
-			
+            $dataHoje = date('d/m');
+            $dataAmanha = date('d/m', strtotime('+1 days'));
+
+            $dataHojeDia =  $dataHoje . " - " . $diasemana[date('w', strtotime($dataHoje))];
+            $dataAmanhaDia = $dataAmanha . " - "  . $diasemana[date('w', strtotime($dataAmanha))];
+
 			/*Dividir cada comando em seu controlador*/
 			if($username){
 				$dao = new CaronaDAO();
@@ -86,7 +90,7 @@
 
 						TelegramConnect::sendMessage($chat_id, $regras);
 						break;
-					
+
 					case 'help':
 						$help = "Utilize este Bot para agendar as caronas. A utilização é super simples e através de comandos:
 								/caronas --> Este comando lista as caronas tanto de ida, quanto de volta do Fundão
@@ -114,10 +118,10 @@
 									(Altera o número de vagas da ida para 2)
 									Ex: /vagas ida 0
 									(Altera o número de vagas da ida para 0, ou seja, lotado)";
-						
+
 						TelegramConnect::sendMessage($chat_id, $help);
 						break;
-						
+
 					case 'teste':
 						error_log("teste");
 						$texto = "Versão 1.2 - ChatId: $chat_id";
@@ -147,13 +151,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  date('d/m') . "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoHoje =  $dataHojeDia ."\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = date('d/m', strtotime('+1 days')) . "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoAmanha = $dataAmanhaDia . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -189,7 +193,7 @@
                                 $timestamp = $dtime->getTimestamp();
 
 								$travel_hour = $hora . ":" . $minuto;
-				
+
 								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
@@ -221,13 +225,13 @@
                             }
 
                             if(!empty($caronasDiaAtual)){
-                                $textoHoje =  date('d/m') . "\n<b>Volta do " . $source . "</b>\n";
+                                $textoHoje =  $dataHojeDia . "\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
                             }
                             if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = date('d/m', strtotime('+1 days')) . "\n<b>Volta do " . $source . "</b>\n";
+                                $textoAmanha = $dataAmanhaDia . "\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -237,7 +241,7 @@
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 
-						
+
 
 						} elseif (count($args) == 4) {
 
@@ -279,7 +283,7 @@
 							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 macembu");
 						}
 						break;
-					      
+
 					case 'caronas':
 
                         $resultadoHoje = $dao->getListaIdaHoje($chat_id);
@@ -344,11 +348,11 @@
                             }
                         }
 
-                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? date('d/m') . "\n" : "";
+                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
                         $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
-                        $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? date('d/m', strtotime('+1 days')) . "\n " : "";
+                        $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "\n " : "";
                         $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
