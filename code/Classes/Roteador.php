@@ -340,6 +340,8 @@
 
                         $texto = isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "" . isset($textoVoltaHoje) ? $textoVoltaHoje . "\n"  : "" . isset($textoIdaAmanha) . "\n"  ?  $textoIdaAmanha : "" . isset($textoVoltaAmanha) . "\n" ? $textoVoltaAmanha : "";
 
+                        error_log($texto);
+
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
