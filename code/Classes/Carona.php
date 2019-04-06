@@ -19,7 +19,6 @@
 			$this->route = $data["route"];
         }
 		public function __toString() {
-			error_log($this->route);
 			if (!empty($this->spots) && !empty($this->location)) {
 				$plural = $this->spots > 1 ? "s" : "";
 				if(!$this->route) {
