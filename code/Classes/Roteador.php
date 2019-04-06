@@ -137,6 +137,8 @@
                             $textoAmanha = "";
                             $source = Config::getBotConfig("source");
 
+                            error_log($dateToday . "teste");
+
 							foreach ($resultado as $carona){
                                 if($carona->getTravelHour() === $dateToday){
                                     $caronasDiaAtual[] = $carona;
