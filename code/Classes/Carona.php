@@ -27,7 +27,7 @@
 					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				}
 			} else {
-				return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3)  . " (Lotado)";
+				return "\n<s>" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3)  . " (Lotado)</s>";
 			}
 		}
 		
