@@ -137,13 +137,13 @@
                             $source = Config::getBotConfig("source");
 
 							foreach ($resultadoHoje as $carona){
-                                $caronasDiaAtual = $carona;
+                                array_push($caronasDiaAtual, $carona);
 							}
 
                             $resultadoAmanha = $dao->getListaIdaAmanha($chat_id);
 
                             foreach ($resultadoAmanha as $carona){
-                                $caronasDiaSeguinte = $carona;
+                                array_push($caronasDiaSeguinte, $carona);
                             }
 
 							if(!empty($caronasDiaAtual)){
