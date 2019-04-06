@@ -97,13 +97,13 @@
 								
 								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO.
 									Ex: /ida 10:00 2 merck
-									(Inclui uma carona de ida às 10:00 com 2 vagas saindo do jardim)
+									(Inclui uma carona de ida às 10:00 com 2 vagas saindo do merck)
 
 								Caso não seja colocado o parâmetro do horário (Ex: /ida) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
 								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. 
 									Ex: /volta 15:00 3 merck 
-									(Inclui uma carona de volta às 15:00 com 3 vagas para o jardim)
+									(Inclui uma carona de volta às 15:00 com 3 vagas para a merck)
 								
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
@@ -149,13 +149,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  $dataHojeDia ."\n <b>Ida para o " . $source . "</b>\n";
+                                $textoHoje =  $dataHojeDia ."\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = $dataAmanhaDia . "\n <b>Ida para o " . $source . "</b>\n";
+                                $textoAmanha = $dataAmanhaDia . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -358,7 +358,7 @@
                         $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
-                        $texto = empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
+                        $texto = empty($texto) ? "Não há ofertas de carona :(" : $texto;
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
