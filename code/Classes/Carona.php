@@ -21,7 +21,7 @@
 		public function __toString() {
 			if (!empty($this->spots) && !empty($this->location)) {
 				$plural = $this->spots > 1 ? "s" : "";
-				if($this->route === true) {
+				if($this->route === false) {
 					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				} else {
 					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
