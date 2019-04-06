@@ -130,12 +130,33 @@
 						if (count($args) == 1) {
 
 							$resultado = $dao->getListaIda($chat_id);
-
-							$source = Config::getBotConfig("source");
-							$texto = $date . " <b>Ida para o " . $source . "</b>\n";
+                            $caronasDiaAtual = array();
+                            $caronasDiaSeguinte = array();
+                            $dateToday = date_create(date("m-d"));
+                            $source = Config::getBotConfig("source");
+                            $textoAmanha = $dateToday->modify('+1 day') . "\n<b>Ida para o " . $source . "</b>\n";
+							$textoHoje = $dateToday . "\n<b>Ida para o " . $source . "</b>\n";
+							
 							foreach ($resultado as $carona){
-								$texto .= (string)$carona . "\n";
+                                if($carona->getTravelHour() === $dateToday){
+                                    $caronasDiaAtual[] = $carona;
+                                } else {
+                                    $caronasDiaSeguinte[] = $carona;
+                                }
 							}
+
+							if(!empty($caronasDiaAtual)){
+                                foreach ($caronasDiaAtual as $carona){
+                                    $textoHoje .= (string)$carona . "\n";
+                                }
+							}
+							if (!empty($caronasDiaSeguinte)){
+                                foreach ($caronasDiaSeguinte as $carona){
+                                    $textoAmanha .= (string)$carona . "\n";
+                                }
+                            }
+
+                            $texto = $textoHoje . '\n' . $textoAmanha;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						} elseif (count($args) == 4) {

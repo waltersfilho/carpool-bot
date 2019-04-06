@@ -6,7 +6,7 @@
         private $user_id;
         private $username;
         private $travel_hour;
-	private $spots;
+	    private $spots;
         private $route;
 
         public function __construct($data){
@@ -35,6 +35,10 @@
 		public function ehIda(){
 			return $this->route == 0;
 		}
+
+		public function getTravelHour(){
+            return $this->travel_hour;
+        }
     }
 
     
