@@ -53,6 +53,8 @@
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
+
+            $date = date('d-m');
 			
 			/*Dividir cada comando em seu controlador*/
 			if($username){
@@ -130,7 +132,7 @@
 							$resultado = $dao->getListaIda($chat_id);
 
 							$source = Config::getBotConfig("source");
-							$texto = "<b>Ida para o " . $source . "</b>\n";
+							$texto = $date . " <b>Ida para o " . $source . "</b>\n";
 							foreach ($resultado as $carona){
 								$texto .= (string)$carona . "\n";
 							}
@@ -147,12 +149,18 @@
 							$location = $args[3];
 
 							if ($horarioValido){
+
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+                                $timestamp = $dtime->getTimestamp();
+
+                                error_log($timestamp);
+
 								$travel_hour = $hora . ":" . $minuto;
 				
-								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $spots, $location, '0');
+								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, $timestamp, $spots, $location, '0');
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
 							} else{
