@@ -54,28 +54,28 @@
 				switch (strtolower($command)) {
 					/*comandos padrão*/
 					case 'regras':
-						$regras = "	 BEM VINDOS AO GRUPO DE CARONAS TAQUARA-FUNDÃO :blue_car:
+						$regras = "	 BEM VINDOS AO GRUPO DE CARONAS TAQUARA-FUNDÃO
 
 								 REGRAS
 
-								:small_blue_diamond: Quem for dar carona é só colocar o nome na lista junto com o horário e local para IDA ou VOLTA do Fundão.
+								- Quem for dar carona é só colocar o nome na lista junto com o horário e local para IDA ou VOLTA do Fundão.
 								 Local de encontro, trajeto e outras informações serão combinados preferincialmente no PRIVADO.
 
-								:small_blue_diamond: Quando seu carro estiver lotado coloque seu nome na lista entre ~ para que fique riscado dessa forma: ~fulano 8h~.
+								- Quando seu carro estiver lotado coloque seu nome na lista entre ~ para que fique riscado dessa forma: ~fulano 8h~.
 
-								:small_blue_diamond: É obrigatório o envio de algum documento que comprove o vínculo com a UFRJ para algum adm. 
+								- É obrigatório o envio de algum documento que comprove o vínculo com a UFRJ para algum adm. 
 
-								:small_blue_diamond: Evitar assuntos não relacionados às caronas no grupo, a menos que considere de interesse público.
+								- Evitar assuntos não relacionados às caronas no grupo, a menos que considere de interesse público.
 
-								:small_blue_diamond:Poste suas caronas sempre em ordem de horários, podendo indicar referências como local de saída ou trajeto. Colabore apagando as caronas antigas e criando as do próximo dia.
+								- Poste suas caronas sempre em ordem de horários, podendo indicar referências como local de saída ou trajeto. Colabore apagando as caronas antigas e criando as do próximo dia.
 
-								:small_blue_diamond:De forma a evitar eventuais transtornos, zele sempre pela integridade e segurança de ambas as partes. Atitudes que possam causar eventuais prejuízos a terceiros serão passíveis de remoção do grupo. Exemplos: direção ofensiva, crimes de trânsito, porte de drogas, documentação do veículo em dia, etc.
+								- De forma a evitar eventuais transtornos, zele sempre pela integridade e segurança de ambas as partes. Atitudes que possam causar eventuais prejuízos a terceiros serão passíveis de remoção do grupo. Exemplos: direção ofensiva, crimes de trânsito, porte de drogas, documentação do veículo em dia, etc.
 
-								:small_blue_diamond: O não cumprimento das regras poderá acarretar na remoção do grupo.
+								- O não cumprimento das regras poderá acarretar na remoção do grupo.
 
-								:small_blue_diamond: Divulgue o grupo somente entre sua rede de pessoas conhecidas. Para adicionar novos integrantes, envie msg no privado para um dos adms.
+								- Divulgue o grupo somente entre sua rede de pessoas conhecidas. Para adicionar novos integrantes, envie msg no privado para um dos adms.
 
-								:small_blue_diamond:Valor da carona: R$6,00.";
+								- Valor da carona: R$6,00.";
 
 						TelegramConnect::sendMessage($chat_id, $regras);
 						break;
