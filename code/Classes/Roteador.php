@@ -132,7 +132,7 @@
 							$resultado = $dao->getListaIda($chat_id);
                             $caronasDiaAtual = array();
                             $caronasDiaSeguinte = array();
-                            $dateToday = new DateTime();
+                            $dateToday = new DateTime("now");
                             $textoHoje = "";
                             $textoAmanha = "";
                             $source = Config::getBotConfig("source");
@@ -178,7 +178,7 @@
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
 
-                                $date = new DateTime();
+                                $date = new DateTime("now");
                                 error_log($date->getTimestamp());
 
                                 if($date->getTimestamp() > $dtime->getTimestamp())
