@@ -178,11 +178,12 @@
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                error_log($dtime->getTimestamp() . "teste1");
 
                                 $date = new DateTime('NOW', $timezone);
-                                error_log($date->getTimestamp() . "teste");
+                                error_log($date->getTimestamp() . "teste2");
 
-                                if($date->getTimestamp() < $dtime->getTimestamp())
+                                if($date->getTimestamp() > $dtime->getTimestamp())
                                 {
                                     $dtime->modify('+1 day');
                                 }
