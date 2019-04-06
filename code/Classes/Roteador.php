@@ -348,7 +348,7 @@
                         $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
-                        $texto .= date('d/m', strtotime('+1 days')) . "\n ";
+                        $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? date('d/m', strtotime('+1 days')) . "\n " : "";
                         $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
