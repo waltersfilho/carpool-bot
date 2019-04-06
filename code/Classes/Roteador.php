@@ -54,8 +54,8 @@
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
 
-            $dataHoje = date('d/m');
-            $dataAmanha = date('d/m', strtotime('+1 days'));
+            $dataHoje = date('d/m/Y');
+            $dataAmanha = date('d/m/Y', strtotime('+1 days'));
 
             $dataHojeDia = $diasemana[date('w', strtotime($dataHoje))] . " - " . $dataHoje;
             $dataAmanhaDia = $diasemana[date('w', strtotime($dataAmanha))]  .  " - " . $dataAmanha;
@@ -149,13 +149,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  $dataHojeDia ."\n<b>Ida para o " . $source . "</b>\n";
+                                $textoHoje =  $dataHojeDia ."\n <b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = $dataAmanhaDia . "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoAmanha = $dataAmanhaDia . "\n <b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
