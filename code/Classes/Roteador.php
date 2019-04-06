@@ -33,7 +33,7 @@
 				$args = explode(" ", $stringComando);
 				
 				if(count($args) == 5) {
-				   $args[3] = $args[3] . $args[4];
+				   $args[3] = $args[3] . " " . $args[4];
 				}
 				unset($args[4]);
 				error_log($args);
