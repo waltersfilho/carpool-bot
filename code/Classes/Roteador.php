@@ -163,7 +163,7 @@
                                 }
                             }
 
-                            $texto = !isset($textoHoje) && !isset($textoHoje) ? "Não há ofertas de carona :(" : "";
+                            $texto = isset($textoHoje) && isset($textoHoje) ? "" : "Não há ofertas de carona :(";
                             $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
@@ -352,7 +352,9 @@
                             }
                         }
 
-                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
+                        $texto =  isset($textoIdaHoje) && isset($textoVoltaHoje) && isset($textoIdaAmanha) && isset($textoVoltaAmanha) ? "" : "Não há ofertas de carona :(";
+
+                        $texto .=  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
                         $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
