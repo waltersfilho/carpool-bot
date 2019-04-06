@@ -134,8 +134,8 @@
                             $caronasDiaSeguinte = array();
                             $dateToday = new DateTime();
                             $source = Config::getBotConfig("source");
-                            $textoAmanha = $dateToday->modify('+1 day') . "\n<b>Ida para o " . $source . "</b>\n";
-							$textoHoje = $dateToday . "\n<b>Ida para o " . $source . "</b>\n";
+                            $textoHoje = date( "d-Y", strtotime($dateToday)) . "\n<b>Ida para o " . $source . "</b>\n";
+                            $textoAmanha = date( "d-Y", strtotime($dateToday->modify('+1 day')) . "\n<b>Ida para o " . $source . "</b>\n";
 
 							foreach ($resultado as $carona){
                                 if($carona->getTravelHour() === $dateToday){
