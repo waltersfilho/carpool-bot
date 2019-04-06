@@ -182,7 +182,7 @@
                                 $date = new DateTime('NOW', $timezone);
                                 error_log($date->getTimestamp() . "teste");
 
-                                if($date->getTimestamp() > $dtime->getTimestamp())
+                                if($date->getTimestamp() < $dtime->getTimestamp())
                                 {
                                     $dtime->modify('+1 day');
                                 }
