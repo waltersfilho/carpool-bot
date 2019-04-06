@@ -319,6 +319,12 @@
                             array_push($caronasDiaAtual, $carona);
                         }
 
+                        unset($caronasDiaAtual);
+                        unset($caronasDiaSeguinte);
+
+                        $caronasDiaAtual = array();
+                        $caronasDiaSeguinte = array();
+
                         $resultadoAmanha = $dao->getListaVoltaAmanha($chat_id);
 
                         foreach ($resultadoAmanha as $carona){
@@ -340,7 +346,7 @@
 
                         $texto = isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "" . isset($textoVoltaHoje) ? $textoVoltaHoje . "\n"  : "" . isset($textoIdaAmanha) . "\n"  ?  $textoIdaAmanha : "" . isset($textoVoltaAmanha) . "\n" ? $textoVoltaAmanha : "";
 
-                        error_log($texto);
+                        error_log($texto . "teste");
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
