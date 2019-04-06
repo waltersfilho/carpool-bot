@@ -49,6 +49,7 @@
 			$args = array();
 			$command = self::processCommand($request['message']['text'], $args);
 			$dados = self::processData($request);
+            $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sabado');
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
@@ -56,9 +57,8 @@
             $dataHoje = date('d/m');
             $dataAmanha = date('d/m', strtotime('+1 days'));
 
-            setlocale(LC_ALL, 'pt_BR','ptb');
-            $dataHojeDia =   strftime("%A", strtotime($dataHoje)) . " - " . $dataHoje;
-            $dataAmanhaDia =  strftime("%A", strtotime($dataAmanha))  .  " - " . $dataAmanha;
+            $dataHojeDia = $diasemana[date('w', strtotime($dataHoje)) + 2] . " - " . $dataHoje;
+            $dataAmanhaDia = $diasemana[date('w', strtotime($dataAmanha)) + 2]  .  " - " . $dataAmanha;
 
 			/*Dividir cada comando em seu controlador*/
 			if($username){
