@@ -253,6 +253,32 @@
 							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 jardim");
 						}
 						break;
+						
+					case 'caronas':
+						
+
+						$resultado = $dao->getListaIda($chat_id);
+
+						$source = Config::getBotConfig("source");
+						$texto = "<b>Ida para " . $source . "</b>\n";
+						foreach ($resultado as $carona){
+							$texto .= (string)$carona . "\n";
+						}
+						
+						$resultado = $dao->getListaVolta($chat_id);
+
+						$source = Config::getBotConfig("source");
+						$texto .= "\n<b>Volta de " . $source . "</b>\n";
+						foreach ($resultado as $carona){
+							$texto .= (string)$carona . "\n";
+						}
+						
+						
+
+						TelegramConnect::sendMessage($chat_id, $texto);
+					}
+					break;
+
 
 					case 'vagas':
 						if (count($args) == 3) {
