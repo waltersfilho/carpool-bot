@@ -31,8 +31,11 @@
 				$stringComando = str_replace($match[0], "", $stringComando);
 				
 				$args = explode(" ", $stringComando);
+				
+				if(count($args) == 5) {
+				   $args[3] = $args[3] . $args[4];
+				}
 				error_log($args);
-
 			}
 
 			error_log( print_r( $command, true ) );
