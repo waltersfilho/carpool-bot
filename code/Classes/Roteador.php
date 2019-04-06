@@ -61,8 +61,6 @@
 								- Quem for dar carona é só colocar o nome na lista junto com o horário e local para IDA ou VOLTA do Fundão.
 								 Local de encontro, trajeto e outras informações serão combinados preferincialmente no PRIVADO.
 
-								- Quando seu carro estiver lotado coloque seu nome na lista entre ~ para que fique riscado dessa forma: ~fulano 8h~.
-
 								- É obrigatório o envio de algum documento que comprove o vínculo com a UFRJ para algum adm. 
 
 								- Evitar assuntos não relacionados às caronas no grupo, a menos que considere de interesse público.
