@@ -227,7 +227,7 @@
                                 }
                             }
                             if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = date('d/m', strtotime('+1 days')) . "\n<b>Ida do " . $source . "</b>\n";
+                                $textoAmanha = date('d/m', strtotime('+1 days')) . "\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -302,21 +302,19 @@
                         if(!empty($caronasDiaAtual)){
                             $textoIdaHoje =  "\n<b>Ida para o " . $source . "</b>\n";
                             foreach ($caronasDiaAtual as $carona){
-                                $textoHoje .= (string)$carona . "\n";
+                                $textoIdaHoje .= (string)$carona . "\n";
                             }
                         }
                         if (!empty($caronasDiaSeguinte)){
                             $textoIdaAmanha = "\n<b>Ida para o " . $source . "</b>\n";
                             foreach ($caronasDiaSeguinte as $carona){
-                                $textoAmanha .= (string)$carona . "\n";
+                                $textoIdaAmanha .= (string)$carona . "\n";
                             }
                         }
 
                         $resultadoHoje = $dao->getListaVoltaHoje($chat_id);
                         $caronasDiaAtual = array();
                         $caronasDiaSeguinte = array();
-                        $textoHoje = "";
-                        $textoAmanha = "";
                         $source = Config::getBotConfig("source");
 
                         foreach ($resultadoHoje as $carona){
@@ -332,13 +330,13 @@
                         if(!empty($caronasDiaAtual)){
                             $textoVoltaHoje =  "\n<b>Volta do " . $source . "</b>\n";
                             foreach ($caronasDiaAtual as $carona){
-                                $textoHoje .= (string)$carona . "\n";
+                                $textoVoltaHoje .= (string)$carona . "\n";
                             }
                         }
                         if (!empty($caronasDiaSeguinte)){
-                            $textoVoltaAmanha = "\n<b>Ida do " . $source . "</b>\n";
+                            $textoVoltaAmanha = "\n<b>Volta do " . $source . "</b>\n";
                             foreach ($caronasDiaSeguinte as $carona){
-                                $textoAmanha .= (string)$carona . "\n";
+                                $textoVoltaAmanha .= (string)$carona . "\n";
                             }
                         }
 
