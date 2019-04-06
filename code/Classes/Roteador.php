@@ -54,30 +54,28 @@
 				switch (strtolower($command)) {
 					/*comandos padrão*/
 					case 'regras':
-						$regras = "	Este grupo tem como intuito principal facilitar o deslocamento entre Ilha e Fundão. Não visamos criar um serviço paralelo nem tirar algum lucro com isso.
-									Este documento descreve como o grupo costuma funcionar para não ficar muito bagunçado. São conselhos baseados no bom senso e experiência adquirida.
+						$regras = "	 BEM VINDOS AO GRUPO DE CARONAS TAQUARA-FUNDÃO :blue_car:
 
-									-Nome e foto: libere a exibição do nome e foto no Telegram. Isso oferece mais segurança para os motoristas e caroneiros. Caso não exiba, existe grande chance de você ser removido por engano ou considerado inativo.
+								 REGRAS
 
-									-Horários: Ao oferecer carona, informe o horário que vai sair do seu destino.
+								:small_blue_diamond: Quem for dar carona é só colocar o nome na lista junto com o horário e local para IDA ou VOLTA do Fundão.
+								 Local de encontro, trajeto e outras informações serão combinados preferincialmente no PRIVADO.
 
-									-Carona para o dia seguinte: espere um horário que não atrapalhe quem está pedindo carona para voltar da faculdade. Sugestão: ofereça após as 19h.
+								:small_blue_diamond: Quando seu carro estiver lotado coloque seu nome na lista entre ~ para que fique riscado dessa forma: ~fulano 8h~.
 
-									-Valor: Não é pagamento, ninguém é obrigado a pagar como também ninguém é obrigado a dar carona. É uma ajuda de custos. Chegamos, em comum acordo, em uma contribuição de 3,00 por trajeto. (Já são mais 3 anos de grupo e nunca tivemos maiores problemas com isso).
+								:small_blue_diamond: É obrigatório o envio de algum documento que comprove o vínculo com a UFRJ para algum adm. 
 
-									-Não seja ganancioso, seu carro não é táxi.
+								:small_blue_diamond: Evitar assuntos não relacionados às caronas no grupo, a menos que considere de interesse público.
 
-									-Não seja mesquinho, você está indo para a faculdade no conforto e rapidez, colabore com o motorista.
+								:small_blue_diamond:Poste suas caronas sempre em ordem de horários, podendo indicar referências como local de saída ou trajeto. Colabore apagando as caronas antigas e criando as do próximo dia.
 
-									-Utilize o bot como forma principal de anunciar as caronas.
+								:small_blue_diamond:De forma a evitar eventuais transtornos, zele sempre pela integridade e segurança de ambas as partes. Atitudes que possam causar eventuais prejuízos a terceiros serão passíveis de remoção do grupo. Exemplos: direção ofensiva, crimes de trânsito, porte de drogas, documentação do veículo em dia, etc.
 
-									-Sempre utilize os padrões propostos pelo comando /help. Eles foram escolhidos de forma a melhorar a exibição das caronas.
+								:small_blue_diamond: O não cumprimento das regras poderá acarretar na remoção do grupo.
 
-									-Evite conversar e fugir do tema do grupo. Este grupo é destinado apenas à carona. Para demais assuntos temos o grupo da zoeira (Para os interessados, mandar inbox para @LuisOctavioCosta)
+								:small_blue_diamond: Divulgue o grupo somente entre sua rede de pessoas conhecidas. Para adicionar novos integrantes, envie msg no privado para um dos adms.
 
-									-Qualquer dúvida sobre o funcionamento do grupo, sugestão ou reclamação, podem me procurar por inbox (@LuisOctavioCosta).
-
-									Obrigado";
+								:small_blue_diamond:Valor da carona: R$6,00.";
 
 						TelegramConnect::sendMessage($chat_id, $regras);
 						break;
