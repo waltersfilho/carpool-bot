@@ -23,7 +23,7 @@
 			if (!empty($this->spots) && !empty($this->location)) {
 				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
 			} else {
-				return "\n" . "*" . substr($this->travel_hour, 0, -3) . " - @" . $this->username + "*" . "Lotado";
+				return "\n" . "*" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "*" . "Lotado";
 			}
 		}
 		
