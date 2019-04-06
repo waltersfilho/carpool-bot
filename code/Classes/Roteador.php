@@ -121,18 +121,6 @@
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
 
-					case 'stop':
-						$texto = "GALERA, OLHA A ZOEIRA...";
-
-						TelegramConnect::sendMessage($chat_id, $texto);
-						break;
-
-					case 'luiza':
-						$texto = "Luiiiis, me espera! Só vou atrasar uns minutinhos!";
-
-						TelegramConnect::sendMessage($chat_id, $texto);
-						break;
-
 					/*Comandos de viagem*/
 					case 'ida':
 						if (count($args) == 1) {
@@ -198,7 +186,7 @@
 							$resultado = $dao->getListaVolta($chat_id);
 
 							$source = Config::getBotConfig("source");
-							$texto = "<b>Volta de " . $source . "</b>\n";
+							$texto = "<b>Volta do " . $source . "</b>\n";
 							foreach ($resultado as $carona){
 								$texto .= (string)$carona . "\n";
 							}
@@ -259,7 +247,7 @@
 						$resultado = $dao->getListaIda($chat_id);
 
 						$source = Config::getBotConfig("source");
-						$texto = "<b>Ida para " . $source . "</b>\n";
+						$texto = "<b>Ida para o" . $source . "</b>\n";
 						foreach ($resultado as $carona){
 							$texto .= (string)$carona . "\n";
 						}
@@ -267,7 +255,7 @@
 						$resultado = $dao->getListaVolta($chat_id);
 
 						$source = Config::getBotConfig("source");
-						$texto .= "\n<b>Volta de " . $source . "</b>\n";
+						$texto .= "\n<b>Volta do " . $source . "</b>\n";
 						foreach ($resultado as $carona){
 							$texto .= (string)$carona . "\n";
 						}
