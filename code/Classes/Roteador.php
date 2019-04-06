@@ -29,7 +29,10 @@
 			if(preg_match($regexComando, $stringComando, $match)){
 				$command = $match['comando'];
 				$stringComando = str_replace($match[0], "", $stringComando);
-				$args = explode(" ", $stringComando);
+				list($info, $local) = explode("\"", $stringComando);
+				error_log($local);
+				$args = explode(" ", $info);
+				$args .= $local;
 			}
 
 			error_log( print_r( $command, true ) );
