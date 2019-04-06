@@ -213,11 +213,7 @@
             $now = date_create(date("Y-m-d G:i P"));
             $nowTimestamp = $now->getTimestamp();
 
-            $hour = explode(":", $travel_hour)[0];
-            $minutes = explode(":", $travel_hour)[1];
-
-            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+            $carpoolExpirationTimestamp = $travel_hour;
             
             /*
              * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
@@ -225,12 +221,10 @@
              * SETS CARPOOL EXPIRATION TIME
              */
             if ($nowTimestamp > $carpoolExpirationTimestamp) {
-                $carpoolExpiration->add($diffDay);
+                $carpoolExpirationTimestamp->add($diffDay);
             } else {
-                $carpoolExpiration->add($diffHour);
+                $carpoolExpirationTimestamp->add($diffHour);
             }
-
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
             
             error_log($nowTimestamp);
             error_log($carpoolExpirationTimestamp);
