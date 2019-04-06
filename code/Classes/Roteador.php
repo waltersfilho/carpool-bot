@@ -53,6 +53,7 @@
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
+            $timezone = new DateTimeZone("America/Sao_Paulo");
 
             $dataHoje = date('d/m');
             $dataAmanha = date('d/m', strtotime('+1 days'));
@@ -178,7 +179,6 @@
 							$location = $args[3];
 
 							if ($horarioValido){
-                                $timezone = new DateTimeZone("America/Sao_Paulo");
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 

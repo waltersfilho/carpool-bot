@@ -221,7 +221,7 @@
 		}
 
         private function getExpirationTimestamp($travel_hour) {
-            
+            $timezone = new DateTimeZone("America/Sao_Paulo");
             error_log("getExpirationTimestamp");
             
             
@@ -230,15 +230,14 @@
 
             $today = date("Y-m-d");
 
-            $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"));
+            $now = new DateTime('NOW', $timezone);
             $nowTimestamp = $now->getTimestamp();
 
             $hour = explode(":", $travel_hour)[0];
             $minutes = explode(":", $travel_hour)[1];
 
             $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
-            $carpoolExpirationTimestamp = $travel_hour;
+            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
             
             /*
              * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
