@@ -156,9 +156,9 @@
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
 
                                 $date = new DateTime();
-                                error_log($date);
+                                error_log($date->getTimestamp());
 
-                                if($date->getTimestamp() < $dtime->getTimestamp())
+                                if($date->getTimestamp() > $dtime->getTimestamp())
                                 {
                                     $dtime->modify('+1 day');
                                 }
