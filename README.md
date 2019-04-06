@@ -109,7 +109,8 @@ Ao logar, copie o comando em database/script.sql e execute:
         spots varchar(128),
         location varchar(128),
         travel_hour time,
-        route bit not null
+        route bit not null,
+        expiration timestamp
 );
 ```
 
