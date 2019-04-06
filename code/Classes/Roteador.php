@@ -160,7 +160,7 @@
 
 								$travel_hour = $hora . ":" . $minuto;
 				
-								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, $timestamp, $spots, $location, '0');
+								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
 							} else{
