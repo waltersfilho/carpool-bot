@@ -173,7 +173,7 @@
 							$location = $args[3];
 
 							if ($horarioValido){
-                                $timezone = DateTimeZone::AMERICA;
+                                $timezone = new DateTimeZone("America/Sao_Paulo");
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
