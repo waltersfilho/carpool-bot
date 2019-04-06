@@ -253,10 +253,9 @@
 							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 jardim");
 						}
 						break;
-						
+					      
 					case 'caronas':
 						
-
 						$resultado = $dao->getListaIda($chat_id);
 
 						$source = Config::getBotConfig("source");
@@ -276,9 +275,7 @@
 						
 
 						TelegramConnect::sendMessage($chat_id, $texto);
-					}
-					break;
-
+						break;
 
 					case 'vagas':
 						if (count($args) == 3) {
