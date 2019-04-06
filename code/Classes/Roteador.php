@@ -178,10 +178,8 @@
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
-                                error_log($dtime->getTimestamp() . "teste1");
 
                                 $date = new DateTime('NOW', $timezone);
-                                error_log($date->getTimestamp() . "teste2");
 
                                 if($dtime < $date)
                                 {
@@ -189,8 +187,6 @@
                                 }
 
                                 $timestamp = $dtime->getTimestamp();
-
-                                error_log($timestamp);
 
 								$travel_hour = $hora . ":" . $minuto;
 				
@@ -207,13 +203,37 @@
 
 					case 'volta':
 						if (count($args) == 1) {
-							$resultado = $dao->getListaVolta($chat_id);
+                            $resultadoHoje = $dao->getListaVoltaHoje($chat_id);
+                            $caronasDiaAtual = array();
+                            $caronasDiaSeguinte = array();
+                            $textoHoje = "";
+                            $textoAmanha = "";
+                            $source = Config::getBotConfig("source");
 
-							$source = Config::getBotConfig("source");
-							$texto = "<b>Volta do " . $source . "</b>\n";
-							foreach ($resultado as $carona){
-								$texto .= (string)$carona . "\n";
-							}
+                            foreach ($resultadoHoje as $carona){
+                                array_push($caronasDiaAtual, $carona);
+                            }
+
+                            $resultadoAmanha = $dao->getListaVoltaAmanha($chat_id);
+
+                            foreach ($resultadoAmanha as $carona){
+                                array_push($caronasDiaSeguinte, $carona);
+                            }
+
+                            if(!empty($caronasDiaAtual)){
+                                $textoHoje =  "\n<b>Volta do " . $source . "</b>\n";
+                                foreach ($caronasDiaAtual as $carona){
+                                    $textoHoje .= (string)$carona . "\n";
+                                }
+                            }
+                            if (!empty($caronasDiaSeguinte)){
+                                $textoAmanha = "\n<b>Ida do " . $source . "</b>\n";
+                                foreach ($caronasDiaSeguinte as $carona){
+                                    $textoAmanha .= (string)$carona . "\n";
+                                }
+                            }
+
+                            $texto = $textoHoje . "\n" . $textoAmanha;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 
@@ -231,22 +251,20 @@
 
                             if ($horarioValido){
 
+                                $timezone = new DateTimeZone("America/Sao_Paulo");
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
 
-                                $date = new DateTime();
-                                error_log($date->getTimestamp());
+                                $date = new DateTime('NOW', $timezone);
 
-                                if($date->getTimestamp() < $dtime->getTimestamp())
+                                if($dtime < $date)
                                 {
                                     $dtime->modify('+1 day');
                                 }
 
                                 $timestamp = $dtime->getTimestamp();
-
-                                error_log($timestamp);
 
                                 $travel_hour = $hora . ":" . $minuto;
 
@@ -263,26 +281,68 @@
 						break;
 					      
 					case 'caronas':
-						
-						$resultado = $dao->getListaIda($chat_id);
 
-						$source = Config::getBotConfig("source");
-						$texto = "<b>Ida para o " . $source . "</b>\n";
-						foreach ($resultado as $carona){
-							$texto .= (string)$carona . "\n";
-						}
-						
-						$resultado = $dao->getListaVolta($chat_id);
+                        $resultadoHoje = $dao->getListaIdaHoje($chat_id);
+                        $caronasDiaAtual = array();
+                        $caronasDiaSeguinte = array();
+                        $textoHoje = "";
+                        $textoAmanha = "";
+                        $source = Config::getBotConfig("source");
 
-						$source = Config::getBotConfig("source");
-						$texto .= "\n<b>Volta do " . $source . "</b>\n";
-						foreach ($resultado as $carona){
-							$texto .= (string)$carona . "\n";
-						}
-						
-						
+                        foreach ($resultadoHoje as $carona){
+                            array_push($caronasDiaAtual, $carona);
+                        }
 
-						TelegramConnect::sendMessage($chat_id, $texto);
+                        $resultadoAmanha = $dao->getListaIdaAmanha($chat_id);
+
+                        foreach ($resultadoAmanha as $carona){
+                            array_push($caronasDiaSeguinte, $carona);
+                        }
+
+                        if(!empty($caronasDiaAtual)){
+                            $textoHoje =  "\n<b>Ida para o " . $source . "</b>\n";
+                            foreach ($caronasDiaAtual as $carona){
+                                $textoHoje .= (string)$carona . "\n";
+                            }
+                        }
+                        if (!empty($caronasDiaSeguinte)){
+                            $textoAmanha = "\n<b>Ida para o " . $source . "</b>\n";
+                            foreach ($caronasDiaSeguinte as $carona){
+                                $textoAmanha .= (string)$carona . "\n";
+                            }
+                        }
+
+                        $resultadoHoje = $dao->getListaVoltaHoje($chat_id);
+                        $caronasDiaAtual = array();
+                        $caronasDiaSeguinte = array();
+                        $textoHoje = "";
+                        $textoAmanha = "";
+                        $source = Config::getBotConfig("source");
+
+                        foreach ($resultadoHoje as $carona){
+                            array_push($caronasDiaAtual, $carona);
+                        }
+
+                        $resultadoAmanha = $dao->getListaVoltaAmanha($chat_id);
+
+                        foreach ($resultadoAmanha as $carona){
+                            array_push($caronasDiaSeguinte, $carona);
+                        }
+
+                        if(!empty($caronasDiaAtual)){
+                            $textoHoje =  "\n<b>Volta do " . $source . "</b>\n";
+                            foreach ($caronasDiaAtual as $carona){
+                                $textoHoje .= (string)$carona . "\n";
+                            }
+                        }
+                        if (!empty($caronasDiaSeguinte)){
+                            $textoAmanha = "\n<b>Ida do " . $source . "</b>\n";
+                            foreach ($caronasDiaSeguinte as $carona){
+                                $textoAmanha .= (string)$carona . "\n";
+                            }
+                        }
+
+						TelegramConnect::sendMessage($chat_id, $textoAmanha);
 						break;
 
 					case 'vagas':

@@ -19,7 +19,8 @@
 		const LISTA_QUERY_IDA_HOJE = "select * from public.caroneiros where chat_id = :chat_id and route = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
         const LISTA_QUERY_IDA_AMANHA = "select * from public.caroneiros where chat_id = :chat_id and route = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
 
-        const LISTA_QUERY_VOLTA = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) ORDER BY travel_hour ASC;";
+        const LISTA_QUERY_VOLTA_HOJE = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
+        const LISTA_QUERY_VOLTA_AMANHA = "select * from public.caroneiros where chat_id = :chat_id and route = '1'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
 	
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
@@ -63,15 +64,25 @@
             return $this->montaListaCaronas($this->db->resultSet());
         }
 		
-		public function getListaVolta($chat_id){
+		public function getListaVoltaHoje($chat_id){
             
             $this->removeExpiredCarpools();
             
-			$this->db->query(CaronaDAO::LISTA_QUERY_VOLTA);
+			$this->db->query(CaronaDAO::LISTA_QUERY_VOLTA_HOJE);
 			$this->db->bind(":chat_id", $chat_id);
 			
 			return $this->montaListaCaronas($this->db->resultSet());
 		}
+
+        public function getListaVoltaAmanha($chat_id){
+
+            $this->removeExpiredCarpools();
+
+            $this->db->query(CaronaDAO::LISTA_QUERY_VOLTA_AMANHA);
+            $this->db->bind(":chat_id", $chat_id);
+
+            return $this->montaListaCaronas($this->db->resultSet());
+        }
 
 		public function updateSpots($chat_id, $user_id, $spots, $route) {
 			$this->db->query(CaronaDAO::QUERY_UPDATE_SPOTS);
