@@ -316,20 +316,17 @@
                             }
                         }
 
-                        $resultadoHoje = $dao->getListaVoltaHoje($chat_id);
-                        $caronasDiaAtual = array();
-                        $caronasDiaSeguinte = array();
-                        $source = Config::getBotConfig("source");
-
-                        foreach ($resultadoHoje as $carona){
-                            array_push($caronasDiaAtual, $carona);
-                        }
-
                         unset($caronasDiaAtual);
                         unset($caronasDiaSeguinte);
 
                         $caronasDiaAtual = array();
                         $caronasDiaSeguinte = array();
+
+                        $resultadoHoje = $dao->getListaVoltaHoje($chat_id);
+
+                        foreach ($resultadoHoje as $carona){
+                            array_push($caronasDiaAtual, $carona);
+                        }
 
                         $resultadoAmanha = $dao->getListaVoltaAmanha($chat_id);
 
