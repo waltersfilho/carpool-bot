@@ -343,14 +343,10 @@
                                 $textoVoltaAmanha .= (string)$carona . "\n";
                             }
                         }
-                        error_log($textoIdaHoje . "textoIdaHoje");
-                        error_log($textoVoltaHoje . "textoVoltaHoje");
-                        error_log($textoIdaAmanha . "textoIdaAmanha");
-                        error_log($textoVoltaAmanha . "textoVoltaAmanha");
 
-                        $texto =  isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
+                        $texto =  isset($textoIdaHoje) ? date('d/m') . "\n" . $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
-                        $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
+                        $texto .= isset($textoIdaAmanha) ?  date('d/m', strtotime('+1 days')) . "\n " . $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
 						TelegramConnect::sendMessage($chat_id, $texto);
