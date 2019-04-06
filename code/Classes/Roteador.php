@@ -101,8 +101,8 @@
 								
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
-								OBS --> Para o local utilize sempre letras minúsculas e para mais de um local siga o padrão : local01/local02 
-									Ex: gramado/macembu/mananciais/guerenguê
+								OBS --> Para o local utilize sempre letras minúsculas e composto por no MÁXIMO duas palavras. Para mais de um local siga o padrão : local01/local02 
+									Ex: gramado/macembu/mananciais/guerenguê/rodrigues caldas
 
 								/remover [ida|volta] --> Comando utilizado para remover a carona da lista. SEMPRE REMOVA a carona depois dela ter sido realizada. 
 									Ex: /remover ida
