@@ -173,7 +173,7 @@
 							$location = $args[3];
 
 							if ($horarioValido){
-                                $timezone = date_default_timezone_get();
+                                $timezone = DateTimeZone::AMERICA;
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
