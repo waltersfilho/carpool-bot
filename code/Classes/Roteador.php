@@ -133,9 +133,9 @@
                             $caronasDiaAtual = array();
                             $caronasDiaSeguinte = array();
                             $dateToday = new DateTime();
+                            $textoHoje = "";
+                            $textoAmanha = "";
                             $source = Config::getBotConfig("source");
-                            $textoHoje = date( "d-Y", strtotime($dateToday)) . "\n<b>Ida para o " . $source . "</b>\n";
-                            $textoAmanha = date( "d-Y", strtotime($dateToday->modify('+1 day'))) . "\n<b>Ida para o " . $source . "</b>\n";
 
 							foreach ($resultado as $carona){
                                 if($carona->getTravelHour() === $dateToday){
@@ -146,17 +146,19 @@
 							}
 
 							if(!empty($caronasDiaAtual)){
+                                $textoHoje = date( "d/m", strtotime($dateToday)) . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
+                                $textoAmanha = date( "d/m", strtotime($dateToday->modify('+1 day'))) . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
                             }
 
-                            $texto = $textoHoje . '\n' . $textoAmanha;
+                            $texto = $textoHoje . "\n" . $textoAmanha;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						} elseif (count($args) == 4) {
