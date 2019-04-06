@@ -54,7 +54,7 @@
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
 
-            $date = date('d-m');
+            $date = date('d/m');
 			
 			/*Dividir cada comando em seu controlador*/
 			if($username){
@@ -147,13 +147,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  date('d-m') . "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoHoje =  date('d/m') . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = date('d-m', strtotime('+1 days')) . "\n<b>Ida para o " . $source . "</b>\n";
+                                $textoAmanha = date('d/m', strtotime('+1 days')) . "\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -221,13 +221,13 @@
                             }
 
                             if(!empty($caronasDiaAtual)){
-                                $textoHoje =  date('d-m') . "\n<b>Volta do " . $source . "</b>\n";
+                                $textoHoje =  date('d/m') . "\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
                             }
                             if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = date('d-m', strtotime('+1 days')) . "\n<b>Ida do " . $source . "</b>\n";
+                                $textoAmanha = date('d/m', strtotime('+1 days')) . "\n<b>Ida do " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -300,13 +300,13 @@
                         }
 
                         if(!empty($caronasDiaAtual)){
-                            $textoHoje =  "\n<b>Ida para o " . $source . "</b>\n";
+                            $textoIdaHoje =  "\n<b>Ida para o " . $source . "</b>\n";
                             foreach ($caronasDiaAtual as $carona){
                                 $textoHoje .= (string)$carona . "\n";
                             }
                         }
                         if (!empty($caronasDiaSeguinte)){
-                            $textoAmanha = "\n<b>Ida para o " . $source . "</b>\n";
+                            $textoIdaAmanha = "\n<b>Ida para o " . $source . "</b>\n";
                             foreach ($caronasDiaSeguinte as $carona){
                                 $textoAmanha .= (string)$carona . "\n";
                             }
@@ -330,17 +330,19 @@
                         }
 
                         if(!empty($caronasDiaAtual)){
-                            $textoHoje =  "\n<b>Volta do " . $source . "</b>\n";
+                            $textoVoltaHoje =  "\n<b>Volta do " . $source . "</b>\n";
                             foreach ($caronasDiaAtual as $carona){
                                 $textoHoje .= (string)$carona . "\n";
                             }
                         }
                         if (!empty($caronasDiaSeguinte)){
-                            $textoAmanha = "\n<b>Ida do " . $source . "</b>\n";
+                            $textoVoltaAmanha = "\n<b>Ida do " . $source . "</b>\n";
                             foreach ($caronasDiaSeguinte as $carona){
                                 $textoAmanha .= (string)$carona . "\n";
                             }
                         }
+
+                        $texto = $textoIdaHoje . "\n" . $textoVoltaHoje . "\n" . $textoIdaAmanha . "\n" . $textoVoltaAmanha;
 
 						TelegramConnect::sendMessage($chat_id, $textoAmanha);
 						break;
