@@ -25,6 +25,7 @@
 					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " - da " . $this->location . "(" . $this->spots . " vagas)";
 				} else {
 					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " - até " . $this->location . "(" . $this->spots . " vagas)";
+				}
 			} else {
 				return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3)  . " (Lotado)";
 			}
