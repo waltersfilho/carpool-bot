@@ -21,7 +21,10 @@
 		public function __toString() {
 
 			if (!empty($this->spots) && !empty($this->location)) {
-				return "\n" . substr($this->travel_hour, 0, -3) . " - @" . $this->username . "\n" . $this->spots . " vagas (" . $this->location . ")";
+				if($this->route === true) {
+					return "\n" . "@" . $this->username substr($this->travel_hour, 0, -3) . " - da " . $this->location . "(" . $this->spots . " vagas . ")";
+				} else {
+					return "\n" . "@" . $this->username substr($this->travel_hour, 0, -3) . " - até " . $this->location . "(" . $this->spots . " vagas . ")";
 			} else {
 				return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3)  . " (Lotado)";
 			}
