@@ -161,7 +161,7 @@
                                 }
                             }
 
-                            $texto = (isset($textoHoje) && isset($textoHoje)) ? "" : "Não há ofertas de carona de ida :(";
+                            $texto = (isset($textoHoje) and isset($textoHoje)) ? "" : "Não há ofertas de carona de ida :(";
                             $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
@@ -235,7 +235,7 @@
                                 }
                             }
 
-                            $texto = (isset($textoHoje) && isset($textoHoje)) ? "" : "Não há ofertas de carona de volta :(";
+                            $texto = (isset($textoHoje) and isset($textoHoje)) ? "" : "Não há ofertas de carona de volta :(";
                             $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
@@ -348,7 +348,7 @@
                             }
                         }
 
-                        $texto =  (isset($textoIdaHoje) && isset($textoVoltaHoje) && isset($textoIdaAmanha) && isset($textoVoltaAmanha)) ? "" : "Não há ofertas de carona :(";
+                        $texto =  (isset($textoIdaHoje) and isset($textoVoltaHoje) && isset($textoIdaAmanha) && isset($textoVoltaAmanha)) ? "" : "Não há ofertas de carona :(";
 
                         $texto .=  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
                         $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
