@@ -163,8 +163,8 @@
 
                             $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
-                            
-                            empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
+
+                            $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 						} elseif (count($args) == 4) {
@@ -239,7 +239,7 @@
                             $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
-                            empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
+                            $texto = empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
 
 							TelegramConnect::sendMessage($chat_id, $texto);
 
@@ -358,7 +358,7 @@
                         $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
-                        empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
+                        $texto = empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
 
 						TelegramConnect::sendMessage($chat_id, $texto);
 						break;
