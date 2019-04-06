@@ -19,15 +19,16 @@
 			$this->route = $data["route"];
         }
 		public function __toString() {
+            $horaFormatada = date( "G:i", strtotime($this->travel_hour));
 			if (!empty($this->spots) && !empty($this->location)) {
 				$plural = $this->spots > 1 ? "s" : "";
 				if(!$this->route) {
-					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+					return "\n" . "@" . $this->username . " - " . $horaFormatada . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				} else {
-					return "\n" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3) . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+					return "\n" . "@" . $this->username . " - " . $horaFormatada . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				}
 			} else {
-				return "\n<i>" . "@" . $this->username . " - " . substr($this->travel_hour, 0, -3)  . " (Lotado)</i>";
+				return "\n<i>" . "@" . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
 			}
 		}
 		
