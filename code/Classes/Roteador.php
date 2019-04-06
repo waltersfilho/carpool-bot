@@ -129,16 +129,22 @@
 					case 'ida':
 						if (count($args) == 1) {
 
-							$resultado = $dao->getListaIda($chat_id);
+							$resultadoHoje = $dao->getListaIdaHoje($chat_id);
                             $caronasDiaAtual = array();
                             $caronasDiaSeguinte = array();
                             $textoHoje = "";
                             $textoAmanha = "";
                             $source = Config::getBotConfig("source");
 
-							foreach ($resultado as $carona){
+							foreach ($resultadoHoje as $carona){
                                 $caronasDiaAtual = $carona;
 							}
+
+                            $resultadoAmanha = $dao->getListaIdaAmanha($chat_id);
+
+                            foreach ($resultadoAmanha as $carona){
+                                $caronasDiaSeguinte = $carona;
+                            }
 
 							if(!empty($caronasDiaAtual)){
                                 $textoHoje =  "\n<b>Ida para o " . $source . "</b>\n";
