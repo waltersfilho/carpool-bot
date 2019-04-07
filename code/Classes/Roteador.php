@@ -318,7 +318,7 @@
 
                                 $dao->createCarpoolAmanhaWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
-                                TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
+                                TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta amanhã às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
 
                             } else{
                                 TelegramConnect::sendMessage($chat_id, "Horário inválido.");

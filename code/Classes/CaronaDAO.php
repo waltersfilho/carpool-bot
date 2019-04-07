@@ -408,6 +408,7 @@
             $today = date("Y-m-d");
 
             $now = new DateTime('NOW', $timezone);
+            $now->modify('+1 day');
             $nowTimestamp = $now->getTimestamp();
 
             $hour = explode(":", $travel_hour)[0];
@@ -421,7 +422,11 @@
              * DAY OR THE NEXT DAY AND
              * SETS CARPOOL EXPIRATION TIME
              */
-            $carpoolExpiration->add($diffHour);
+            if ($nowTimestamp < $carpoolExpirationTimestamp) {
+                $carpoolExpiration->add($diffDay);
+            } else {
+                $carpoolExpiration->add($diffHour);
+            }
 
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
 
