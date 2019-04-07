@@ -138,6 +138,9 @@
 
                 $this->db->execute();
 
+                error_log($this->db->resultSet()[$opcao]);
+                error_log('teste');
+
                 return $this->db->resultSet()[$opcao];
             }
         }
