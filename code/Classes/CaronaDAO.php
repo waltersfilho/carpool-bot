@@ -26,6 +26,8 @@
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
 
+        const QUERY_INSERIR_ACEITA_PAGAMENTO = "insert into public.caroneiro_pagamento (chat_id, user_id) values (:chat_id, :user_id)";
+
         const QUERY_INSERIR_ACEITA_PICPAY = "insert into public.caroneiro_pagamento (chat_id, user_id, picpay) values (:chat_id, :user_id, :picpay)";
 
         const QUERY_UPDATE_ACEITA_PICPAY = "update public.caroneiro_pagamento set picpay = ~picpay where chat_id = :chat_id and user_id = :user_id";
@@ -118,12 +120,10 @@
                     $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PICPAY);
                     $this->db->bind(":chat_id", $chat_id);
                     $this->db->bind(":user_id", $user_id);
-                    $this->db->bind(":picpay", '1');
                 } else {
                     $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_WUNDER);
                     $this->db->bind(":chat_id", $chat_id);
                     $this->db->bind(":user_id", $user_id);
-                    $this->db->bind(":wunder", '1');
                 }
 
                 $this->db->execute();
@@ -218,8 +218,19 @@
 				error_log("Erro: " . $this->db->getError());
 			}
 
+            $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
+            $this->db->bind(":chat_id", $chat_id);
+            $this->db->bind(":user_id", $user_id);
 
-		}
+            $this->db->execute();
+
+            if (count($this->db->resultSet()) == 0) {
+                $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PICPAY);
+                $this->db->bind(":chat_id", $chat_id);
+                $this->db->bind(":user_id", $user_id);
+            }
+
+        }
 
         /*
          * CREATES A NEW CARPOOL ON A SPECIFIC CHAT, OFFERED BY A SINGLE USER
