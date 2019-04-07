@@ -58,8 +58,8 @@
             $dataHoje = date('d/m');
             $dataAmanha = date('d/m', strtotime('+1 days'));
 
-            $dataHojeDia = /*$diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . */ $dataHoje;
-            $dataAmanhaDia = /*$diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " .*/ $dataAmanha;
+            $dataHojeDia = /*$diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . */ "U+1F697" . $dataHoje;
+            $dataAmanhaDia = /*$diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " .*/ "U+1F697" . $dataAmanha;
 
 			/*Dividir cada comando em seu controlador*/
 			if($username){
@@ -150,13 +150,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  $dataHojeDia ."\n\n<b>Ida para o " . $source . "</b>\n";
+                                $textoHoje =  $dataHojeDia ." U+1F699 \n\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = $dataAmanhaDia . "\n\n<b>Ida para o " . $source . "</b>\n";
+                                $textoAmanha = $dataAmanhaDia . "U+1F699 \n\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -224,13 +224,13 @@
                             }
 
                             if(!empty($caronasDiaAtual)){
-                                $textoHoje =  $dataHojeDia . "\n\n<b>Volta do " . $source . "</b>\n";
+                                $textoHoje =  $dataHojeDia . "U+1F699 \n\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
                             }
                             if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = $dataAmanhaDia . "\n\n<b>Volta do " . $source . "</b>\n";
+                                $textoAmanha = $dataAmanhaDia . "U+1F699 \n\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -381,11 +381,11 @@
                             }
                         }
 
-                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
+                        $texto =  isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "U+1F699" . "\n" : "";
                         $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n"  : "";
                         $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
-                        $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "\n " : "";
+                        $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "U+1F699" . "\n " : "";
                         $texto .= isset($textoIdaAmanha) ?  $textoIdaAmanha  . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha  . "\n" : "";
 
