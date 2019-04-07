@@ -122,7 +122,13 @@
 									Ex: /vagas ida 2 
 									(Altera o número de vagas da ida para 2)
 									Ex: /vagas ida 0
-									(Altera o número de vagas da ida para 0, ou seja, lotado)";
+									(Altera o número de vagas da ida para 0, ou seja, lotado)
+									
+								/picpay --> Este comando serve para definir se você aceita ou não PicPay
+								    Ex: Por padrão, todos os caroneiros NÃO aceitam PicPay, utilizando o comando, você passa a informar que aceita, de forma permanente.
+								  
+								/wunder --> Este comando serve para definir se você aceita ou não Wunder
+								    Ex: Assim como o comando do PicPay, por padrão, todos os caroneiros NÃO aceitam Wunder, utilizando o comando, você passa a informar que aceita, de forma permanente.";
 
 						TelegramConnect::sendMessage($chat_id, $help);
 						break;
@@ -260,7 +266,7 @@
                             $location = $args[3];
 
                             if ($horarioValido){
-                                
+
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
