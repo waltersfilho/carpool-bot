@@ -431,7 +431,7 @@
                         if (count($args) == 1) {
                             $resultado = $dao->insertMeioPagamento($chat_id, $user_id, 'picpay');
 
-                            $texto = $resultado ? "Você informou que aceita PicPay" : "Você informou que <b> NÃO </b> aceita PicPay";
+                            $texto = $resultado ? "@".$username." informou que aceita PicPay" : "Você informou que <b> NÃO </b> aceita PicPay";
                             TelegramConnect::sendMessage($chat_id, $texto);
                         }
                         break;
@@ -439,7 +439,7 @@
                         if (count($args) == 1) {
                             $resultado = $dao->insertMeioPagamento($chat_id, $user_id,  'wunder');
 
-                            $texto = $resultado ? "Você informou que aceita Wunder" : "Você informou que <b> NÃO </b> aceita Wunder";
+                            $texto = $resultado ? "@".$username. " informou que aceita Wunder" : "Você informou que <b> NÃO </b> aceita Wunder";
                             TelegramConnect::sendMessage($chat_id, $texto);
                         }
                         break;

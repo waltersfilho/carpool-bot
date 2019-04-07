@@ -28,11 +28,11 @@
 
         const QUERY_INSERIR_ACEITA_PICPAY = "insert into public.caroneiro_pagamento (chat_id, user_id, picpay) values (:chat_id, :user_id, :picpay)";
 
-        const QUERY_UPDATE_ACEITA_PICPAY = "update public.caroneiro_pagamento set picpay = (picpay ^ 1) where chat_id = :chat_id and user_id = :user_id";
+        const QUERY_UPDATE_ACEITA_PICPAY = "update public.caroneiro_pagamento set picpay = (picpay # 1) where chat_id = :chat_id and user_id = :user_id";
 
         const QUERY_INSERIR_ACEITA_WUNDER = "insert into public.caroneiro_pagamento (chat_id, user_id, wunder) values (:chat_id, :user_id, :wunder)";
 
-        const QUERY_UPDATE_ACEITA_WUNDER = "update public.caroneiro_pagamento set wunder = (wunder ^ 1) where chat_id = :chat_id and user_id = :user_id";
+        const QUERY_UPDATE_ACEITA_WUNDER = "update public.caroneiro_pagamento set wunder = (wunder # 1) where chat_id = :chat_id and user_id = :user_id";
 
         const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
         
