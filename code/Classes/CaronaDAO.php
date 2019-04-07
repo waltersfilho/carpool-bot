@@ -137,11 +137,13 @@
                 $this->db->bind(":user_id", $user_id);
 
                 $this->db->execute();
-
-                error_log($this->db->resultSet()[$opcao]);
                 error_log('teste');
 
-                return $this->db->resultSet()[$opcao];
+                foreach ($this->db->resultSet() as $aceita)
+                {
+                    error_log($aceita[$opcao]);
+                    return $aceita[$opcao];
+                }
             }
         }
 
