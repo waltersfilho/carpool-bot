@@ -278,7 +278,41 @@
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
 
-							}else{
+							}
+                        } elseif (count($args) == 4) {
+
+                            $horarioRaw = $args[1];
+                            $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
+
+                            $horarioValido = preg_match($horarioRegex, $horarioRaw, $resultado);
+
+                            $spots = $args[2];
+                            $location = $args[3];
+
+                            if ($horarioValido){
+
+                                $timezone = new DateTimeZone("America/Sao_Paulo");
+                                $hora = $resultado['hora'];
+                                $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
+
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+
+                                $date = new DateTime('NOW', $timezone);
+
+                                if($dtime < $date)
+                                {
+                                    $dtime->modify('+1 day');
+                                }
+
+                                $timestamp = $dtime->getTimestamp();
+
+                                $travel_hour = $hora . ":" . $minuto;
+
+                                $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
+
+                                TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
+
+                            } else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
 						} else {
@@ -370,10 +404,10 @@
 								$dao->updateSpots($chat_id, $user_id, $spots, '1');
 								TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas de volta para " . $spots);
 							} else {
-								TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /volta ida 2");
+								TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /volta ida 2");
+							TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
 						}
 						break;
 
@@ -381,10 +415,10 @@
 						if (count($args) == 2) {
 							if($args[1] == 'ida') {
 								$dao->removeCarpool($chat_id, $user_id, '0');
-								TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua ida");
+								TelegramConnect::sendMessage($chat_id, "@".$username." removeu a carona de ida");
 							} elseif ($args[1] == 'volta') {
 								$dao->removeCarpool($chat_id, $user_id, '1');
-								TelegramConnect::sendMessage($chat_id, "@".$username." removeu sua volta");
+								TelegramConnect::sendMessage($chat_id, "@".$username." removeu a carona de volta");
 							} else {
 								TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
 							}
@@ -393,6 +427,17 @@
 						}
 
 						break;
+                    case 'picpay':
+                        if (count($args) == 1) {
+                            $dao->insertMeioPagamento($chat_id, $user_id, 'picpay');
+                        }
+                        break;
+                    case 'wunder':
+                        if (count($args) == 1) {
+                            $dao->insertMeioPagamento($chat_id, $user_id,  'wunder');
+                        }
+                        break;
+
 				}
 			} else {
 				TelegramConnect::sendMessage($chat_id, "Registre seu username nas configurações do Telegram para utilizar o Bot.");

@@ -8,6 +8,8 @@
         private $travel_hour;
 	    private $spots;
         private $route;
+        private $picpay;
+        private $wunder;
 
         public function __construct($data){
             $this->chat_id = $data["chat_id"];
@@ -17,12 +19,16 @@
 			$this->spots = $data["spots"];
 			$this->location = $data["location"];
 			$this->route = $data["route"];
+			$this->picpay = $data["picpay"];
+			$this->wunder = $data["wunder"];
         }
 		public function __toString() {
             $horaFormatada = date( "G:i", strtotime('-3 hours', strtotime($this->travel_hour)));
 			if (!empty($this->spots) && !empty($this->location)) {
 				$plural = $this->spots > 1 ? "s" : "";
-				if(!$this->route) {
+				$this->username .= $this->picpay ? "(p)" : "";
+                $this->username .= $this->wunder ? "(w)" : "";
+                if(!$this->route) {
 					return "\n" . "@" . $this->username . " - " . $horaFormatada . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				} else {
 					return "\n" . "@" . $this->username . " - " . $horaFormatada . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
