@@ -280,6 +280,8 @@
                 $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PAGAMENTO);
                 $this->db->bind(":chat_id", $chat_id);
                 $this->db->bind(":user_id", $user_id);
+
+                $this->db->execute();
             }
 
 
