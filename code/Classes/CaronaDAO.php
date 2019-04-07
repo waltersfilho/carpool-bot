@@ -120,10 +120,13 @@
                     $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PICPAY);
                     $this->db->bind(":chat_id", $chat_id);
                     $this->db->bind(":user_id", $user_id);
+                    $this->db->bind(":picpay", $opcao);
+
                 } else {
                     $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_WUNDER);
                     $this->db->bind(":chat_id", $chat_id);
                     $this->db->bind(":user_id", $user_id);
+                    $this->db->bind(":wunder", $opcao);
                 }
 
                 $this->db->execute();
@@ -291,7 +294,7 @@
 
             error_log("create carpool with details");
 
-            $expiration = $this->getExpirationTimestampAmanha($travel_hour);
+            $expiration = $this->getExpirationTimestampAmanha($timestamp);
 
             $this->db->query(CaronaDAO::QUERY_SEARCH);
             $this->db->bind(":chat_id", $chat_id);
@@ -397,37 +400,20 @@
         return $carpoolExpirationTimestamp;
     }
 
-        private function getExpirationTimestampAmanha($travel_hour) {
+        private function getExpirationTimestampAmanha($timestamp) {
             $timezone = new DateTimeZone("UTC");
             error_log("getExpirationTimestamp");
 
-
-            $diffDay = new DateInterval('PT24H30M');
-            $diffHour = new DateInterval('PT30M');
-
-            $today = date("Y-m-d");
-
-            $now = new DateTime('NOW', $timezone);
-            $now->modify('+1 day');
-            $nowTimestamp = $now->getTimestamp();
-
-            $hour = explode(":", $travel_hour)[0];
-            $minutes = explode(":", $travel_hour)[1];
-
-            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('UTC'));
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+            $carpoolExpirationTimestamp = $timestamp;
 
             /*
              * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
              * DAY OR THE NEXT DAY AND
              * SETS CARPOOL EXPIRATION TIME
              */
-            
-            $carpoolExpiration->add($diffHour);
 
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+            $carpoolExpirationTimestamp += 60 * 30;
 
-            error_log($nowTimestamp);
             error_log($carpoolExpirationTimestamp);
 
             return $carpoolExpirationTimestamp;

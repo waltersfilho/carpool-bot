@@ -261,7 +261,7 @@
 
                             if ($horarioValido){
 
-                                $timezone = new DateTimeZone("America/Sao_Paulo");
+                                $timezone = new DateTimeZone($timezone);
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
@@ -302,7 +302,7 @@
 
                             if ($horarioValido){
 
-                                $timezone = new DateTimeZone("America/Sao_Paulo");
+                                $timezone = new DateTimeZone($timezone);
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
