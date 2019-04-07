@@ -9,3 +9,11 @@ create table Caroneiros(
 	route bit not null,
 	expiration timestamp
 );
+
+create table caroneiro_pagamento(
+	id bigserial UNIQUE PRIMARY KEY,
+	chat_id  int NOT NULL,
+	user_id  int NOT NULL,
+	picpay bit DEFAULT 0::bit,
+	wunder bit DEFAULT 0::bit
+);
