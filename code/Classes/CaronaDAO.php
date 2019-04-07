@@ -223,6 +223,7 @@
 			$this->db->bind(":user_id", $user_id);
 			$this->db->bind(":route", $route);
 
+
 			$this->db->execute();
 
 			if (count($this->db->resultSet()) == 0) {
@@ -241,19 +242,44 @@
 				error_log("Erro: " . $this->db->getError());
 
 			} elseif (count($this->db->resultSet()) == 1) {
-				error_log("updating existing carpool with details going");
+                $resultado = $this->db->resultSet()[0];
+                $date = new DateTime('NOW');
+                $dataEncontrada = $resultado["travel_hour"];
 
-				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
-				$this->db->bind(":chat_id", $chat_id);
-				$this->db->bind(":user_id", $user_id);
-				$this->db->bind(":travel_hour", $timestamp);
-				$this->db->bind(":spots", $spots);
-				$this->db->bind(":location", $location);
-				$this->db->bind(":route", $route);
-                $this->db->bind(":expiration", $expiration);
+                $diff = $date->diff( $dataEncontrada );
+                $diffDays = (integer)$diff->format( "%R%a" );
 
-				$this->db->execute();
-				error_log("Erro: " . $this->db->getError());
+			    if($opcao === 'voltamanha' && $diffDays == 0)
+                {
+                    error_log("insterting new carpool with details going");
+                    $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
+                    $this->db->bind(":chat_id", $chat_id);
+                    $this->db->bind(":user_id", $user_id);
+                    $this->db->bind(":username", $username);
+                    $this->db->bind(":travel_hour", $timestamp);
+                    $this->db->bind(":spots", $spots);
+                    $this->db->bind(":location", strtolower($location));
+                    $this->db->bind(":route", $route);
+                    $this->db->bind(":expiration", $expiration);
+
+                    $this->db->execute();
+                    error_log("Erro: " . $this->db->getError());
+                } else {
+                    error_log("updating existing carpool with details going");
+
+                    $this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
+                    $this->db->bind(":chat_id", $chat_id);
+                    $this->db->bind(":user_id", $user_id);
+                    $this->db->bind(":travel_hour", $timestamp);
+                    $this->db->bind(":spots", $spots);
+                    $this->db->bind(":location", $location);
+                    $this->db->bind(":route", $route);
+                    $this->db->bind(":expiration", $expiration);
+
+                    $this->db->execute();
+                    error_log("Erro: " . $this->db->getError());
+                }
+
 
 			} elseif (count($this->db->resultSet()) == 2) {
                 error_log("updating existing carpool with details going");

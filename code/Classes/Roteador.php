@@ -288,7 +288,7 @@
 
                                 error_log($dtime->getTimestamp());
                                 error_log($date->getTimestamp());
-                                
+
                                 $dtime->modify("-3 hours");
                                 $timestamp = $dtime->getTimestamp();
 
