@@ -131,19 +131,18 @@
             }
             else {
                 $this->updateMeioPagamento($chat_id, $user_id, $opcao);
+            }
 
-                $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
-                $this->db->bind(":chat_id", $chat_id);
-                $this->db->bind(":user_id", $user_id);
+            $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
+            $this->db->bind(":chat_id", $chat_id);
+            $this->db->bind(":user_id", $user_id);
 
-                $this->db->execute();
-                error_log('teste');
+            $this->db->execute();
 
-                foreach ($this->db->resultSet() as $aceita)
-                {
-                    error_log($aceita[$opcao]);
-                    return $aceita[$opcao];
-                }
+            foreach ($this->db->resultSet() as $aceita)
+            {
+                error_log($aceita[$opcao]);
+                return $aceita[$opcao];
             }
         }
 
