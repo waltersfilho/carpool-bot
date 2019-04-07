@@ -326,7 +326,7 @@
              * SETS CARPOOL EXPIRATION TIME
              */
 
-            $carpoolExpirationTimestamp += 30;
+            $carpoolExpirationTimestamp += 60 * 30;
 
             error_log($carpoolExpirationTimestamp);
 
