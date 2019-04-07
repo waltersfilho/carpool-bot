@@ -422,11 +422,8 @@
              * DAY OR THE NEXT DAY AND
              * SETS CARPOOL EXPIRATION TIME
              */
-            if ($nowTimestamp < $carpoolExpirationTimestamp) {
-                $carpoolExpiration->add($diffDay);
-            } else {
-                $carpoolExpiration->add($diffHour);
-            }
+            
+            $carpoolExpiration->add($diffHour);
 
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
 
