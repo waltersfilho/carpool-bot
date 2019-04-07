@@ -150,13 +150,13 @@
                             }
 
 							if(!empty($caronasDiaAtual)){
-                                $textoHoje =  $dataHojeDia ."\n<b>Ida para o " . $source . "</b>\n\n";
+                                $textoHoje =  $dataHojeDia ."\n\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
 							}
 							if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = $dataAmanhaDia . "\n<b>Ida para o " . $source . "</b>\n\n";
+                                $textoAmanha = $dataAmanhaDia . "\n\n<b>Ida para o " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
@@ -224,13 +224,13 @@
                             }
 
                             if(!empty($caronasDiaAtual)){
-                                $textoHoje =  $dataHojeDia . "\n<b>Volta do " . $source . "</b>\n\n";
+                                $textoHoje =  $dataHojeDia . "\n\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaAtual as $carona){
                                     $textoHoje .= (string)$carona . "\n";
                                 }
                             }
                             if (!empty($caronasDiaSeguinte)){
-                                $textoAmanha = $dataAmanhaDia . "\n<b>Volta do " . $source . "</b>\n\n";
+                                $textoAmanha = $dataAmanhaDia . "\n\n<b>Volta do " . $source . "</b>\n";
                                 foreach ($caronasDiaSeguinte as $carona){
                                     $textoAmanha .= (string)$carona . "\n";
                                 }
