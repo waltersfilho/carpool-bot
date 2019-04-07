@@ -260,8 +260,7 @@
                             $location = $args[3];
 
                             if ($horarioValido){
-
-                                $timezone = new DateTimeZone($timezone);
+                                
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
@@ -302,7 +301,6 @@
 
                             if ($horarioValido){
 
-                                $timezone = new DateTimeZone($timezone);
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
