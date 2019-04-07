@@ -218,18 +218,6 @@
 				error_log("Erro: " . $this->db->getError());
 			}
 
-            $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
-            $this->db->bind(":chat_id", $chat_id);
-            $this->db->bind(":user_id", $user_id);
-
-            $this->db->execute();
-
-            if (count($this->db->resultSet()) == 0) {
-                $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PAGAMENTO);
-                $this->db->bind(":chat_id", $chat_id);
-                $this->db->bind(":user_id", $user_id);
-            }
-
         }
 
         /*
@@ -281,6 +269,18 @@
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
 			}
+
+            $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
+            $this->db->bind(":chat_id", $chat_id);
+            $this->db->bind(":user_id", $user_id);
+
+            $this->db->execute();
+
+            if (count($this->db->resultSet()) == 0) {
+                $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PAGAMENTO);
+                $this->db->bind(":chat_id", $chat_id);
+                $this->db->bind(":user_id", $user_id);
+            }
 
 
 		}
