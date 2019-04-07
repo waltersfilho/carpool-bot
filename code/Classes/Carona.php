@@ -29,12 +29,12 @@
 				$this->username .= $this->picpay ? "(p)" : "";
                 $this->username .= $this->wunder ? "(w)" : "";
                 if(!$this->route) {
-					return "\n" . "@" . $this->username . " - " . $horaFormatada . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+					return  "@" . $this->username . " - " . $horaFormatada . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				} else {
-					return "\n" . "@" . $this->username . " - " . $horaFormatada . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+					return "@" . $this->username . " - " . $horaFormatada . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				}
 			} else {
-				return "\n<i>" . "@" . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
+				return "<i>" . "@" . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
 			}
 		}
 		
