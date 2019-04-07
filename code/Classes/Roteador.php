@@ -275,7 +275,7 @@
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
-
+                                $dtime->modify("+3 hours");
                                 $date = new DateTime('NOW', $timezone);
 
                                 error_log($dtime->getTimestamp());
@@ -288,7 +288,8 @@
 
                                 error_log($dtime->getTimestamp());
                                 error_log($date->getTimestamp());
-
+                                
+                                $dtime->modify("-3 hours");
                                 $timestamp = $dtime->getTimestamp();
 
                                 $travel_hour = $hora . ":" . $minuto;
