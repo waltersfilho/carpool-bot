@@ -28,11 +28,11 @@
 
         const QUERY_INSERIR_ACEITA_PICPAY = "insert into public.caroneiro_pagamento (chat_id, user_id, picpay) values (:chat_id, :user_id, :picpay)";
 
-        const QUERY_UPDATE_ACEITA_PICPAY = "update public.caroneiro_pagamento set picpay = NOT picpay where chat_id = :chat_id and user_id = :user_id";
+        const QUERY_UPDATE_ACEITA_PICPAY = "update public.caroneiro_pagamento set picpay = (picpay ^ 1) where chat_id = :chat_id and user_id = :user_id";
 
         const QUERY_INSERIR_ACEITA_WUNDER = "insert into public.caroneiro_pagamento (chat_id, user_id, wunder) values (:chat_id, :user_id, :wunder)";
 
-        const QUERY_UPDATE_ACEITA_WUNDER = "update public.caroneiro_pagamento set wunder = NOT wunder where chat_id = :chat_id and user_id = :user_id";
+        const QUERY_UPDATE_ACEITA_WUNDER = "update public.caroneiro_pagamento set wunder = (wunder ^ 1) where chat_id = :chat_id and user_id = :user_id";
 
         const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
         
@@ -131,6 +131,14 @@
             }
             else {
                 $this->updateMeioPagamento($chat_id, $user_id, $opcao);
+
+                $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
+                $this->db->bind(":chat_id", $chat_id);
+                $this->db->bind(":user_id", $user_id);
+
+                $this->db->execute();
+
+                return $this->db->resultSet()[$opcao];
             }
         }
 
