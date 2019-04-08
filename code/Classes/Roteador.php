@@ -206,7 +206,7 @@
 
 								$travel_hour = $hora . ":" . $minuto;
 
-								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, 'ida', $timestamp, $spots, $location, '0');
+								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
 
 								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
 							} else{
@@ -284,7 +284,7 @@
 
                                 $travel_hour = $hora . ":" . $minuto;
 
-                                $dao->createCarpoolWithDetails($chat_id, $user_id, $username, 'volta', $timestamp, $spots, $location, '1');
+                                $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
                                 TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
 
@@ -313,13 +313,15 @@
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
 
+                                $date = new DateTime('NOW', $timezone);
+
                                 $dtime->modify('+1 day');
 
                                 $timestamp = $dtime->getTimestamp();
 
                                 $travel_hour = $hora . ":" . $minuto;
 
-                                $dao->createCarpoolWithDetails($chat_id, $user_id, $username, 'voltaamanha', $timestamp, $spots, $location, '1');
+                                $dao->createCarpoolAmanhaWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
                                 TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta amanhã às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
 
@@ -327,7 +329,7 @@
                                 TelegramConnect::sendMessage($chat_id, "Horário inválido.");
                             }
                         } else {
-                            TelegramConnect::sendMessage($chat_id, "Uso: /voltaamanha [horario] [vagas] [local] \nEx: /voltaamanha 15:00 2 macembu");
+                            TelegramConnect::sendMessage($chat_id, "Uso: /voltaAmanha [horario] [vagas] [local] \nEx: /volta 15:00 2 macembu");
                         }
                         break;
 
@@ -408,18 +410,17 @@
 					case 'vagas':
 						if (count($args) == 3) {
 							$spots = $args[2];
-                            $dao->updateSpots($chat_id, $user_id, $spots, $args[1]);
 							if($args[1] == 'ida') {
+								$dao->updateSpots($chat_id, $user_id, $spots, '0');
 								TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas de ida para " . $spots);
 							} elseif ($args[1] == 'volta') {
+								$dao->updateSpots($chat_id, $user_id, $spots, '1');
 								TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas de volta para " . $spots);
-                            } elseif ($args[1] == 'voltaamanha') {
-                                TelegramConnect::sendMessage($chat_id, "@".$username." atualizou o número de vagas da volta de amanhã para " . $spots);
 							} else {
-								TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas voltamanha 2");
+								TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
 							}
 						} else {
-							TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas voltamanha 2");
+							TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
 						}
 						break;
 
