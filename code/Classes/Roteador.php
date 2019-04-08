@@ -265,6 +265,9 @@
 
                                 $date = new DateTime('NOW', $timezone);
 
+                                error_log($dtime->getTimestamp() . "horasetada");
+                                error_log($date->getTimestamp() . "horaagora");
+
                                 if($dtime < $date)
                                 {
                                     $dtime->modify('+1 day');
