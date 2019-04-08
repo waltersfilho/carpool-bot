@@ -191,7 +191,7 @@
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime = DateTime::createFromFormat("G:i", $hora - 3 . ':' . $minuto, $timezone);
 
                                 $timestamp = $dtime->getTimestamp();
 
@@ -262,7 +262,7 @@
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime = DateTime::createFromFormat("G:i", $hora - 3 . ':' . $minuto, $timezone);
 
                                 $timestamp = $dtime->getTimestamp();
 
@@ -295,7 +295,7 @@
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime = DateTime::createFromFormat("G:i", $hora - 3 . ':' . $minuto, $timezone);
 
                                 $timestamp = $dtime->getTimestamp();
 
