@@ -225,8 +225,6 @@
 
 
 			$this->db->execute();
-			
-			error_log($timestamp . "timestamp");
 
 			if (count($this->db->resultSet()) == 0) {
 				error_log("insterting new carpool with details going");
@@ -249,12 +247,9 @@
                 $dataEncontrada = new DateTime();
                 $dataEncontrada->setTimestamp($resultado["travel_hour"]);
 
-                $diff = $date->diff( $dataEncontrada );
-                $diffDays = (integer)$diff->format( "%R%a" );
-				
-		error_log($diff . "teste");
+               $diff = $date->diff( $dataEncontrada )->days;
 
-			    if($opcao === 'voltamanha' && $diffDays == 0)
+			    if($opcao === 'voltamanha' && $diff === 0)
                 {
                     
                     error_log("insterting new carpool with details going");
