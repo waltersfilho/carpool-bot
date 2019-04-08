@@ -49,6 +49,7 @@
 			$args = array();
 			$command = self::processCommand($request['message']['text'], $args);
 			$dados = self::processData($request);
+            $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
@@ -192,8 +193,17 @@
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+                                $date = new DateTime('NOW', $timezone);
 
+                                error_log($dtime->getTimestamp());
+                                error_log($date->getTimestamp());
+
+                                if($dtime < $date)
+                                {
+                                    $dtime->modify('+1 day');
+                                }
+								
                                 $timestamp = $dtime->getTimestamp();
 
 								$travel_hour = $hora . ":" . $minuto;
@@ -263,7 +273,19 @@
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+                                $date = new DateTime('NOW', $timezone);
+
+                                error_log($dtime->getTimestamp());
+                                error_log($date->getTimestamp());
+
+                                if($dtime < $date)
+                                {
+                                    $dtime->modify('+1 day');
+                                }
+
+                                error_log($dtime->getTimestamp());
+                                error_log($date->getTimestamp());
 
                                 $timestamp = $dtime->getTimestamp();
 
@@ -297,6 +319,8 @@
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+
+                                $dtime->modify('+1 day');
 
                                 $timestamp = $dtime->getTimestamp();
 
