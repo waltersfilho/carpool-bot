@@ -72,14 +72,12 @@
 
 								 REGRAS
 
-								- Quem for dar carona é só colocar o nome na lista junto com o horário e local para IDA ou VOLTA do Fundão.
+								- Para oferecer carona basta usar os comandos de nosso bot, caso tenha dúvida, use o comando /help.
 								 Local de encontro, trajeto e outras informações serão combinados preferincialmente no PRIVADO.
 
 								- É obrigatório o envio de algum documento que comprove o vínculo com a UFRJ para algum adm. 
 
 								- Evitar assuntos não relacionados às caronas no grupo, a menos que considere de interesse público.
-
-								- Poste suas caronas sempre em ordem de horários, podendo indicar referências como local de saída ou trajeto. Colabore apagando as caronas antigas e criando as do próximo dia.
 
 								- De forma a evitar eventuais transtornos, zele sempre pela integridade e segurança de ambas as partes. Atitudes que possam causar eventuais prejuízos a terceiros serão passíveis de remoção do grupo. Exemplos: direção ofensiva, crimes de trânsito, porte de drogas, documentação do veículo em dia, etc.
 
@@ -118,7 +116,11 @@
 									Ex: /vagas ida 2 
 									(Altera o número de vagas da ida para 2)
 									Ex: /vagas ida 0
-									(Altera o número de vagas da ida para 0, ou seja, lotado)";
+									(Altera o número de vagas da ida para 0, ou seja, lotado)
+								/picpay --> Este comando informa que você aceita PicPay, de forma permanente. Para passar a não aceitar, chame o comando novamente.
+									Ex: Por padrão, todos os caroneiros não aceitam PicPay. Chamando o comando pela primeira vez, é cadastrado que você aceita PicPay.
+								/wunder --> Este comando informa que você aceita Wunder, de forma permanente. Para passar a não aceitar, chame o comando novamente.
+									Ex: Assim como o PicPay, por padrão, todos os caroneiros não aceitam Wunder. Chamando o comando pela primeira vez, é cadastrado que você aceita Wunder.";
 
 						TelegramConnect::sendMessage($chat_id, $help);
 						break;
