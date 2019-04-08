@@ -244,7 +244,7 @@
 			} elseif (count($this->db->resultSet()) == 1) {
                 $resultado = $this->db->resultSet()[0];
                 $date = new DateTime('NOW');
-                $dataEncontrada = strtotime($resultado["travel_hour"]);
+                $dataEncontrada = $resultado["travel_hour"];
 
                 $diff = $date->diff( $dataEncontrada );
                 $diffDays = (integer)$diff->format( "%R%a" );
