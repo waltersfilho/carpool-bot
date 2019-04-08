@@ -162,6 +162,63 @@
             error_log("Erro: " . $this->db->getError());
         }
 
+        /*
+         * CREATES A NEW CARPOOL ON A SPECIFIC CHAT, OFFERED BY A SINGLE USER
+         * LINKED TO HIS USER NAME ON A SPECIFIC TIME EITHER GOING OR RETURNING
+         */
+        
+		public function createCarpool($chat_id, $user_id, $username, $travel_hour, $route) {
+
+			$travel_hour = $this->setStringTime($travel_hour);
+            
+            $expiration = $this->getExpirationTimestamp($travel_hour);
+			error_log("createCarpool");
+            error_log($travel_hour);
+            error_log($expiration);
+            
+			
+			$this->db->query(CaronaDAO::QUERY_SEARCH);
+			$this->db->bind(":chat_id", $chat_id);
+			$this->db->bind(":user_id", $user_id);
+			$this->db->bind(":route", $route);
+
+			error_log("-- info --");
+            error_log($chat_id);
+			error_log($user_id);
+            error_log($username);
+            error_log($travel_hour);
+            error_log($route);
+            error_log($expiration);
+
+			$this->db->execute();
+
+			if (count($this->db->resultSet()) == 0) {
+				error_log("insterting new carpool going");                
+				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL);
+				$this->db->bind(":chat_id", $chat_id);
+				$this->db->bind(":user_id", $user_id);
+				$this->db->bind(":username", $username);
+				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":route", $route);
+                $this->db->bind(":expiration", $expiration);
+
+				$this->db->execute();
+				error_log("Erro: " . $this->db->getError());
+
+			} else {
+				error_log("updating existing carpool going");
+				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL);
+				$this->db->bind(":chat_id", $chat_id);
+				$this->db->bind(":user_id", $user_id);
+				$this->db->bind(":travel_hour", $travel_hour);
+				$this->db->bind(":route", $route);
+                $this->db->bind(":expiration", $expiration);
+
+				$this->db->execute();
+				error_log("Erro: " . $this->db->getError());
+			}
+
+        }
 
         /*
          * CREATES A NEW CARPOOL ON A SPECIFIC CHAT, OFFERED BY A SINGLE USER
