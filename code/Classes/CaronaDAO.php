@@ -219,7 +219,7 @@
             $now = new DateTime("NOW", $timezone);
             $nowTimestamp = $now->getTimestamp();
 
-            if ($timestamp < $nowTimestamp || $opcao === 'voltaamanha'){
+            if ($opcao === 'voltaamanha'){
                 $timestamp += 24*60*60;
             }
 
