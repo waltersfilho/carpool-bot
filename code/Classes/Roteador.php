@@ -286,7 +286,7 @@
 							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 macembu");
 						}
 						break;
-                    case 'voltaamanha':
+                    case 'voltaAmanha':
                         if (count($args) == 4) {
 
                             $horarioRaw = $args[1];
