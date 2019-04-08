@@ -63,7 +63,6 @@
 
 			/*Dividir cada comando em seu controlador*/
 			if($username){
-			    $chat_id = -365671779;
 				$dao = new CaronaDAO();
 
 				switch (strtolower($command)) {
