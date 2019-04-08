@@ -220,7 +220,7 @@
             $nowTimestamp = $now->getTimestamp();
 
             if ($timestamp < $nowTimestamp || $opcao === 'voltaamanha'){
-                $timestamp += 24*60*60;
+                $timestamp = 24*60*60;
             }
 
             $expiration = $this->getExpirationTimestamp($timestamp);
