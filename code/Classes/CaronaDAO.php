@@ -22,7 +22,7 @@
 	
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
-        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where travel_hour + + (30 ||' minutes')::interval < :now";
+        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where travel_hour + (30 ||' minutes')::interval < :now";
 
         const QUERY_INSERIR_ACEITA_PAGAMENTO = "insert into public.caroneiro_pagamento (chat_id, user_id) values (:chat_id, :user_id)";
 
