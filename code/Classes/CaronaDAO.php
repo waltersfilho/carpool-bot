@@ -215,7 +215,7 @@
 		public function createCarpoolWithDetails($chat_id, $user_id, $username, $opcao, $timestamp, $spots, $location, $route) {
 
 			error_log("create carpool with details");
-            $timezone = new DateTimeZone("America/Sao_Paulo");
+            $timezone = new DateTimeZone("UTC");
             $now = new DateTime("NOW", $timezone);
             $nowTimestamp = $now->getTimestamp();
 
