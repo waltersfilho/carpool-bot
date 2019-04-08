@@ -244,7 +244,7 @@
 			} elseif (count($this->db->resultSet()) == 1) {
                 $resultado = $this->db->resultSet()[0];
 				
-		if($opcao === 'voltamanha' && date('Ymd', strtotime($resultado["travel_hour"]) === date('Ymd'))){
+		if($opcao === 'voltamanha' && date('Ymd', strtotime($resultado["travel_hour"]) === date('Ymd')){
                     
                     error_log("insterting new carpool with details going");
                     $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
