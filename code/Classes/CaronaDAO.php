@@ -176,6 +176,8 @@
 			$this->db->bind(":user_id", $user_id);
 			$this->db->bind(":route", $route);
 
+			$timestamp -= 3 * 3600;
+
 			$this->db->execute();
 
 			if (count($this->db->resultSet()) == 0) {
