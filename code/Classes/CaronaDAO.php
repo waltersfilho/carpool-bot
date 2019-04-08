@@ -216,6 +216,13 @@
 
 			error_log("create carpool with details");
 
+            $now = new DateTime("NOW", "UTC");
+            $nowTimestamp = $now->getTimestamp();
+
+            if ($timestamp < $now || $opcao === 'voltaamanha'){
+                $timestamp = 24*60*60;
+            }
+
             $expiration = $this->getExpirationTimestamp($timestamp);
 
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
