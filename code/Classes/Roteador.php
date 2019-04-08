@@ -302,7 +302,7 @@
 
                                 $date = new DateTime('NOW', $timezone);
 
-                                if($dtime < $date)
+                                if($dtime->getTimestamp() < $date->getTimestamp())
                                 {
                                     $dtime->modify('+1 day');
                                 }
