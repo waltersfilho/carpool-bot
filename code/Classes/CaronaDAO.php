@@ -252,6 +252,9 @@
             $today = date("Y-m-d");
 
             $now = new DateTime('NOW', $timezone);
+
+
+            $now->setTimestamp($now->getTimestamp() - 3 * 3600);
             $nowTimestamp = $now->getTimestamp();
 
             $hour = explode(":", $travel_hour)[0];
