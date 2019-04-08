@@ -249,12 +249,10 @@
 
                 $diff = $date->diff( $dataEncontrada );
                 $diffDays = (integer)$diff->format( "%R%a" );
-				
-		error_log($diffDays . "teste");
 
 			    if($opcao === 'voltamanha' && $diffDays == 0)
                 {
-                    
+                    error_log("entrei");
                     error_log("insterting new carpool with details going");
                     $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
                     $this->db->bind(":chat_id", $chat_id);
