@@ -193,7 +193,7 @@
 								$hora = $resultado['hora'];
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
 
                                 $date = new DateTime('NOW', $timezone);
 
@@ -274,7 +274,7 @@
                                 $hora = $resultado['hora'];
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto);
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
 
                                 $date = new DateTime('NOW', $timezone);
 
@@ -285,9 +285,6 @@
                                 {
                                     $dtime->modify('+1 day');
                                 }
-
-                                error_log($dtime->getTimestamp());
-                                error_log($date->getTimestamp());
 
                                 $timestamp = $dtime->getTimestamp();
 
