@@ -215,11 +215,11 @@
 		public function createCarpoolWithDetails($chat_id, $user_id, $username, $opcao, $timestamp, $spots, $location, $route) {
 
 			error_log("create carpool with details");
-            $timezone = new DateTimeZone("UTC");
-            $now = new DateTime("NOW", $timezone);
+
+            $now = new DateTime("NOW", "UTC");
             $nowTimestamp = $now->getTimestamp();
 
-            if ($timestamp < $nowTimestamp || $opcao === 'voltaamanha'){
+            if ($timestamp < $now || $opcao === 'voltaamanha'){
                 $timestamp = 24*60*60;
             }
 
