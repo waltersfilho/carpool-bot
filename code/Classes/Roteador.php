@@ -107,10 +107,6 @@
 									Ex: /volta 15:00 3 merck 
 									(Inclui uma carona de volta às 15:00 com 3 vagas para a merck)
 								
-								/voltaamanha [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO <b>AMANHA</b> para o SEU BAIRRO. 
-									Ex: /volta 15:00 3 merck 
-									(Inclui uma carona de volta às 15:00 com 3 vagas para a merck)
-								
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
 								OBS --> Para o local utilize sempre letras minúsculas e composto por no MÁXIMO duas palavras. Para mais de um local siga o padrão : local01/local02 
