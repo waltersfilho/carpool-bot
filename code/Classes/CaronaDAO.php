@@ -174,8 +174,8 @@
 			error_log("create carpool with details");
 
             $expiration = $this->getExpirationTimestamp($travel_hour);
-            $timestamp -= 3 * 60;
-            $expiration -= 3 * 60;
+            $timestamp -= 3 * 3600 ;
+            $expiration -= 3 * 3600;
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
