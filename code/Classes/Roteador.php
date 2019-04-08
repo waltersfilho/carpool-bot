@@ -202,7 +202,6 @@
 							} else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
-
 						} else {
 							TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 mecembu");
 						}
@@ -246,6 +245,41 @@
 							TelegramConnect::sendMessage($chat_id, $texto);
 
 
+
+						} elseif (count($args) == 4) {
+
+                            $horarioRaw = $args[1];
+                            $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
+
+                            $horarioValido = preg_match($horarioRegex, $horarioRaw, $resultado);
+
+                            $spots = $args[2];
+                            $location = $args[3];
+
+                            if ($horarioValido){
+
+                                $timezone = new DateTimeZone("America/Sao_Paulo");
+                                $hora = $resultado['hora'];
+                                $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
+
+                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+
+                                $date = new DateTime('NOW', $timezone);
+
+                                if($dtime < $date)
+                                {
+                                    $dtime->modify('+1 day');
+                                }
+
+                                $timestamp = $dtime->getTimestamp();
+
+                                $travel_hour = $hora . ":" . $minuto;
+
+                                $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
+
+								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
+
+							}
                         } elseif (count($args) == 4) {
 
                             $horarioRaw = $args[1];
@@ -282,36 +316,6 @@
                             } else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
-                        } elseif (count($args) == 5) {
-
-                            $horarioRaw = $args[1];
-                            $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
-
-                            $horarioValido = preg_match($horarioRegex, $horarioRaw, $resultado);
-
-                            $spots = $args[2];
-                            $location = $args[3];
-
-                            if ($horarioValido){
-                                $hora = $resultado['hora'];
-                                $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
-
-                                $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
-
-                                $date = new DateTime('NOW', $timezone);
-
-                                if(($dtime < $date) || $args[4] === 'amanha')
-                                {
-                                    $dtime->modify('+1 day');
-                                }
-
-                                $timestamp = $dtime->getTimestamp();
-
-                                $travel_hour = $hora . ":" . $minuto;
-
-                                $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
-
-                                TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
 						} else {
 							TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 macembu");
 						}
