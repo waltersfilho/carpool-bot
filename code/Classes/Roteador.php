@@ -186,9 +186,6 @@
 
                                 $date = new DateTime('NOW', $timezone);
 
-                                $dtime->setTimestamp($dtime->getTimestamp() - 3 * 3600);
-                                $date->setTimestamp($dtime->getTimestamp() - 3 * 3600);
-
                                 if($dtime < $date)
                                 {
                                     $dtime->modify('+1 day');
@@ -267,9 +264,6 @@
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
 
                                 $date = new DateTime('NOW', $timezone);
-
-                                $dtime->setTimestamp($dtime->getTimestamp() - 3 * 3600);
-                                $date->setTimestamp($dtime->getTimestamp() - 3 * 3600);
 
                                 if($dtime < $date)
                                 {

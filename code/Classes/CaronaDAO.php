@@ -174,6 +174,8 @@
 			error_log("create carpool with details");
 
             $expiration = $this->getExpirationTimestamp($travel_hour);
+            $timestamp -= 3 * 60;
+            $expiration -= 3 * 60;
 			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
@@ -252,19 +254,13 @@
             $today = date("Y-m-d");
 
             $now = new DateTime('NOW', $timezone);
-
-
-            $now->setTimestamp($now->getTimestamp() - 3 * 3600);
             $nowTimestamp = $now->getTimestamp();
 
             $hour = explode(":", $travel_hour)[0];
             $minutes = explode(":", $travel_hour)[1];
 
             $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
-            $carpoolExpiration->setTimestamp($carpoolExpiration->getTimestamp() - 3 * 3600);
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
-
-
             
             /*
              * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
