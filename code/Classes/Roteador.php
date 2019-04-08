@@ -197,9 +197,6 @@
 
                                 $date = new DateTime('NOW', $timezone);
 
-                                error_log($dtime->getTimestamp());
-                                error_log($date->getTimestamp());
-
                                 if($dtime < $date)
                                 {
                                     $dtime->modify('+1 day');
@@ -211,7 +208,7 @@
 
 								$dao->createCarpoolWithDetails($chat_id, $user_id, $username, 'ida', $timestamp, $spots, $location, '0');
 
-								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo da " . $location);
+								TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
 							} else{
 								TelegramConnect::sendMessage($chat_id, "Horário inválido.");
 							}
@@ -277,9 +274,6 @@
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
 
                                 $date = new DateTime('NOW', $timezone);
-
-                                error_log($dtime->getTimestamp());
-                                error_log($date->getTimestamp());
 
                                 if($dtime < $date)
                                 {
