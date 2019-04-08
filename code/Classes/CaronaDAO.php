@@ -261,7 +261,10 @@
             $minutes = explode(":", $travel_hour)[1];
 
             $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
+            $carpoolExpiration->setTimestamp($carpoolExpiration->getTimestamp() - 3 * 3600);
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
+
+
             
             /*
              * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
