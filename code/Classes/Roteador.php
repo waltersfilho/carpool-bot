@@ -118,9 +118,7 @@
 									Ex: /vagas ida 2 
 									(Altera o número de vagas da ida para 2)
 									Ex: /vagas ida 0
-									(Altera o número de vagas da ida para 0, ou seja, lotado)
-								/picpay
-								/wunder";
+									(Altera o número de vagas da ida para 0, ou seja, lotado)";
 
 						TelegramConnect::sendMessage($chat_id, $help);
 						break;
@@ -185,10 +183,8 @@
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
-                                $dtime->modify("-3 hours");
 
                                 $date = new DateTime('NOW', $timezone);
-                                $dtime->modify("-3 hours");
 
                                 if($dtime < $date)
                                 {
@@ -266,10 +262,8 @@
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
-                                $dtime->modify("-3 hours");
 
                                 $date = new DateTime('NOW', $timezone);
-                                $dtime->modify("-3 hours");
 
                                 if($dtime < $date)
                                 {
