@@ -268,7 +268,7 @@
                                 error_log($dtime->getTimestamp() . "horasetada");
                                 error_log($date->getTimestamp() . "horaagora");
 
-                                if($dtime < $date)
+                                if($dtime->getTimestamp() < $date->getTimestamp())
                                 {
                                     $dtime->modify('+1 day');
                                 }

@@ -6,8 +6,7 @@ create table Caroneiros(
 	spots varchar(128),
 	location varchar(128),
 	travel_hour time,
-	route bit not null,
-	expiration timestamp
+	route bit not null
 );
 
 create table caroneiro_pagamento(

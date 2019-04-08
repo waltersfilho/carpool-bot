@@ -5,12 +5,10 @@
     
     class CaronaDAO{
 
-		
-		const QUERY_CREATE_CARPOOL = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, route, expiration) values (:chat_id, :user_id, :username, :travel_hour, :route::bit(1), :expiration)";
-		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route, expiration) values (:chat_id, :user_id, :username, to_timestamp(:travel_hour), :spots, :location, :route::bit(1), to_timestamp(:expiration))";
+		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, to_timestamp(:travel_hour), :spots, :location, :route::bit(1))";
 
-		const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '', expiration = :expiration where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
-		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = to_timestamp(:travel_hour), spots = :spots, location = :location, expiration = to_timestamp(:expiration) where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '' where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = to_timestamp(:travel_hour), spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
         
 		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
@@ -24,7 +22,7 @@
 	
 		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
-        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where expiration < :now";
+        const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where travel_hour + + (30 ||' minutes')::interval < :now";
 
         const QUERY_INSERIR_ACEITA_PAGAMENTO = "insert into public.caroneiro_pagamento (chat_id, user_id) values (:chat_id, :user_id)";
 
@@ -230,8 +228,6 @@
 
 			error_log("create carpool with details");
 
-            $expiration = $this->getExpirationTimestamp($travel_hour);
-			
 			$this->db->query(CaronaDAO::QUERY_SEARCH);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
@@ -249,7 +245,6 @@
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", strtolower($location));
 				$this->db->bind(":route", $route);
-                $this->db->bind(":expiration", $expiration);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
@@ -264,7 +259,6 @@
 				$this->db->bind(":spots", $spots);
 				$this->db->bind(":location", $location);
 				$this->db->bind(":route", $route);
-                $this->db->bind(":expiration", $expiration);
 
 				$this->db->execute();
 				error_log("Erro: " . $this->db->getError());
@@ -298,44 +292,6 @@
 			error_log("Erro: " . $this->db->getError());
 		}
 
-        private function getExpirationTimestamp($travel_hour) {
-            $timezone = new DateTimeZone("America/Sao_Paulo");
-            error_log("getExpirationTimestamp");
-            
-            
-            $diffDay = new DateInterval('PT24H30M');
-            $diffHour = new DateInterval('PT30M');
-
-            $today = date("Y-m-d");
-
-            $now = new DateTime('NOW', $timezone);
-            $nowTimestamp = $now->getTimestamp();
-
-            $hour = explode(":", $travel_hour)[0];
-            $minutes = explode(":", $travel_hour)[1];
-
-            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
-            
-            /*
-             * CHECKS IF CARPOOL EXPIRATION IS ON SOME SAME
-             * DAY OR THE NEXT DAY AND
-             * SETS CARPOOL EXPIRATION TIME
-             */
-            if ($nowTimestamp > $carpoolExpirationTimestamp) {
-                $carpoolExpiration->add($diffDay);
-            } else {
-                $carpoolExpiration->add($diffHour);
-            }
-
-            $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
-            
-            error_log($nowTimestamp);
-            error_log($carpoolExpirationTimestamp);
-            
-            return $carpoolExpirationTimestamp;
-        }
-		
 		private function acertarStringHora($travel_hour){
 			return $travel_hour .= ":00";
 		}
@@ -351,12 +307,7 @@
          * MORE THAN 30 MINUTES
          */
         private function removeExpiredCarpools() {
-            $timezone = date_default_timezone_get();
-            $now = date_create(date("Y-m-d G:i P"));
-            $nowTimestamp = $now->getTimestamp();
-            
             $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
-			$this->db->bind(":now", $nowTimestamp);
 
 			$this->db->execute();
             
