@@ -23,7 +23,7 @@
 			$this->wunder = $data["wunder"];
         }
 		public function __toString() {
-            $horaFormatada = date( "G:i", strtotime($this->travel_hour));
+            $horaFormatada = date( "G:i", strtotime('-3 hours', strtotime($this->travel_hour)));
 			if (!empty($this->spots) && !empty($this->location)) {
 				$plural = $this->spots > 1 ? "s" : "";
 				$this->username .= $this->picpay ? "(p)" : "";

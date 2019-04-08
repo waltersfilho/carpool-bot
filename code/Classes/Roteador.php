@@ -53,7 +53,7 @@
 			$chat_id = $dados["chatId"];
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
-            $timezone = new DateTimeZone("UTC");
+            $timezone = new DateTimeZone("America/Sao_Paulo");
 
             $dataHoje = date('d/m');
             $dataAmanha = date('d/m', strtotime('+1 days'));

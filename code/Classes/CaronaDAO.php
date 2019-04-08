@@ -398,7 +398,7 @@
     }
 
         private function getExpirationTimestampAmanha($travel_hour) {
-            $timezone = new DateTimeZone("UTC");
+            $timezone = new DateTimeZone("America/Sao_Paulo");
             error_log("getExpirationTimestamp");
 
 
@@ -414,7 +414,7 @@
             $hour = explode(":", $travel_hour)[0];
             $minutes = explode(":", $travel_hour)[1];
 
-            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('UTC'));
+            $carpoolExpiration = date_create($today . " " . $hour . ":" . $minutes, timezone_open('America/Sao_Paulo'));
             $carpoolExpirationTimestamp = $carpoolExpiration->getTimestamp();
 
             /*
