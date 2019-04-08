@@ -183,6 +183,7 @@
 								$minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime->modify("-3 hours");
 
                                 $date = new DateTime('NOW', $timezone);
 
@@ -262,6 +263,7 @@
                                 $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
                                 $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+                                $dtime->modify("-3 hours");
 
                                 $date = new DateTime('NOW', $timezone);
 
