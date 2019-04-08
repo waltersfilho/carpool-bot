@@ -247,10 +247,10 @@
                 $dataEncontrada = new DateTime();
                 $dataEncontrada->setTimestamp($resultado["travel_hour"]);
 
-                $diff = $date->diff( $dataEncontrada )->days;
-		error_log($diff . "diff");
+               $diff = $date->diff( $dataEncontrada )->days;
 
-		if($opcao === 'voltamanha' && $diff === 0){
+			    if($opcao === 'voltamanha' && $diff === 0)
+                {
                     
                     error_log("insterting new carpool with details going");
                     $this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
