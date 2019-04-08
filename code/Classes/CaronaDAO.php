@@ -255,6 +255,7 @@
             $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
 
 			$this->db->execute();
+		error_log("Erro: " . $this->db->getError());
             
         }
 		
