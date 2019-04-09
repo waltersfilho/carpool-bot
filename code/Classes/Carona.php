@@ -23,11 +23,12 @@
 			$this->wunder = $data["wunder"];
         }
 		public function __toString() {
-            $horaFormatada = date( "G:i", strtotime($this->travel_hour));
+			$this->username .= $this->picpay ? "(p)" : "";
+                	$this->username .= $this->wunder ? "(w)" : "";
+           	 	$horaFormatada = date( "G:i", strtotime($this->travel_hour));
 			if (!empty($this->spots) && !empty($this->location)) {
 				$plural = $this->spots > 1 ? "s" : "";
-				$this->username .= $this->picpay ? "(p)" : "";
-                $this->username .= $this->wunder ? "(w)" : "";
+
                 if(!$this->route) {
 					return  "@" . $this->username . " - " . $horaFormatada . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
 				} else {
