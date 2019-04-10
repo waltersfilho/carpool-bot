@@ -55,11 +55,12 @@
 			$username = $dados['username'];
             $timezone = new DateTimeZone("America/Sao_Paulo");
 
-            $dataHoje = date('d/m');
-            $dataAmanha = date('d/m', strtotime('+1 days'));
+            $dataHoje = new DateTime('NOW', $timezone);
+            $dataAmanha = new DateTime('NOW', $timezone);
+	    $dataAmanha->modify('+1 day');
 
-            $dataHojeDia = /*$diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . */ $dataHoje;
-            $dataAmanhaDia = /*$diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " .*/ $dataAmanha;
+            $dataHojeDia = /*$diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . */ $dataHoje->format('d/m');
+            $dataAmanhaDia = /*$diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " .*/ $dataAmanha->format('d/m');
 
 			/*Dividir cada comando em seu controlador*/
 			if($username){
