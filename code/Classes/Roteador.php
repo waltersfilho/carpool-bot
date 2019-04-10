@@ -51,6 +51,7 @@
 			$dados = self::processData($request);
             $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
 			$chat_id = $dados["chatId"];
+			error_log($chat_id . " chat_id");
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
             $timezone = new DateTimeZone("America/Sao_Paulo");
