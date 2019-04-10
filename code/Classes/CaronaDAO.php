@@ -118,10 +118,12 @@
                     $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PICPAY);
                     $this->db->bind(":chat_id", $chat_id);
                     $this->db->bind(":user_id", $user_id);
+		    $this->db->bind(":picpay", '1');
                 } else {
                     $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_WUNDER);
                     $this->db->bind(":chat_id", $chat_id);
                     $this->db->bind(":user_id", $user_id);
+		    $this->db->bind(":wunder", '1');	
                 }
 
                 $this->db->execute();
