@@ -6,7 +6,8 @@ create table Caroneiros(
 	spots varchar(128),
 	location varchar(128),
 	travel_hour timestamp,
-	route bit not null
+	route bit not null,
+	expired bit DEFAULT 0::bit;
 );
 
 create table caroneiro_pagamento(
