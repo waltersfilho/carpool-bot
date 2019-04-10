@@ -4,23 +4,24 @@
 
     
     class CaronaDAO{
+	const QUERY_SETAR_TIMEZONE = "set timezone='America/Sao_Paulo'";
 
-		const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, to_timestamp(:travel_hour), :spots, :location, :route::bit(1))";
+	const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, to_timestamp(:travel_hour), :spots, :location, :route::bit(1))";
 
-		const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '' where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
-		const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = to_timestamp(:travel_hour), spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+	const QUERY_UPDATE_CARPOOL = "update public.caroneiros set travel_hour = :travel_hour, spots = '', location = '' where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+	const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = to_timestamp(:travel_hour), spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
         
-		const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+	const QUERY_UPDATE_SPOTS = "update public.caroneiros set spots = :spots where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
-		const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) ORDER BY travel_hour ASC;";
+	const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) ORDER BY travel_hour ASC;";
 
-		const LISTA_QUERY_IDA_HOJE = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
+	const LISTA_QUERY_IDA_HOJE = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
         const LISTA_QUERY_IDA_AMANHA = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
 
         const LISTA_QUERY_VOLTA_HOJE = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '1'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
         const LISTA_QUERY_VOLTA_AMANHA = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '1'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
 	
-		const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
+	const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
         const QUERY_REMOVE_EXPIRED_CARPOOLS = "delete from public.caroneiros where travel_hour + (30 ||' minutes')::interval < now()";
 
@@ -54,15 +55,15 @@
         }
         */
         
-		public function getListaIdaHoje($chat_id){
-            
-            $this->removeExpiredCarpools();
-            
-			$this->db->query(CaronaDAO::LISTA_QUERY_IDA_HOJE);
-			$this->db->bind(":chat_id", $chat_id);
-			
-			return $this->montaListaCaronas($this->db->resultSet());
-		}
+	public function getListaIdaHoje($chat_id){
+
+    		$this->removeExpiredCarpools();
+
+		$this->db->query(CaronaDAO::LISTA_QUERY_IDA_HOJE);
+		$this->db->bind(":chat_id", $chat_id);
+
+		return $this->montaListaCaronas($this->db->resultSet());
+	}
 
         public function getListaIdaAmanha($chat_id){
 
@@ -74,15 +75,15 @@
             return $this->montaListaCaronas($this->db->resultSet());
         }
 		
-		public function getListaVoltaHoje($chat_id){
-            
-            $this->removeExpiredCarpools();
-            
-			$this->db->query(CaronaDAO::LISTA_QUERY_VOLTA_HOJE);
-			$this->db->bind(":chat_id", $chat_id);
-			
-			return $this->montaListaCaronas($this->db->resultSet());
-		}
+	public function getListaVoltaHoje($chat_id){
+
+    		$this->removeExpiredCarpools();
+
+		$this->db->query(CaronaDAO::LISTA_QUERY_VOLTA_HOJE);
+		$this->db->bind(":chat_id", $chat_id);
+
+		return $this->montaListaCaronas($this->db->resultSet());
+	}
 
         public function getListaVoltaAmanha($chat_id){
 
@@ -94,19 +95,19 @@
             return $this->montaListaCaronas($this->db->resultSet());
         }
 
-		public function updateSpots($chat_id, $user_id, $spots, $route) {
-			$this->db->query(CaronaDAO::QUERY_UPDATE_SPOTS);
-			$this->db->bind(":chat_id", $chat_id);
-			$this->db->bind(":user_id", $user_id);
-			$this->db->bind(":spots", $spots);
-			$this->db->bind(":route", $route);
+	public function updateSpots($chat_id, $user_id, $spots, $route) {
+		$this->db->query(CaronaDAO::QUERY_UPDATE_SPOTS);
+		$this->db->bind(":chat_id", $chat_id);
+		$this->db->bind(":user_id", $user_id);
+		$this->db->bind(":spots", $spots);
+		$this->db->bind(":route", $route);
 
-			$this->db->execute();
-			error_log("Erro: " . $this->db->getError());
-			
-		}
+		$this->db->execute();
+		error_log("Erro: " . $this->db->getError());
 
-		public function insertMeioPagamento($chat_id, $user_id, $opcao) {
+	}
+
+	public function insertMeioPagamento($chat_id, $user_id, $opcao) {
             $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
             $this->db->bind(":chat_id", $chat_id);
             $this->db->bind(":user_id", $user_id);
@@ -169,82 +170,82 @@
          * WITH LOCATION AS REFERENCE AND NUMBER OF SPOTS
          */
         
-		public function createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, $route) {
+	public function createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, $route) {
 
-			error_log("create carpool with details");
+		error_log("create carpool with details");
 
-			$this->db->query(CaronaDAO::QUERY_SEARCH);
+		$this->db->query(CaronaDAO::QUERY_SEARCH);
+		$this->db->bind(":chat_id", $chat_id);
+		$this->db->bind(":user_id", $user_id);
+		$this->db->bind(":route", $route);
+
+		$this->db->execute();
+
+		if (count($this->db->resultSet()) == 0) {
+			error_log("insterting new carpool with details going");
+			$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
 			$this->db->bind(":chat_id", $chat_id);
 			$this->db->bind(":user_id", $user_id);
+			$this->db->bind(":username", $username);
+			$this->db->bind(":travel_hour", $timestamp);
+			$this->db->bind(":spots", $spots);
+			$this->db->bind(":location", strtolower($location));
 			$this->db->bind(":route", $route);
 
-			$this->db->execute();
-
-			if (count($this->db->resultSet()) == 0) {
-				error_log("insterting new carpool with details going");
-				$this->db->query(CaronaDAO::QUERY_CREATE_CARPOOL_WITH_DETAILS);
-				$this->db->bind(":chat_id", $chat_id);
-				$this->db->bind(":user_id", $user_id);
-				$this->db->bind(":username", $username);
-				$this->db->bind(":travel_hour", $timestamp);
-				$this->db->bind(":spots", $spots);
-				$this->db->bind(":location", strtolower($location));
-				$this->db->bind(":route", $route);
-
-				$this->db->execute();
-				error_log("Erro: " . $this->db->getError());
-
-			} else {
-				error_log("updating existing carpool with details going");
-
-				$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
-				$this->db->bind(":chat_id", $chat_id);
-				$this->db->bind(":user_id", $user_id);
-				$this->db->bind(":travel_hour", $timestamp);
-				$this->db->bind(":spots", $spots);
-				$this->db->bind(":location", $location);
-				$this->db->bind(":route", $route);
-
-				$this->db->execute();
-				error_log("Erro: " . $this->db->getError());
-			}
-
-            $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
-            $this->db->bind(":chat_id", $chat_id);
-            $this->db->bind(":user_id", $user_id);
-
-            $this->db->execute();
-
-            if (count($this->db->resultSet()) == 0) {
-                $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PAGAMENTO);
-                $this->db->bind(":chat_id", $chat_id);
-                $this->db->bind(":user_id", $user_id);
-
-                $this->db->execute();
-            }
-
-
-		}
-
-
-		public function removeCarpool($chat_id, $user_id, $route) {
-			$this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
-			$this->db->bind(":chat_id", $chat_id);
-			$this->db->bind(":user_id", $user_id);
-			$this->db->bind(":route", $route);
-			
 			$this->db->execute();
 			error_log("Erro: " . $this->db->getError());
-		}
 
-		private function acertarStringHora($travel_hour){
-			return $travel_hour .= ":00";
-		}
+		} else {
+			error_log("updating existing carpool with details going");
+
+			$this->db->query(CaronaDAO::QUERY_UPDATE_CARPOOL_WITH_DETAILS);
+			$this->db->bind(":chat_id", $chat_id);
+			$this->db->bind(":user_id", $user_id);
+			$this->db->bind(":travel_hour", $timestamp);
+			$this->db->bind(":spots", $spots);
+			$this->db->bind(":location", $location);
+			$this->db->bind(":route", $route);
+
+			$this->db->execute();
+			error_log("Erro: " . $this->db->getError());
+	    }
+
+	    $this->db->query(CaronaDAO::QUERY_SEARCH_PAGAMENTO);
+	    $this->db->bind(":chat_id", $chat_id);
+	    $this->db->bind(":user_id", $user_id);
+
+	    $this->db->execute();
+
+	    if (count($this->db->resultSet()) == 0) {
+		$this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_PAGAMENTO);
+		$this->db->bind(":chat_id", $chat_id);
+		$this->db->bind(":user_id", $user_id);
+
+		$this->db->execute();
+	    }
 
 
-		private function setStringTime($travel_hour){
-			return $travel_hour .= ":00";
-		}
+	}
+
+
+	public function removeCarpool($chat_id, $user_id, $route) {
+		$this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
+		$this->db->bind(":chat_id", $chat_id);
+		$this->db->bind(":user_id", $user_id);
+		$this->db->bind(":route", $route);
+
+		$this->db->execute();
+		error_log("Erro: " . $this->db->getError());
+	}
+
+	private function acertarStringHora($travel_hour){
+		return $travel_hour .= ":00";
+	}
+
+
+	private function setStringTime($travel_hour){
+		return $travel_hour .= ":00";
+	}
         
         
         /*
@@ -252,26 +253,31 @@
          * MORE THAN 30 MINUTES
          */
         private function removeExpiredCarpools() {
-            $this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
+		$this->db->query(CaronaDAO::QUERY_SETAR_TIMEZONE);
+		$this->db->execute();
+		
+		error_log("Erro: " . $this->db->getError());
+		
+		$this->db->query(CaronaDAO::QUERY_REMOVE_EXPIRED_CARPOOLS);
 
-			$this->db->execute();
+		$this->db->execute();
 		error_log("Erro: " . $this->db->getError());
             
         }
 		
-		private function montaListaCaronas($resultSet){
+	private function montaListaCaronas($resultSet){
 
-			error_log("montaListaCaronas");
+		error_log("montaListaCaronas");
 
-			$resultado = array();
-			
-			foreach ($resultSet as $entrada)
-			{
-				array_push($resultado, new Carona($entrada));
-			}
-			
-			return $resultado;
+		$resultado = array();
+
+		foreach ($resultSet as $entrada)
+		{
+			array_push($resultado, new Carona($entrada));
 		}
+
+		return $resultado;
+	}
     }
 
     
