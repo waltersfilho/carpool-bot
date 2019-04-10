@@ -49,20 +49,20 @@
 			$args = array();
 			$command = self::processCommand($request['message']['text'], $args);
 			$dados = self::processData($request);
-            $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
+		    	$diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
 			$chat_id = $dados["chatId"];
 			error_log($chat_id . " chat_id");
 			$user_id = $dados["userId"];
 			$username = $dados['username'];
-            $timezone = new DateTimeZone("America/Sao_Paulo");
+		    	$timezone = new DateTimeZone("America/Sao_Paulo");
 
-            $dataHoje = new DateTime('NOW', $timezone);
-            $dataAmanha = new DateTime('NOW', $timezone);
-	    $dataAmanha->modify('+1 day');
+		    	$dataHoje = new DateTime('NOW', $timezone);
+		    	$dataAmanha = new DateTime('NOW', $timezone);
+		    	$dataAmanha->modify('+1 day');
 
-            $dataHojeDia = /*$diasemana[(date('w', strtotime($dataHoje)) + 3) % 7] . " - " . */ $dataHoje->format('d/m');
-            $dataAmanhaDia = /*$diasemana[(date('w', strtotime($dataAmanha)) + 3) % 7]  .  " - " .*/ $dataAmanha->format('d/m');
-
+		    	$dataHojeDia = $diasemana[$dataHoje->format('N')] . " - " . $dataHoje->format('d/m');
+		    	$dataAmanhaDia = $diasemana[$dataAmanha->format('N')]  .  " - " . $dataAmanha->format('d/m');
+			
 			/*Dividir cada comando em seu controlador*/
 			if($username){
 				$dao = new CaronaDAO();
