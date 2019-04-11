@@ -19,7 +19,7 @@ Bot para gerenciar caronas usado no [Telegram].
   - [Getting Started](#getting-started)
     - [Criação de um Bot]
     - [Configuração do servidor PHP no [Heroku]]
-      - [Criação de conta no [Heroku]](#cria%C3%A7%C3%A3o-de-conta-no-heroku)
+      - [Criação de conta no [Heroku]]
       - [Criação do Banco de Dados](#cria%C3%A7%C3%A3o-do-banco-de-dados)
       - [Configuração do Banco de Dados](#configura%C3%A7%C3%A3o-do-banco-de-dados)
       - [Criação de aplicação](#cria%C3%A7%C3%A3o-de-aplica%C3%A7%C3%A3o)
