@@ -17,8 +17,8 @@ Bot para gerenciar caronas usado no [Telegram].
     - [Desenvolvimento](#desenvolvimento)
     - [Devs](#devs)
   - [Getting Started](#getting-started)
-    - [Criação de um Bot](#cria%C3%A7%C3%A3o-de-um-bot)
-    - [Configuração do servidor PHP no [Heroku]](#configura%C3%A7%C3%A3o-do-servidor-php-no-heroku)
+    - [Criação de um Bot]
+    - [Configuração do servidor PHP no [Heroku]]
       - [Criação de conta no [Heroku]](#cria%C3%A7%C3%A3o-de-conta-no-heroku)
       - [Criação do Banco de Dados](#cria%C3%A7%C3%A3o-do-banco-de-dados)
       - [Configuração do Banco de Dados](#configura%C3%A7%C3%A3o-do-banco-de-dados)
@@ -33,11 +33,12 @@ Bot para gerenciar caronas usado no [Telegram].
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ### Funcionalidades:
-  - Adicionar/Remover caronas com horário, número de vagas e origm/destino
+  - Adicionar/Remover caronas com horário, número de vagas e origem/destino
   - Exibir lista com as caronas de ida e volta
+  - Informar uso de aplicativos externos (PicPay e Wunder)
 
 ### Version
-1.2.0
+1.3.0
 
 ### Tecnologias
 
@@ -45,7 +46,7 @@ Todo o código foi escrito em PHP integrando com a Bot API do [Telegram].
 
 ### Desenvolvimento
 
-Alterações feitas a partir do código original em https://github.com/henriquemaio/CaronasBot. Novas funcionalidades como o número de vagas disponíveis e o trajeto.
+Alterações feitas a partir do código original em https://github.com/henriquemaio/CaronasBot. Novas funcionalidades como o número de vagas disponíveis e o trajeto, informação de forma de pagamento e outras condições que foram atendidas conforme o cotidiano do grupo de caronas no qual participo.
 Adicione uma issue ou faça um pull request.
 
 ### Devs
@@ -55,6 +56,7 @@ Adicione uma issue ou faça um pull request.
  - [VBustamante]
  - [doravante]
  - [filipebarretto]
+ - [waltersfilho]
 
 
 ## Getting Started
@@ -102,15 +104,23 @@ heroku pg:psql --app [db_name] [db_type]
 Ao logar, copie o comando em database/script.sql e execute:
 ```
 => create table Caroneiros(
-        id bigserial UNIQUE PRIMARY KEY,
-        chat_id int NOT NULL,
-        user_id int NOT NULL,
-        username varchar(128),
-        spots varchar(128),
-        location varchar(128),
-        travel_hour time,
-        route bit not null,
-        expiration timestamp
+	id bigserial UNIQUE PRIMARY KEY,
+	chat_id varchar(255) NOT NULL,
+	user_id int NOT NULL,
+	username varchar(128),
+	spots varchar(128),
+	location varchar(128),
+	travel_hour timestamp,
+	route bit not null,
+	expired bit DEFAULT 0::bit;
+);
+
+=> create table caroneiro_pagamento(
+	id bigserial UNIQUE PRIMARY KEY,
+	chat_id varchar(255) NOT NULL,
+	user_id int NOT NULL,
+	picpay bit DEFAULT 0::bit,
+	wunder bit DEFAULT 0::bit
 );
 ```
 
@@ -172,6 +182,9 @@ volta - Cadastrar nova volta, atualizar volta ou ver idas existentes
 remover - Remover ida ou volta
 regras - Visualizar regras de uso do grupo
 vagas - Atualiza o numero de vagas
+caronas - Ver idas e voltas em uma única mensagem
+picpay - Informe se aceita ou não PicPay
+wunder - Informe se aceita ou não Wunder
 ```
 
 ### Comece a usar
@@ -194,6 +207,7 @@ MIT
    [VBustamante]: <https://github.com/VBustamante>
    [doravante]: <https://github.com/doravante>
    [filipebarretto]: <https://github.com/filipebarretto>
+   [waltersfilho]: <https://github.com/waltersfilho>
    [BotFather]: <https://telegram.me/botfather>
    [Heroku]: <https://heroku.com>
    [Postgres]: <http://www.postgresql.org/download/>
