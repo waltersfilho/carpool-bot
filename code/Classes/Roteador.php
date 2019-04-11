@@ -209,7 +209,7 @@ class Roteador
                             TelegramConnect::sendMessage($chat_id, "Horário inválido.");
                         }
                     } else {
-                        TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 mecembu");
+                        TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
                     }
                     break;
 
