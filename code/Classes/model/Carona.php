@@ -1,5 +1,5 @@
 <?php
-require_once "../util/PontoReferenciaMap.php";
+require_once (__DIR__."/../util/PontoReferenciaMap.php");
 
 
 class Carona
