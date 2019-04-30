@@ -1,4 +1,6 @@
 <?php
+require_once "../util/PontoReferenciaMap.php";
+
 
 class Carona
 {
@@ -11,6 +13,7 @@ class Carona
     private $route;
     private $picpay;
     private $wunder;
+    private $pontoReferenciaMap;
 
     public function __construct($data)
     {
@@ -27,6 +30,7 @@ class Carona
 
     public function __toString()
     {
+        $this->pontoReferenciaMap = new PontoReferenciaMap();
         $this->username .= $this->picpay ? "(p)" : "";
         $this->username .= $this->wunder ? "(w)" : "";
         $horaFormatada = date("G:i", strtotime($this->travel_hour));
@@ -34,9 +38,9 @@ class Carona
             $plural = $this->spots > 1 ? "s" : "";
 
             if (!$this->route) {
-                return "@" . $this->username . " - " . $horaFormatada . " da " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+                return "@" . $this->username . " - " . $horaFormatada . " d" . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
             } else {
-                return "@" . $this->username . " - " . $horaFormatada . " até " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+                return "@" . $this->username . " - " . $horaFormatada . " até " . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
             }
         } else {
             return "<i>" . "@" . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
