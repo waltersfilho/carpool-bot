@@ -1,7 +1,7 @@
 <?php
-    require_once "Classes/Config.php";
-    require_once "Classes/Roteador.php";
-    require_once "Classes/Connection.php";
+    require_once "Classes/config/Config.php";
+    require_once "Classes/controller/Roteador.php";
+    require_once "Classes/config/Connection.php";
 
 
     $update = file_get_contents('php://input');
@@ -11,4 +11,4 @@
 ?>
 
 <h2>CaronasBot</h2>
-<h4>More @ <a href="https://github.com/filipebarretto/CaronasBot">https://github.com/filipebarretto/CaronasBot</a></h4>
+<h4>More @ <a href="https://github.com/waltersfilho/CaronasBot">https://github.com/waltersfilho/CaronasBot</a></h4>
