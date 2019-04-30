@@ -1,6 +1,6 @@
 <?php
-require_once "Connection.php";
-require_once "Carona.php";
+require_once "../config/Connection.php";
+require_once "../model/Carona.php";
 
 
 class CaronaDAO

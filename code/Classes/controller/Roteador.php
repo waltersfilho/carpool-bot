@@ -1,8 +1,8 @@
 <?php
-require_once "Config.php";
-require_once "TelegramConnect.php";
-require_once "CaronaDAO.php";
-require_once "Carona.php";
+require_once "../config/Config.php";
+require_once "../config/TelegramConnect.php";
+require_once "../dao/CaronaDAO.php";
+require_once "../model/Carona.php";
 
 class Roteador
 {
