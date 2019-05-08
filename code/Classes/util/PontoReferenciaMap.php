@@ -5,6 +5,7 @@ class PontoReferenciaMap
     private $prefixo = array(
         "gramado" => "o",
         "chinainbox" => "o",
+        "center" => "o",
     );
 
     public function prefixoPontoReferencia($pontoReferencia)

@@ -3,9 +3,11 @@ require_once (__DIR__."/../config/Config.php");
 require_once (__DIR__."/../config/TelegramConnect.php");
 require_once (__DIR__."/../dao/CaronaDAO.php");
 require_once (__DIR__."/../model/Carona.php");
+require_once (__DIR__."/../util/PontoReferenciaMap.php");
 
 class Roteador
 {
+    private $pontoReferenciaMap;
 
     /*Espera o objeto 'message' já como array*/
     private static function processData($data)
@@ -70,6 +72,7 @@ class Roteador
         /*Dividir cada comando em seu controlador*/
         if ($username) {
             $dao = new CaronaDAO();
+            $pontoReferenciaMap = new PontoReferenciaMap();
 
             switch (strtolower($command)) {
                 /*comandos padrão*/
@@ -204,7 +207,7 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
 
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo de " . $location);
+                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo d" . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
                         } else {
                             TelegramConnect::sendMessage($chat_id, "Horário inválido.");
                         }
@@ -284,7 +287,7 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
+                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
 
                         }
                     } elseif (count($args) == 4) {
@@ -317,7 +320,7 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $location);
+                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
 
                         } else {
                             TelegramConnect::sendMessage($chat_id, "Horário inválido.");
