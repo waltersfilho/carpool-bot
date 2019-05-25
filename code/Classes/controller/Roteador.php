@@ -106,12 +106,20 @@ class Roteador
 								/ida [horario] [vagas] [local] --> Este comando serve para definir um horário que você está INDO para o FUNDÃO.
 									Ex: /ida 10:00 2 merck
 									(Inclui uma carona de ida às 10:00 com 2 vagas saindo do merck)
-
+								
+								Caso já tenha oferecido carona anteriormente, basta usar o comando:
+								    Ex: /ida 10:00 2
+									(Inclui uma carona de ida às 10:00 com 2 vagas saindo do seu último ponto de referência ofertado)
+								
 								Caso não seja colocado o parâmetro do horário (Ex: /ida) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
 								/volta [horario] [vagas] [local] --> Este comando serve para definir um horário que você está VOLTANDO para o SEU BAIRRO. 
 									Ex: /volta 15:00 3 merck 
 									(Inclui uma carona de volta às 15:00 com 3 vagas para a merck)
+								
+								Caso já tenha oferecido carona anteriormente, basta usar o comando:
+								    Ex: /volta 15:00 3
+									(Inclui uma carona de volta às 10:00 com 2 vagas indo até seu último ponto de referência ofertado)
 								
 								Caso não seja colocado o parâmetro do horário (Ex: /volta) o bot irá apresentar a lista com as caronas registradas para o trajeto.
 
@@ -182,7 +190,7 @@ class Roteador
                     } elseif (count($args) == 3) {
 
                         if(empty($resultadoUltimaCarona)){
-                            TelegramConnect::sendMessage($chat_id, "Você não usou ponto de referência anteriormente. Por favor use o comando: \n Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
+                            TelegramConnect::sendMessage($chat_id, "Você não usou ponto de referência anteriormente. Por favor, use o comando: \nUso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
                             return;
                         }
 
@@ -292,7 +300,7 @@ class Roteador
                     } elseif (count($args) == 3) {
 
                         if(empty($resultadoUltimaCarona)){
-                            TelegramConnect::sendMessage($chat_id, "Você não usou ponto de referência anteriormente. Por favor use o comando: \n Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
+                            TelegramConnect::sendMessage($chat_id, "Você não usou ponto de referência anteriormente. Por favor, use o comando: \nUso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
                             return;
                         }
 
