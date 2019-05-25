@@ -59,7 +59,7 @@ class Carona
 
     public function getLocation()
     {
-        return $this>location;
+        return $this->location;
     }
 }
 
