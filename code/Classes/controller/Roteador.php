@@ -310,7 +310,7 @@ class Roteador
                         $horarioValido = preg_match($horarioRegex, $horarioRaw, $resultado);
 
                         $spots = $args[2];
-                        $location = $args[3];
+                        $location = $resultadoUltimaCarona[0]->getLocation();
 
                         if ($horarioValido) {
 
