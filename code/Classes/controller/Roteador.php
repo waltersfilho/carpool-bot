@@ -181,7 +181,7 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
                     } elseif (count($args) == 3) {
 
-                        if(!empty($resultadoUltimaCarona)){
+                        if(empty($resultadoUltimaCarona)){
                             TelegramConnect::sendMessage($chat_id, "Você não usou ponto de referência anteriormente. Por favor use o comando: \n Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
                             return;
                         }
@@ -291,7 +291,7 @@ class Roteador
 
                     } elseif (count($args) == 3) {
 
-                        if(!empty($resultadoUltimaCarona)){
+                        if(empty($resultadoUltimaCarona)){
                             TelegramConnect::sendMessage($chat_id, "Você não usou ponto de referência anteriormente. Por favor use o comando: \n Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
                             return;
                         }
