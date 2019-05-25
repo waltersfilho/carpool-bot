@@ -250,7 +250,7 @@ class CaronaDAO
 
     public function getUltimaCarona($user_id, $chat_id)
     {
-        $this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
+        $this->db->query(CaronaDAO::QUERY_SEARCH_ULTIMA_CARONA);
         $this->db->bind(":chat_id", $chat_id);
         $this->db->bind(":user_id", $user_id);
 
