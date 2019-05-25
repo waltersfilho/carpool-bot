@@ -37,7 +37,7 @@ class CaronaDAO
 
     const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
 
-    const QUERY_SEARCH_ULTIMA_CARONA = "select * from public.caroneiros where user_id=:user_id and chat_id=:chat_id order by traver_hour DESC;";
+    const QUERY_SEARCH_ULTIMA_CARONA = "select * from public.caroneiros where user_id=:user_id and chat_id=:chat_id order by travel_hour DESC;";
 
     private $db;
 
