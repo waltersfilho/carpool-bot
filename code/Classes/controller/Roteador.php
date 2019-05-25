@@ -7,7 +7,6 @@ require_once (__DIR__."/../util/PontoReferenciaMap.php");
 
 class Roteador
 {
-    private $pontoReferenciaMap;
 
     /*Espera o objeto 'message' já como array*/
     private static function processData($data)
@@ -73,6 +72,7 @@ class Roteador
         if ($username) {
             $dao = new CaronaDAO();
             $pontoReferenciaMap = new PontoReferenciaMap();
+            $resultadoUltimaCarona = $dao->getUltimaCarona($user_id, $chat_id);
 
             switch (strtolower($command)) {
                 /*comandos padrão*/
@@ -179,6 +179,37 @@ class Roteador
                         $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
 
                         TelegramConnect::sendMessage($chat_id, $texto);
+                    } elseif (count($args) == 3 && isset($resultadoUltimaCarona)) {
+
+                        $horarioRaw = $args[1];
+                        $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
+
+                        $horarioValido = preg_match($horarioRegex, $horarioRaw, $resultado);
+
+                        $spots = $args[2];
+
+                        $location = $resultadoUltimaCarona[0]->getLocation();
+
+                        if ($horarioValido) {
+                            $hora = $resultado['hora'];
+                            $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
+
+                            $dtime = DateTime::createFromFormat("G:i", $hora . ':' . $minuto, $timezone);
+
+                            $date = new DateTime('NOW', $timezone);
+
+                            if ($dtime < $date) {
+                                $dtime->modify('+1 day');
+                            }
+
+                            $timestamp = $dtime->getTimestamp();
+
+                            $travel_hour = $hora . ":" . $minuto;
+
+                            $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
+
+                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vagas saindo d" . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
+                        }
                     } elseif (count($args) == 4) {
 
                         $horarioRaw = $args[1];

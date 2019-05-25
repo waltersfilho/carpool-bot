@@ -37,6 +37,8 @@ class CaronaDAO
 
     const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
 
+    const QUERY_SEARCH_ULTIMA_CARONA = "select * from public.caroneiros where user_id=:user_id and chat_id=:chat_id order by traver_hour DESC;";
+
     private $db;
 
     public function __construct()
@@ -245,15 +247,17 @@ class CaronaDAO
         error_log("Erro: " . $this->db->getError());
     }
 
-    private function acertarStringHora($travel_hour)
-    {
-        return $travel_hour .= ":00";
-    }
 
-
-    private function setStringTime($travel_hour)
+    public function getUltimaCarona($user_id, $chat_id)
     {
-        return $travel_hour .= ":00";
+        $this->db->query(CaronaDAO::QUERY_REMOVE_CARPOOL);
+        $this->db->bind(":chat_id", $chat_id);
+        $this->db->bind(":user_id", $user_id);
+
+        $this->db->execute();
+        error_log("Erro: " . $this->db->getError());
+
+        return $this->montaListaCaronas($this->db->resultSet());
     }
 
 

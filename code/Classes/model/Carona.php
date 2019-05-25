@@ -56,6 +56,11 @@ class Carona
     {
         return $this->travel_hour;
     }
+
+    public function getLocation()
+    {
+        return $this>location;
+    }
 }
 
     
