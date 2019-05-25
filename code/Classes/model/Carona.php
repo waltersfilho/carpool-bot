@@ -11,6 +11,7 @@ class Carona
     private $travel_hour;
     private $spots;
     private $route;
+    private $location;
     private $picpay;
     private $wunder;
     private $pontoReferenciaMap;
