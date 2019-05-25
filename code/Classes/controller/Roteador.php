@@ -179,7 +179,7 @@ class Roteador
                         $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
 
                         TelegramConnect::sendMessage($chat_id, $texto);
-                    } elseif (count($args) == 3 && isset($resultadoUltimaCarona)) {
+                    } elseif (count($args) == 3 && !empty($resultadoUltimaCarona)) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
