@@ -12,7 +12,7 @@ class Carona
     private $spots;
     private $route;
     private $picpay;
-    private $wunder;
+    private $carpool;
     private $pontoReferenciaMap;
 
     public function __construct($data)
@@ -25,14 +25,14 @@ class Carona
         $this->location = $data["location"];
         $this->route = $data["route"];
         $this->picpay = $data["picpay"];
-        $this->wunder = $data["wunder"];
+        $this->carpool = $data["carpool"];
     }
 
     public function __toString()
     {
         $this->pontoReferenciaMap = new PontoReferenciaMap();
         $this->username .= $this->picpay ? "(p)" : "";
-        $this->username .= $this->wunder ? "(w)" : "";
+        $this->username .= $this->carpool ? "(c)" : "";
         $horaFormatada = date("G:i", strtotime($this->travel_hour));
         if (!empty($this->spots) && !empty($this->location)) {
             $plural = $this->spots > 1 ? "s" : "";

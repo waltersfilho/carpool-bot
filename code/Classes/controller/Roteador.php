@@ -128,8 +128,8 @@ class Roteador
 									(Altera o número de vagas da ida para 0, ou seja, lotado)
 								/picpay --> Este comando informa que você aceita PicPay, de forma permanente. Para passar a não aceitar, chame o comando novamente.
 									Ex: Por padrão, todos os caroneiros não aceitam PicPay. Chamando o comando pela primeira vez, é cadastrado que você aceita PicPay.
-								/wunder --> Este comando informa que você aceita Wunder, de forma permanente. Para passar a não aceitar, chame o comando novamente.
-									Ex: Assim como o PicPay, por padrão, todos os caroneiros não aceitam Wunder. Chamando o comando pela primeira vez, é cadastrado que você aceita Wunder.";
+								/carpool --> Este comando informa que você aceita Waze Carpool, de forma permanente. Para passar a não aceitar, chame o comando novamente.
+									Ex: Assim como o PicPay, por padrão, todos os caroneiros não aceitam Waze Carpool. Chamando o comando pela primeira vez, é cadastrado que você aceita Waze Carpool.";
 
                     TelegramConnect::sendMessage($chat_id, $help);
                     break;
@@ -179,7 +179,7 @@ class Roteador
                         $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
 
                         TelegramConnect::sendMessage($chat_id, $texto);
-                    } elseif (count($args) == 4) {
+                    } elseif ((count($args) == 4) || (strtolower($args[3]) != 'pechincha')) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
@@ -254,7 +254,7 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
 
 
-                    } elseif (count($args) == 4) {
+                    } elseif ((count($args) == 4) || (strtolower($args[3]) != 'pechincha')) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
@@ -290,7 +290,7 @@ class Roteador
                             TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
 
                         }
-                    } elseif (count($args) == 4) {
+                    } elseif ((count($args) == 4) || (strtolower($args[3]) != 'pechincha')) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
@@ -447,11 +447,11 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
                     }
                     break;
-                case 'wunder':
+                case 'carpool':
                     if (count($args) == 1) {
-                        $resultado = $dao->insertMeioPagamento($chat_id, $user_id, 'wunder');
+                        $resultado = $dao->insertMeioPagamento($chat_id, $user_id, 'carpool');
 
-                        $texto = $resultado ? "@" . $username . " informou que aceita Wunder" : "@" . $username . " informou que <b>NÃO</b> aceita Wunder";
+                        $texto = $resultado ? "@" . $username . " informou que aceita Waze Carpool" : "@" . $username . " informou que <b>NÃO</b> aceita Waze Carpool";
                         TelegramConnect::sendMessage($chat_id, $texto);
                     }
                     break;

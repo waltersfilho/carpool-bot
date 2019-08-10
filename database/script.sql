@@ -15,5 +15,5 @@ create table caroneiro_pagamento(
 	chat_id varchar(255) NOT NULL,
 	user_id int NOT NULL,
 	picpay bit DEFAULT 0::bit,
-	wunder bit DEFAULT 0::bit
+	carpool bit DEFAULT 0::bit
 );
