@@ -15,11 +15,11 @@ class CaronaDAO
 
     const QUERY_SEARCH = "select * from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) and expired = '0'::bit(1) ORDER BY travel_hour ASC;";
 
-    const LISTA_QUERY_IDA_HOJE = "select p.picpay, p.carpool, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
-    const LISTA_QUERY_IDA_AMANHA = "select p.picpay, p.carpool, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
+    const LISTA_QUERY_IDA_HOJE = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
+    const LISTA_QUERY_IDA_AMANHA = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '0'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
 
-    const LISTA_QUERY_VOLTA_HOJE = "select p.picpay, p.carpool, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '1'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
-    const LISTA_QUERY_VOLTA_AMANHA = "select p.picpay, p.carpool, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '1'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
+    const LISTA_QUERY_VOLTA_HOJE = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '1'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) ORDER BY travel_hour ASC;";
+    const LISTA_QUERY_VOLTA_AMANHA = "select p.picpay, p.wunder, c.* from public.caroneiros c inner join public.caroneiro_pagamento p on (c.user_id = p.user_id and c.chat_id = p.chat_id) where c.chat_id = :chat_id and route = '1'::bit(1) and expired = '0'::bit(1) and (SELECT EXTRACT(DAY FROM travel_hour)) = (SELECT EXTRACT(DAY FROM now())) + 1 ORDER BY travel_hour ASC;";
 
     const QUERY_REMOVE_CARPOOL = "delete from public.caroneiros where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1)";
 
@@ -31,9 +31,9 @@ class CaronaDAO
 
     const QUERY_UPDATE_ACEITA_PICPAY = "update public.caroneiro_pagamento set picpay = ~picpay where chat_id = :chat_id and user_id = :user_id";
 
-    const QUERY_INSERIR_ACEITA_CARPOOL = "insert into public.caroneiro_pagamento (chat_id, user_id, carpool) values (:chat_id, :user_id, :carpool)";
+    const QUERY_INSERIR_ACEITA_WUNDER = "insert into public.caroneiro_pagamento (chat_id, user_id, wunder) values (:chat_id, :user_id, :wunder)";
 
-    const QUERY_UPDATE_ACEITA_CARPOOL = "update public.caroneiro_pagamento set carpool = ~carpool where chat_id = :chat_id and user_id = :user_id";
+    const QUERY_UPDATE_ACEITA_WUNDER = "update public.caroneiro_pagamento set wunder = ~wunder where chat_id = :chat_id and user_id = :user_id";
 
     const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
 
@@ -128,10 +128,10 @@ class CaronaDAO
                 $this->db->bind(":user_id", $user_id);
                 $this->db->bind(":picpay", '1');
             } else {
-                $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_CARPOOL);
+                $this->db->query(CaronaDAO::QUERY_INSERIR_ACEITA_WUNDER);
                 $this->db->bind(":chat_id", $chat_id);
                 $this->db->bind(":user_id", $user_id);
-                $this->db->bind(":carpool", '1');
+                $this->db->bind(":wunder", '1');
             }
 
             $this->db->execute();
@@ -159,7 +159,7 @@ class CaronaDAO
             $this->db->bind(":chat_id", $chat_id);
             $this->db->bind(":user_id", $user_id);
         } else {
-            $this->db->query(CaronaDAO::QUERY_UPDATE_ACEITA_CARPOOL);
+            $this->db->query(CaronaDAO::QUERY_UPDATE_ACEITA_WUNDER);
             $this->db->bind(":chat_id", $chat_id);
             $this->db->bind(":user_id", $user_id);
         }
