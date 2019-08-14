@@ -455,6 +455,13 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
                     }
                     break;
+		case 'sobre':
+                    if (count($args) == 1) {
+
+                        $texto = "<a href='https://github.com/waltersfilho/carpool-bot'>Teste</a>";
+                        TelegramConnect::sendMessage($chat_id, $texto);
+                    }
+                    break;
 
             }
         } else {
