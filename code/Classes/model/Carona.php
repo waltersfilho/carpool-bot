@@ -32,7 +32,7 @@ class Carona
     {
         $this->pontoReferenciaMap = new PontoReferenciaMap();
         $this->username .= $this->picpay ? "(p)" : "";
-        $this->username .= $this->carpool ? "(c)" : "";
+        $this->username .= $this->carpool ? "<a href='https://waze.app.goo.gl/Fn1EJ'>(c)<a>" : "";
         $horaFormatada = date("G:i", strtotime($this->travel_hour));
         if (!empty($this->spots) && !empty($this->location)) {
             $plural = $this->spots > 1 ? "s" : "";
