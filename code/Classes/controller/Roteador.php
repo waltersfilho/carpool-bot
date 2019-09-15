@@ -455,15 +455,25 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
                     }
                     break;
-		case 'sobre':
-                    if (count($args) == 1) {
+		            case 'sobre':
+                        if (count($args) == 1) {
 
-                        $texto = "<a href='https://github.com/waltersfilho/carpool-bot'>Teste</a>";
-                        TelegramConnect::sendMessage($chat_id, $texto);
+                            $texto = "<a href='https://github.com/waltersfilho/carpool-bot'>Teste</a>";
+                            TelegramConnect::sendMessage($chat_id, $texto);
+                        }
+                        break;
+
+                    case 'aviso':
+                        if (count($args) == 2) {
+
+
+                            TelegramConnect::isAdmin($chat_id, $user_id);
                     }
                     break;
 
             }
+
+
         } else {
             TelegramConnect::sendMessage($chat_id, "Registre seu username nas configurações do Telegram para utilizar o Bot.");
         }
