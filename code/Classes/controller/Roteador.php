@@ -173,7 +173,7 @@ class Roteador
                             }
                         }
 
-                        $texto = $dao->retornarAvisos($chat_id)[0];
+                        $texto = $dao->retornarAvisos($chat_id);
                         $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                         $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
@@ -247,7 +247,7 @@ class Roteador
                             }
                         }
 
-                        $texto = $dao->retornarAvisos($chat_id)[0];
+                        $texto = $dao->retornarAvisos($chat_id);
                         $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                         $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
@@ -393,7 +393,7 @@ class Roteador
                         }
                     }
 
-                    $texto = $dao->retornarAvisos($chat_id)[0];
+                    $texto = $dao->retornarAvisos($chat_id);
                     $texto .= isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
                     $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n" : "";
                     $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";

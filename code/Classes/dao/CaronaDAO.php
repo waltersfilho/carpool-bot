@@ -286,7 +286,7 @@ class CaronaDAO
 
         error_log("Erro: " . $this->db->getError());
 
-        return $this->db->resultSet();
+        return $this->db->resultSet()[0]['message'];
 
     }
 
