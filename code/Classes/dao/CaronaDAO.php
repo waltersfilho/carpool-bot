@@ -259,8 +259,8 @@ class CaronaDAO
 
     public function inserirAviso($chat_id, $mensagem) {
         $this->db->query(CaronaDAO::QUERY_INSERIR_AVISO);
-        $this->db->bind("chat_id", $chat_id);
-        $this->db->query("mensagem", $mensagem);
+        $this->db->bind(":chat_id", $chat_id);
+        $this->db->query(":mensagem", $mensagem);
 
         $this->db->execute();
 
@@ -270,7 +270,7 @@ class CaronaDAO
 
     public function removerAviso($chat_id) {
         $this->db->query(CaronaDAO::QUERY_REMOVER_AVISO);
-        $this->db->bind("chat_id", $chat_id);
+        $this->db->bind(":chat_id", $chat_id);
 
         $this->db->execute();
 
