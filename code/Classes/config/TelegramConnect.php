@@ -9,8 +9,10 @@ class TelegramConnect
 
     public static function isAdmin ($chatId, $userId) {
         $url = Config::getBotConfig("ApiRequestUrl")."/getChatMember?chat_id=".$chatId."&user_id=".$userId;
-        $teste = file_get_contents($url);
-        $obj = json_decode($teste);
+        $obj = json_decode(file_get_contents($url));
         error_log("Logando response:" . $obj->{'result'}->{'status'});
+        $member_status = $obj->{'result'}->{'status'};
+
+        return ($member_status === 'creator' || $member_status === 'administrator');
     }
 }

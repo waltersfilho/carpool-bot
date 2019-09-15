@@ -37,24 +37,18 @@ class CaronaDAO
 
     const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
 
+    const QUERY_INSERIR_AVISO = "insert into public.avisos (chat_id, message, data, expired) values (:chat_id, :mensagem, now(), '0'::bit(1))";
+
+    const QUERY_REMOVER_AVISO = "update public.avisos set expired = '1'::bit(1) where chat_id = :chat_id";
+
+    const QUERY_RECUPERAR_AVISO = "select message from public.avisos where expired = '0'::bit(1) and chat_id = :chat_id";
+
     private $db;
 
     public function __construct()
     {
         $this->db = new Database();
     }
-
-
-    /*
-     * TODO
-     * CREATE SINGLE FUNCTION TO LIST CARPOOL
-     * WITH ROUTE AS PARAMETER
-     */
-    /*
-    public function getCarpoolList($chat_id, $route) {
-        return "";
-    }
-    */
 
     public function getListaIdaHoje($chat_id)
     {
@@ -245,18 +239,6 @@ class CaronaDAO
         error_log("Erro: " . $this->db->getError());
     }
 
-    private function acertarStringHora($travel_hour)
-    {
-        return $travel_hour .= ":00";
-    }
-
-
-    private function setStringTime($travel_hour)
-    {
-        return $travel_hour .= ":00";
-    }
-
-
     /*
      * AUTOMATICALLY DELETES CARPOOLS EXPIRED
      * MORE THAN 30 MINUTES
@@ -272,6 +254,39 @@ class CaronaDAO
 
         $this->db->execute();
         error_log("Erro: " . $this->db->getError());
+
+    }
+
+    public function inserirAviso($chat_id, $mensagem) {
+        $this->db->query(CaronaDAO::QUERY_INSERIR_AVISO);
+        $this->db->bind("chat_id", $chat_id);
+        $this->db->query("mensagem", $mensagem);
+
+        $this->db->execute();
+
+        error_log("Erro: " . $this->db->getError());
+
+    }
+
+    public function removerAviso($chat_id) {
+        $this->db->query(CaronaDAO::QUERY_REMOVER_AVISO);
+        $this->db->bind("chat_id", $chat_id);
+
+        $this->db->execute();
+
+        error_log("Erro: " . $this->db->getError());
+
+    }
+
+    public function retornarAvisos($chat_id) {
+        $this->db->query(CaronaDAO::QUERY_RECUPERAR_AVISO);
+        $this->db->bind("chat_id", $chat_id);
+
+        $this->db->execute();
+
+        error_log("Erro: " . $this->db->getError());
+
+        return $this->db->resultSet();
 
     }
 

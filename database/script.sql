@@ -17,3 +17,12 @@ create table caroneiro_pagamento(
 	picpay bit DEFAULT 0::bit,
 	carpool bit DEFAULT 0::bit
 );
+
+create table avisos (
+    id bigserial UNIQUE PRIMARY KEY,
+	chat_id varchar(255) NOT NULL,
+	message varchar(255) NOT NULL,
+	data timestamp,
+	expired bit DEFAULT 0::bit
+);
+

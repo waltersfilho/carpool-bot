@@ -173,7 +173,8 @@ class Roteador
                             }
                         }
 
-                        $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
+                        $texto = $dao->retornarAvisos($chat_id);
+                        $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                         $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
                         $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
@@ -246,7 +247,8 @@ class Roteador
                             }
                         }
 
-                        $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
+                        $texto = $dao->retornarAvisos($chat_id);
+                        $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                         $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
                         $texto = empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
@@ -391,7 +393,8 @@ class Roteador
                         }
                     }
 
-                    $texto = isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
+                    $texto = $dao->retornarAvisos($chat_id);
+                    $texto .= isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
                     $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n" : "";
                     $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
@@ -429,6 +432,8 @@ class Roteador
                         } elseif ($args[1] == 'volta') {
                             $dao->removeCarpool($chat_id, $user_id, '1');
                             TelegramConnect::sendMessage($chat_id, "@" . $username . " removeu a carona de volta");
+                        } elseif ($args[1] == 'aviso' && TelegramConnect::isAdmin($chat_id, $user_id)) {
+                            $dao->removerAviso();
                         } else {
                             TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
                         }
@@ -466,8 +471,9 @@ class Roteador
                     case 'aviso':
                         if (count($args) == 2) {
 
-
-                            TelegramConnect::isAdmin($chat_id, $user_id);
+                            if(TelegramConnect::isAdmin($chat_id, $user_id)){
+                                $dao->inserirAviso($chat_id, $args[1]);
+                            }
                     }
                     break;
 
