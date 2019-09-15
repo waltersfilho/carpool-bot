@@ -260,7 +260,7 @@ class CaronaDAO
     public function inserirAviso($chat_id, $mensagem) {
         $this->db->query(CaronaDAO::QUERY_INSERIR_AVISO);
         $this->db->bind(":chat_id", $chat_id);
-        $this->db->query(":message", $mensagem);
+        $this->db->bind(":message", $mensagem);
 
         $this->db->execute();
 
