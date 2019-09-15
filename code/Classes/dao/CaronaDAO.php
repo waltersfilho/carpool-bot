@@ -37,7 +37,7 @@ class CaronaDAO
 
     const QUERY_SEARCH_PAGAMENTO = "select * from public.caroneiro_pagamento where chat_id = :chat_id and user_id = :user_id;";
 
-    const QUERY_INSERIR_AVISO = "insert into public.avisos (chat_id, message, data, expired) values (:chat_id, :mensagem, now(), '0'::bit(1))";
+    const QUERY_INSERIR_AVISO = "insert into public.avisos (chat_id, message, data) values (:chat_id, :message, now())";
 
     const QUERY_REMOVER_AVISO = "update public.avisos set expired = '1'::bit(1) where chat_id = :chat_id";
 
@@ -260,7 +260,7 @@ class CaronaDAO
     public function inserirAviso($chat_id, $mensagem) {
         $this->db->query(CaronaDAO::QUERY_INSERIR_AVISO);
         $this->db->bind(":chat_id", $chat_id);
-        $this->db->query(":mensagem", $mensagem);
+        $this->db->query(":message", $mensagem);
 
         $this->db->execute();
 
@@ -280,7 +280,7 @@ class CaronaDAO
 
     public function retornarAvisos($chat_id) {
         $this->db->query(CaronaDAO::QUERY_RECUPERAR_AVISO);
-        $this->db->bind("chat_id", $chat_id);
+        $this->db->bind(":chat_id", $chat_id);
 
         $this->db->execute();
 
