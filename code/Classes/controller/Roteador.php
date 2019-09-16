@@ -433,7 +433,7 @@ class Roteador
                             $dao->removeCarpool($chat_id, $user_id, '1');
                             TelegramConnect::sendMessage($chat_id, "@" . $username . " removeu a carona de volta");
                         } elseif ($args[1] == 'aviso' && TelegramConnect::isAdmin($chat_id, $user_id)) {
-                            $dao->removerAviso();
+                            $dao->removerAviso($chat_id);
                         } else {
                             TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
                         }
