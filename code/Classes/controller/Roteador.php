@@ -180,7 +180,7 @@ class Roteador
                         $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
 
                         TelegramConnect::sendMessage($chat_id, $texto);
-                    } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha')) {
+                    } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
@@ -256,7 +256,7 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
 
 
-                    } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha')) {
+                    } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
@@ -292,7 +292,7 @@ class Roteador
                             TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vagas indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
 
                         }
-                    } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha')) {
+                    } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
 
                         $horarioRaw = $args[1];
                         $horarioRegex = '/^(?P<hora>[01]?\d|2[0-3])(?::(?P<minuto>[0-5]\d))?$/';
