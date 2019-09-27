@@ -177,7 +177,7 @@ class Roteador
                         $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                         $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
-                        $texto = empty($texto) ? "Não há ofertas de carona de ida :(" : $texto;
+                        $texto = empty(str_replace("\n", "", trim($texto))) ? "Não há ofertas de carona de ida :(" : $texto;
 
                         TelegramConnect::sendMessage($chat_id, $texto);
                     } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
@@ -251,7 +251,7 @@ class Roteador
                         $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                         $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
-                        $texto = empty($texto) ? "Não há ofertas de carona de volta :(" : $texto;
+                        $texto = empty(str_replace("\n", "", trim($texto))) ? "Não há ofertas de carona de volta :(" : $texto;
 
                         TelegramConnect::sendMessage($chat_id, $texto);
 
@@ -402,7 +402,7 @@ class Roteador
                     $texto .= isset($textoIdaAmanha) ? $textoIdaAmanha . "\n" : "";
                     $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha . "\n" : "";
 
-                    $texto = empty($texto) ? "Não há ofertas de carona :(" : $texto;
+                    $texto = empty(str_replace("\n", "", trim($texto))) ? "Não há ofertas de carona :(" : $texto;
 
                     TelegramConnect::sendMessage($chat_id, $texto);
                     break;
