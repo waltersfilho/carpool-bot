@@ -58,7 +58,6 @@ class Roteador
         $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
         $chat_id = $dados["chatId"];
         $chatInformations = $request['message']['chat'];
-        error_log($chatInformations['title']);
         $user_id = $dados["userId"];
         $username = $dados['username'];
         $timezone = new DateTimeZone("America/Sao_Paulo");
@@ -78,7 +77,7 @@ class Roteador
             switch (strtolower($command)) {
                 /*comandos padrão*/
                 case 'regras':
-                    $regras = "	 BEM VINDOS AO GRUPO DE 
+                    $regras = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . "
 
 								 REGRAS
 
