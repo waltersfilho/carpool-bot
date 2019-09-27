@@ -57,7 +57,7 @@ class Roteador
         $dados = self::processData($request);
         $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
         $chat_id = $dados["chatId"];
-        error_log($chat_id . " chat_id");
+        error_log($dados);
         $user_id = $dados["userId"];
         $username = $dados['username'];
         $timezone = new DateTimeZone("America/Sao_Paulo");
@@ -77,7 +77,7 @@ class Roteador
             switch (strtolower($command)) {
                 /*comandos padrão*/
                 case 'regras':
-                    $regras = "	 BEM VINDOS AO GRUPO DE CARONAS TAQUARA-FUNDÃO
+                    $regras = "	 BEM VINDOS AO GRUPO DE 
 
 								 REGRAS
 
