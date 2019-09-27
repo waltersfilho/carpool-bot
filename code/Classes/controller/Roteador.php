@@ -57,7 +57,8 @@ class Roteador
         $dados = self::processData($request);
         $diasemana = array('Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado');
         $chat_id = $dados["chatId"];
-        error_log($dados["chatTitle"]);
+        $chatInformations = $request['message']['chat'];
+        error_log($chatInformations['title']);
         $user_id = $dados["userId"];
         $username = $dados['username'];
         $timezone = new DateTimeZone("America/Sao_Paulo");
