@@ -475,7 +475,7 @@ class Roteador
 
                     case 'aviso':
                         if(TelegramConnect::isAdmin($chat_id, $user_id)){
-                            $dao->inserirAviso($chat_id, $args[1]);
+                            $dao->inserirAviso($chat_id, $args);
                         }
                         break;
 
