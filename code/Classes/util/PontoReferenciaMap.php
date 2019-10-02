@@ -6,6 +6,10 @@ class PontoReferenciaMap
         "gramado" => "o",
         "chinainbox" => "o",
         "center" => "o",
+        "capenha" => "o",
+        "planalto" => "o",
+        "prezunic" => "o",
+        "castelo" => "o",
     );
 
     public function prefixoPontoReferencia($pontoReferencia)
