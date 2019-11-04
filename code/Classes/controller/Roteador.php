@@ -65,7 +65,7 @@ class Roteador
         $chatInformations = $request['message']['chat'];
         $user_id = $dados["userId"];
         $username = $dados['username'];
-        $timezone = new DateTimeZone("America/Sao_Paulo");
+        $timezone = new DateTimeZone("America/Bahia");
 
         $dataHoje = new DateTime('NOW', $timezone);
         $dataAmanha = new DateTime('NOW', $timezone);
@@ -273,7 +273,7 @@ class Roteador
 
                         if ($horarioValido) {
 
-                            $timezone = new DateTimeZone("America/Sao_Paulo");
+                            $timezone = new DateTimeZone("America/Bahia");
                             $hora = $resultado['hora'];
                             $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
@@ -309,7 +309,7 @@ class Roteador
 
                         if ($horarioValido) {
 
-                            $timezone = new DateTimeZone("America/Sao_Paulo");
+                            $timezone = new DateTimeZone("America/Bahia");
                             $hora = $resultado['hora'];
                             $minuto = isset($resultado['minuto']) ? $resultado['minuto'] : "00";
 
