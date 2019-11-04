@@ -5,7 +5,7 @@ require_once (__DIR__."/../model/Carona.php");
 
 class CaronaDAO
 {
-    const QUERY_SETAR_TIMEZONE = "set timezone='America/Sao_Paulo'";
+    const QUERY_SETAR_TIMEZONE = "set timezone='America/Bahia'";
 
     const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, to_timestamp(:travel_hour), :spots, :location, :route::bit(1))";
 
