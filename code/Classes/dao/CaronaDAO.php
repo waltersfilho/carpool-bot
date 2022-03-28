@@ -262,7 +262,7 @@ class CaronaDAO
     }
 
     public function inserirRegra($chat_id, $mensagem) {
-        $this->db->query(CaronaDAO::QUERY_INSERIR_REGRA)
+        $this->db->query(CaronaDAO::QUERY_INSERIR_REGRA);
         $this->db->bind(":chat_id", $chat_id);
         $this->db->bind(":message", $mensagem);
 
