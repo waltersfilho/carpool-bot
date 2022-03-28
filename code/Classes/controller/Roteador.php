@@ -458,7 +458,7 @@ class Roteador
 
                 case 'regra':
                     if(count($args) == 1){
-                        $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n"
+                        $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n";
                         
                         $regras = $dao->retornarRegra($chat_id);
                         
