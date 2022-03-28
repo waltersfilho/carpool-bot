@@ -458,14 +458,16 @@ class Roteador
 
                 case 'regras':
                     if(count($args) == 1){
-                        $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n";
+                        $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n \n";
                         
                         $regras = $dao->retornarRegra($chat_id);
                         
-                        if(empty(str_replace("\n", "", trim($regras))))
+                        if(empty(str_replace("\n", "", trim($regras)))) {
                             $header .= "Não há regras cadastradas";
-                        else
+                        }
+                        else{
                             $header .= $regras;
+                        }
                         
                         TelegramConnect::sendMessage($chat_id, $header);
                         
