@@ -463,9 +463,9 @@ class Roteador
                         $regras = $dao->retornarRegra($chat_id);
                         
                         if(empty(str_replace("\n", "", trim($regras))))
-                            $header += "Não há regras cadastradas";
+                            $header .= "Não há regras cadastradas";
                         else
-                            $header += $regras;
+                            $header .= $regras;
                         
                         TelegramConnect::sendMessage($chat_id, $header);
                         
