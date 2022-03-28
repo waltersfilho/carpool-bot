@@ -456,7 +456,7 @@ class Roteador
                     }
                     break;
 
-                case 'regra':
+                case 'regras':
                     if(count($args) == 1){
                         $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n";
                         
