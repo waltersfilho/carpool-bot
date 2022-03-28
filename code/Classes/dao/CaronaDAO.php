@@ -43,6 +43,10 @@ class CaronaDAO
 
     const QUERY_RECUPERAR_AVISO = "select message from public.avisos where expired = '0'::bit(1) and chat_id = :chat_id";
 
+    const QUERY_INSERIR_REGRA = "insert into public.regras (chat_id, message) values (:chat_id, :message) ON CONFLICT DO UPDATE";
+
+    const QUERY_RECUPERAR_REGRAS = "select message from public.regras where chat_id = :chat_id";
+
     private $db;
 
     public function __construct()
@@ -255,6 +259,27 @@ class CaronaDAO
         $this->db->execute();
         error_log("Erro: " . $this->db->getError());
 
+    }
+
+    public function inserirRegra($chat_id, $mensagem) {
+        $this->db->query(CaronaDAO::QUERY_INSERIR_REGRA)
+        $this->db->bind(":chat_id", $chat_id);
+        $this->db->bind(":message", $mensagem);
+
+        $this->db->execute();
+
+        error_log("Erro: " . $this->db->getError());
+    }
+
+    public function retornarRegra($chat_id) {
+        $this->db->query(CaronaDAO::QUERY_RECUPERAR_AVISO);
+        $this->db->bind(":chat_id", $chat_id);
+
+        $this->db->execute();
+
+        error_log("Erro: " . $this->db->getError());
+
+        return $this->db->resultSet()[0]['message'] . "\n \n";
     }
 
     public function inserirAviso($chat_id, $mensagem) {

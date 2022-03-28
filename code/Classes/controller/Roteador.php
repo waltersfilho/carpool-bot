@@ -81,29 +81,6 @@ class Roteador
 
             switch (strtolower($command)) {
                 /*comandos padrão*/
-                case 'regras':
-                    $regras = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . "
-
-								 REGRAS
-
-								- Para oferecer carona basta usar os comandos de nosso bot, caso tenha dúvida, use o comando /help.
-								 Local de encontro, trajeto e outras informações serão combinados preferincialmente no PRIVADO.
-
-								- É obrigatório o envio de algum documento que comprove o vínculo com a UFRJ para algum adm. 
-
-								- Evitar assuntos não relacionados às caronas no grupo, a menos que considere de interesse público.
-
-								- De forma a evitar eventuais transtornos, zele sempre pela integridade e segurança de ambas as partes. Atitudes que possam causar eventuais prejuízos a terceiros serão passíveis de remoção do grupo. Exemplos: direção ofensiva, crimes de trânsito, porte de drogas, documentação do veículo em dia, etc.
-
-								- O não cumprimento das regras poderá acarretar na remoção do grupo.
-
-								- Divulgue o grupo somente entre sua rede de pessoas conhecidas. Para adicionar novos integrantes, envie msg no privado para um dos adms.
-
-								- Valor da carona: R$6,00.";
-
-                    TelegramConnect::sendMessage($chat_id, $regras);
-                    break;
-
                 case 'help':
                     $help = "Utilize este Bot para agendar as caronas. A utilização é super simples e através de comandos:
 								/caronas --> Este comando lista as caronas tanto de ida, quanto de volta do Fundão
@@ -465,20 +442,38 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $texto);
                     }
                     break;
-		            case 'sobre':
-                        if (count($args) == 1) {
+		        case 'sobre':
+                    if (count($args) == 1) {
 
-                            $texto = "<a href='https://github.com/waltersfilho/carpool-bot'>Teste</a>";
-                            TelegramConnect::sendMessage($chat_id, $texto);
-                        }
-                        break;
+                        $texto = "<a href='https://github.com/waltersfilho/carpool-bot'>Teste</a>";
+                        TelegramConnect::sendMessage($chat_id, $texto);
+                    }
+                    break;
 
-                    case 'aviso':
-                        if(TelegramConnect::isAdmin($chat_id, $user_id)){
-                            $dao->inserirAviso($chat_id, $args);
-                        }
-                        break;
+                case 'aviso':
+                    if(TelegramConnect::isAdmin($chat_id, $user_id)){
+                        $dao->inserirAviso($chat_id, $args);
+                    }
+                    break;
 
+                case 'regra':
+                    if(count($args) == 1){
+                        $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n"
+                        
+                        $regras = $dao->retornarRegra($chat_id);
+                        
+                        if(empty(str_replace("\n", "", trim($regras))))
+                            $header += "Não há regras cadastradas";
+                        else
+                            $header += $regras 
+                        
+                        TelegramConnect::sendMessage($chat_id, $header);
+                        
+                    }
+                    else if(count($args) == 2 && TelegramConnect::isAdmin($chat_id, $user_id)){
+                        $dao->inserirRegra($chat_id, $message);
+                    }
+                    break;
             }
 
 
