@@ -43,7 +43,7 @@ class CaronaDAO
 
     const QUERY_RECUPERAR_AVISO = "select message from public.avisos where expired = '0'::bit(1) and chat_id = :chat_id";
 
-    const QUERY_INSERIR_REGRAS = "insert into public.regras (chat_id, message) values (:chat_id, :message) ON CONFLICT(chat_id) DO UPDATE SET message = :message_update";
+    const QUERY_INSERIR_REGRAS = "insert into public.regras (chat_id, message) values (:chat_id, :message) ON CONFLICT(chat_id) DO UPDATE SET message = EXCLUDED.message";
 
     const QUERY_RECUPERAR_REGRAS = "select message from public.regras where chat_id = :chat_id";
 
