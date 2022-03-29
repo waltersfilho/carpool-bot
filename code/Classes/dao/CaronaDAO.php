@@ -265,7 +265,6 @@ class CaronaDAO
         $this->db->query(CaronaDAO::QUERY_INSERIR_REGRAS);
         $this->db->bind(":chat_id", $chat_id);
         $this->db->bind(":message", $mensagem);
-        $this->db->bind(":message_update", $mensagem);
 
         $this->db->execute();
 
