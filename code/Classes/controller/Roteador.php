@@ -457,7 +457,7 @@ class Roteador
                     break;
 
                 case 'regras':
-                    if(count($args) == 1){
+                    if(empty(str_replace("\n", "", trim($args)))){
                         $header = "	 BEM VINDOS AO GRUPO DE " . strtoupper($chatInformations['title']) . " \n \n";
                         
                         $regras = $dao->retornarRegra($chat_id);
@@ -472,7 +472,7 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, $header);
                         
                     }
-                    else if(count($args) == 2 && TelegramConnect::isAdmin($chat_id, $user_id)){
+                    else if(TelegramConnect::isAdmin($chat_id, $user_id)){
                         $dao->inserirRegra($chat_id, $args);
 
                         TelegramConnect::sendMessage($chat_id, "Regras inseridas/atualizadas com sucesso.");
