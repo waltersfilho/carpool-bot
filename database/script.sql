@@ -13,7 +13,7 @@ create table Caroneiros(
 create table caroneiro_pagamento(
 	id bigserial UNIQUE PRIMARY KEY,
 	chat_id varchar(255) NOT NULL,
-	user_id int NOT NULL,
+	user_id bigint NOT NULL,
 	picpay bit DEFAULT 0::bit,
 	carpool bit DEFAULT 0::bit
 );
