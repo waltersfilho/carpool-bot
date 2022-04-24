@@ -1,7 +1,7 @@
 create table Caroneiros(
 	id bigserial UNIQUE PRIMARY KEY,
 	chat_id varchar(255) NOT NULL,
-	user_id int NOT NULL,
+	user_id bigint NOT NULL,
 	username varchar(128),
 	spots varchar(128),
 	location varchar(128),
