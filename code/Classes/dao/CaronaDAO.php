@@ -5,8 +5,6 @@ require_once (__DIR__."/../model/Carona.php");
 
 class CaronaDAO
 {
-    const QUERY_SETAR_TIMEZONE = "SET timezone = 'Brazil/East'";
-
     const QUERY_CREATE_CARPOOL_WITH_DETAILS = "insert into public.caroneiros (chat_id, user_id, username, travel_hour, spots, location, route) values (:chat_id, :user_id, :username, to_timestamp(:travel_hour), :spots, :location, :route::bit(1))";
 
     const QUERY_UPDATE_CARPOOL_WITH_DETAILS = "update public.caroneiros set travel_hour = to_timestamp(:travel_hour), spots = :spots, location = :location where chat_id = :chat_id and user_id = :user_id and route = :route::bit(1) and expired = '0'::bit(1)";
@@ -249,11 +247,6 @@ class CaronaDAO
      */
     private function removeExpiredCarpools()
     {
-        $this->db->query(CaronaDAO::QUERY_SETAR_TIMEZONE);
-        $this->db->execute();
-
-        error_log("Erro: " . $this->db->getError());
-
         $this->db->query(CaronaDAO::QUERY_SET_EXPIRED_CARPOOLS);
 
         $this->db->execute();
