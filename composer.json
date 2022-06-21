@@ -1,5 +1,5 @@
 {
-	"name": "filipebarretto/CaronaBot",
+	"name": "filipebarretto/carona-bot",
     	"type": "project",
 	"require-dev": {
     		"heroku/heroku-buildpack-php": "*"
