@@ -33,7 +33,13 @@ class Carona
         $this->pontoReferenciaMap = new PontoReferenciaMap();
         $this->username .= $this->picpay ? "(p)" : "";
         $this->username .= $this->carpool ? "(c)" : "";
-        $horaFormatada = date("G:i", strtotime($this->travel_hour) . '+0300');
+        
+        $timezone='America/Sao_Paulo';
+
+        $given = new DateTime($this->travel_hour, new DateTimeZone("UTC"));
+        $given->setTimezone(new DateTimeZone($timezone));
+        $horaFormatada = $given->format("G:i");
+        
         if (!empty($this->spots) && !empty($this->location)) {
             $plural = $this->spots > 1 ? "s" : "";
 
