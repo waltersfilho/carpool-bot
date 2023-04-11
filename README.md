@@ -182,9 +182,11 @@ volta - Cadastrar nova volta, atualizar volta ou ver idas existentes
 remover - Remover ida ou volta
 regras - Visualizar regras de uso do grupo
 vagas - Atualiza o numero de vagas
+lotou - Atualiza o numero de vagas para 0
 caronas - Ver idas e voltas em uma única mensagem
 picpay - Informe se aceita ou não PicPay
-wunder - Informe se aceita ou não Wunder
+carpool - Informe se aceita ou não Waze
+sobre - Sobre o bot
 ```
 
 ### Comece a usar
