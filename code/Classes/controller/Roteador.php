@@ -494,6 +494,12 @@ class Roteador
                         TelegramConnect::sendMessage($chat_id, "Regras inseridas/atualizadas com sucesso.");
                     }
                     break;
+
+                case 'broadcast':
+                    if(TelegramConnect::isBotOwner($chat_id)){
+                        TelegramConnect::sendMessage($chat_id, "$args");
+                    }
+                    break;
             }
 
 

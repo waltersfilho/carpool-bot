@@ -15,4 +15,9 @@ class TelegramConnect
 
         return ($member_status === 'creator' || $member_status === 'administrator');
     }
+
+    public static function isBotOwner ($userId) {
+        $ownerId = array_key_exists("OWNER_ID", $_ENV) ? $_ENV["OWNER_ID"] : "botName";
+        return $ownerId == $userId;
+    }
 }
