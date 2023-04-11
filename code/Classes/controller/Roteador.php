@@ -406,6 +406,22 @@ class Roteador
                     }
                     break;
 
+                case 'lotou':
+                    if (count($args) == 2) {
+                        if ($args[1] == 'ida') {
+                            $dao->updateSpots($chat_id, $user_id, 0, '0');
+                            TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para 0");
+                        } elseif ($args[1] == 'volta') {
+                            $dao->updateSpots($chat_id, $user_id, 0, '1');
+                            TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para 0");
+                        } else {
+                            TelegramConnect::sendMessage($chat_id, "Formato: /lotou [ida|volta]\nEx: /lotou ida");
+                        }
+                    } else {
+                        TelegramConnect::sendMessage($chat_id, "Formato: /lotou [ida|volta]\nEx: /lotou ida");
+                    }
+                    break;
+
                 case 'remover':
                     if (count($args) == 2) {
                         if ($args[1] == 'ida') {
