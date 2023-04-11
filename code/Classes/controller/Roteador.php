@@ -35,7 +35,7 @@ class Roteador
             $command = $match['comando'];
             $stringComando = str_replace($match[0], "", $stringComando);
 
-            if($command === 'aviso' || $command === 'regras') {
+            if($command === 'aviso' || $command === 'regras' || $command === 'broadcast') {
                 $args = $stringComando;
                 return $command;
             }
