@@ -489,7 +489,7 @@ class Roteador
                         
                     }
                     else if(TelegramConnect::isAdmin($chat_id, $user_id)){
-                        $dao->inserirRegra($chat_id, $args);
+                        $dao->inserirRegra($chat_id, $args[1]);
 
                         TelegramConnect::sendMessage($chat_id, "Regras inseridas/atualizadas com sucesso.");
                     }
