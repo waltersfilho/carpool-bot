@@ -155,13 +155,15 @@ class Roteador
                             }
                         }
 
-                        $texto = $dao->retornarAvisos($chat_id);
-                        $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
-                        $texto .= isset($textoAmanha) ? $textoAmanha : "";
-
-                        $texto = empty(str_replace("\n", "", trim($texto))) ? "Não há ofertas de carona de ida :(" : $texto;
+                        if (empty($caronasDiaAtual) && empty($caronasDiaSeguinte)) {
+                            $texto = $dao->retornarAvisos($chat_id);
+                            $texto .= "\n" . "Não há ofertas de carona de ida :(";
+                        } else {
+                            $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
+                            $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
                         TelegramConnect::sendMessage($chat_id, $texto);
+
                     } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
 
                         $horarioRaw = $args[1];
@@ -229,11 +231,12 @@ class Roteador
                             }
                         }
 
-                        $texto = $dao->retornarAvisos($chat_id);
-                        $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
-                        $texto .= isset($textoAmanha) ? $textoAmanha : "";
-
-                        $texto = empty(str_replace("\n", "", trim($texto))) ? "Não há ofertas de carona de volta :(" : $texto;
+                        if (empty($caronasDiaAtual) && empty($caronasDiaSeguinte)) {
+                            $texto = $dao->retornarAvisos($chat_id);
+                            $texto .= "\n" . "Não há ofertas de carona de volta :(";
+                        } else {
+                            $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
+                            $texto .= isset($textoAmanha) ? $textoAmanha : "";
 
                         TelegramConnect::sendMessage($chat_id, $texto);
 
@@ -317,74 +320,77 @@ class Roteador
                 case 'caronas':
 
                     $resultadoHoje = $dao->getListaIdaHoje($chat_id);
-                    $caronasDiaAtual = array();
-                    $caronasDiaSeguinte = array();
+                    $caronasIdaDiaAtual = array();
+                    $caronasVoltaDiaAtual = array();
+                    $caronasIdaDiaSeguinte = array();
+                    $caronasVoltaDiaSeguinte = array();
                     $source = Config::getBotConfig("source");
 
                     foreach ($resultadoHoje as $carona) {
-                        array_push($caronasDiaAtual, $carona);
+                        array_push($caronasIdaDiaAtual, $carona);
                     }
 
                     $resultadoAmanha = $dao->getListaIdaAmanha($chat_id);
 
                     foreach ($resultadoAmanha as $carona) {
-                        array_push($caronasDiaSeguinte, $carona);
+                        array_push($caronasIdaDiaSeguinte, $carona);
                     }
 
-                    if (!empty($caronasDiaAtual)) {
+                    if (!empty($caronasIdaDiaAtual)) {
                         $textoIdaHoje = "\n<b>Ida para o " . $source . "</b>\n";
-                        foreach ($caronasDiaAtual as $carona) {
+                        foreach ($caronasIdaDiaAtual as $carona) {
                             $textoIdaHoje .= (string)$carona . "\n";
                         }
                     }
-                    if (!empty($caronasDiaSeguinte)) {
+                    if (!empty($caronasIdaDiaSeguinte)) {
                         $textoIdaAmanha = "\n<b>Ida para o " . $source . "</b>\n";
-                        foreach ($caronasDiaSeguinte as $carona) {
+                        foreach ($caronasIdaDiaSeguinte as $carona) {
                             $textoIdaAmanha .= (string)$carona . "\n";
                         }
                     }
 
-                    unset($caronasDiaAtual);
-                    unset($caronasDiaSeguinte);
-
-                    $caronasDiaAtual = array();
-                    $caronasDiaSeguinte = array();
-
                     $resultadoHoje = $dao->getListaVoltaHoje($chat_id);
 
                     foreach ($resultadoHoje as $carona) {
-                        array_push($caronasDiaAtual, $carona);
+                        array_push($caronasVoltaDiaAtual, $carona);
                     }
 
                     $resultadoAmanha = $dao->getListaVoltaAmanha($chat_id);
 
                     foreach ($resultadoAmanha as $carona) {
-                        array_push($caronasDiaSeguinte, $carona);
+                        array_push($caronasVoltaDiaSeguinte, $carona);
                     }
 
-                    if (!empty($caronasDiaAtual)) {
+                    if (!empty($caronasVoltaDiaAtual)) {
                         $textoVoltaHoje = "\n<b>Volta do " . $source . "</b>\n";
-                        foreach ($caronasDiaAtual as $carona) {
+                        foreach ($caronasVoltaDiaAtual as $carona) {
                             $textoVoltaHoje .= (string)$carona . "\n";
                         }
                     }
-                    if (!empty($caronasDiaSeguinte)) {
+                    if (!empty($caronasVoltaDiaSeguinte)) {
                         $textoVoltaAmanha = "\n<b>Volta do " . $source . "</b>\n";
-                        foreach ($caronasDiaSeguinte as $carona) {
+                        foreach ($caronasVoltaDiaSeguinte as $carona) {
                             $textoVoltaAmanha .= (string)$carona . "\n";
                         }
                     }
 
-                    $texto = $dao->retornarAvisos($chat_id);
-                    $texto .= isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
-                    $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n" : "";
-                    $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
+                    $texto = '';
 
-                    $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "\n " : "";
-                    $texto .= isset($textoIdaAmanha) ? $textoIdaAmanha . "\n" : "";
-                    $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha . "\n" : "";
+                    if (empty($caronasIdaDiaAtual)
+                        && empty($caronasIdaDiaSeguinte)
+                        && empty($caronasVoltaDiaAtual)
+                        && empty($caronasVoltaDiaSeguinte)
+                    ) {
+                        $texto = $dao->retornarAvisos($chat_id);
+                        $texto .= "\n" . "Não há ofertas de carona :(";
+                    } else {
+                        $texto .= isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
+                        $texto .= isset($textoIdaHoje) ? $textoIdaHoje . "\n" : "";
+                        $texto .= isset($textoVoltaHoje) ? $textoVoltaHoje . "\n" : "";
 
-                    $texto = empty(str_replace("\n", "", trim($texto))) ? "Não há ofertas de carona :(" : $texto;
+                        $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "\n " : "";
+                        $texto .= isset($textoIdaAmanha) ? $textoIdaAmanha . "\n" : "";
+                        $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha . "\n" : "";
 
                     TelegramConnect::sendMessage($chat_id, $texto);
                     break;
