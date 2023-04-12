@@ -313,8 +313,6 @@ class CaronaDAO
 
     public function getChatsList() {
 
-        $this->removeExpiredCarpools();
-
         $this->db->query(CaronaDAO::LISTA_QUERY_CHAT_IDS);
 
         return $this->montaListaCaronas($this->db->resultSet());
