@@ -45,6 +45,9 @@ class CaronaDAO
 
     const QUERY_RECUPERAR_REGRAS = "select message from public.regras where chat_id = :chat_id";
 
+    const LISTA_QUERY_CHAT_IDS = "select distinct c.chat_id from caroneiros c";
+
+
     private $db;
 
     public function __construct()
@@ -306,6 +309,15 @@ class CaronaDAO
 
         return $this->db->resultSet()[0]['message'] . "\n \n";
 
+    }
+
+    public function getChatsList() {
+
+        $this->removeExpiredCarpools();
+
+        $this->db->query(CaronaDAO::LISTA_QUERY_CHAT_IDS);
+
+        return $this->montaListaCaronas($this->db->resultSet());
     }
 
     private function montaListaCaronas($resultSet)

@@ -496,8 +496,14 @@ class Roteador
                     break;
 
                 case 'broadcast':
-                    if(TelegramConnect::isBotOwner($chat_id)){
-                        TelegramConnect::sendMessage($chat_id, $args);
+                    if(TelegramConnect::isBotOwner($user_id)){
+                        $chat_ids = $dao->getChatsList();
+
+                        if (!empty($chat_ids)) {
+                            foreach ($chat_ids as $chat_id) {
+                                TelegramConnect::sendMessage($chat_id, $args);
+                            }
+                        }
                     }
                     break;
             }
