@@ -238,6 +238,7 @@ class Roteador
                         } else {
                             $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
+                        }
 
                         TelegramConnect::sendMessage($chat_id, $texto);
 
@@ -392,6 +393,7 @@ class Roteador
                         $texto .= isset($textoIdaAmanha) || isset($textoVoltaAmanha) ? $dataAmanhaDia . "\n " : "";
                         $texto .= isset($textoIdaAmanha) ? $textoIdaAmanha . "\n" : "";
                         $texto .= isset($textoVoltaAmanha) ? $textoVoltaAmanha . "\n" : "";
+                    }
 
                     TelegramConnect::sendMessage($chat_id, $texto);
                     break;
