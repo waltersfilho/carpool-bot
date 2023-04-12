@@ -14,6 +14,7 @@ class PontoReferenciaMap
         "barra bali" => "o",
         "anil" => "o",
         "batalhão" => "o",
+        "batalhao" => "o",
         "jd clarice" => "o"
     );
 
