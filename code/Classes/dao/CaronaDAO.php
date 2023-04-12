@@ -315,7 +315,7 @@ class CaronaDAO
 
         $this->db->query(CaronaDAO::LISTA_QUERY_CHAT_IDS);
 
-        return $this->montaListaCaronas($this->db->resultSet());
+        return $this->db->resultSet();
     }
 
     private function montaListaCaronas($resultSet)

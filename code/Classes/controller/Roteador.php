@@ -500,8 +500,8 @@ class Roteador
                         $chat_ids = $dao->getChatsList();
 
                         if (!empty($chat_ids)) {
-                            foreach ($chat_ids as $chat_id) {
-                                TelegramConnect::sendMessage($chat_id, $args);
+                            foreach ($chat_ids as $row) {
+                                TelegramConnect::sendMessage($row["chat_id"], $args);
                             }
                         }
                     }
