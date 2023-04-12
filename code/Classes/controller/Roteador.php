@@ -155,11 +155,12 @@ class Roteador
                             }
                         }
 
+                        $texto = $dao->retornarAvisos($chat_id);
+
                         if (empty($caronasDiaAtual) && empty($caronasDiaSeguinte)) {
-                            $texto = $dao->retornarAvisos($chat_id);
                             $texto .= "\n" . "Não há ofertas de carona de ida :(";
                         } else {
-                            $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
+                            $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
                         }
 
@@ -232,11 +233,12 @@ class Roteador
                             }
                         }
 
+                        $texto = $dao->retornarAvisos($chat_id);
+
                         if (empty($caronasDiaAtual) && empty($caronasDiaSeguinte)) {
-                            $texto = $dao->retornarAvisos($chat_id);
                             $texto .= "\n" . "Não há ofertas de carona de volta :(";
                         } else {
-                            $texto = isset($textoHoje) ? $textoHoje . "\n" : "";
+                            $texto .= isset($textoHoje) ? $textoHoje . "\n" : "";
                             $texto .= isset($textoAmanha) ? $textoAmanha : "";
                         }
 
@@ -376,14 +378,13 @@ class Roteador
                         }
                     }
 
-                    $texto = '';
+                    $texto = $dao->retornarAvisos($chat_id);
 
                     if (empty($caronasIdaDiaAtual)
                         && empty($caronasIdaDiaSeguinte)
                         && empty($caronasVoltaDiaAtual)
                         && empty($caronasVoltaDiaSeguinte)
                     ) {
-                        $texto = $dao->retornarAvisos($chat_id);
                         $texto .= "\n" . "Não há ofertas de carona :(";
                     } else {
                         $texto .= isset($textoIdaHoje) || isset($textoVoltaHoje) ? $dataHojeDia . "\n" : "";
