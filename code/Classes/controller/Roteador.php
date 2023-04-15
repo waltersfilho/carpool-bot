@@ -31,6 +31,8 @@ class Roteador
         $command = NULL;
         $args = NULL;
 
+        error_log($stringComando);
+
         if (preg_match($regexComando, $stringComando, $match)) {
             $command = $match['comando'];
             $stringComando = str_replace($match[0], "", $stringComando);
