@@ -10,6 +10,12 @@ class PontoReferenciaMap
         "planalto" => "o",
         "prezunic" => "o",
         "castelo" => "o",
+        "americas park" => "o",
+        "barra bali" => "o",
+        "anil" => "o",
+        "batalhão" => "o",
+        "batalhao" => "o",
+        "jd clarice" => "o"
     );
 
     public function prefixoPontoReferencia($pontoReferencia)

@@ -406,10 +406,18 @@ class Roteador
                         $spots = $args[2];
                         if ($args[1] == 'ida') {
                             $dao->updateSpots($chat_id, $user_id, $spots, '0');
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para " . $spots);
+			    if ($spots === '0') {
+				TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para " . $spots . "\nConsidere usar o comando /lotou");    
+			    } else {
+			    	TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para " . $spots);
+			    }	
                         } elseif ($args[1] == 'volta') {
                             $dao->updateSpots($chat_id, $user_id, $spots, '1');
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para " . $spots);
+			    if ($spots === '0') {
+				TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para " . $spots . "\nConsidere usar o comando /lotou");    
+			    } else {	
+                            	TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para " . $spots);
+			    }
                         } else {
                             TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
                         }
