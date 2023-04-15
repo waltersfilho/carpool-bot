@@ -31,8 +31,6 @@ class Roteador
         $command = NULL;
         $args = NULL;
 
-        error_log($stringComando);
-
         if (preg_match($regexComando, $stringComando, $match)) {
             $command = $match['comando'];
             $stringComando = str_replace($match[0], "", $stringComando);
@@ -44,11 +42,14 @@ class Roteador
 
             $args = explode(" ", $stringComando);
 
-            if (count($args) == 5) {
-                $args[3] = $args[3] . " " . $args[4];
+            if (count($args) > 0) {
+
+                if (count($args) == 5) {
+                    $args[3] = $args[3] . " " . $args[4];
+                }
+                unset($args[4]);
+                error_log($args[1]);
             }
-            unset($args[4]);
-            error_log($args);
         }
 
         error_log(print_r($command, true));
