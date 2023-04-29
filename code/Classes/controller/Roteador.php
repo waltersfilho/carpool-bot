@@ -169,6 +169,8 @@ class Roteador
 
                         TelegramConnect::sendMessage($chat_id, $texto);
 
+                        return $texto;
+
                     } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
 
                         $horarioRaw = $args[1];
@@ -197,14 +199,23 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
 
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s" : "") . " saindo d" . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
+                            $texto = "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s" : "") . " saindo d" . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location;
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         } else {
-                            TelegramConnect::sendMessage($chat_id, "Horário inválido.");
+
+                            $texto = "Horário inválido.";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         }
                     } else {
-                        TelegramConnect::sendMessage($chat_id, "Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu");
+
+                        $texto = "Uso: /ida [horario] [vagas] [local] \nEx: /ida 10:00 2 macembu";
+
+                        TelegramConnect::sendMessage($chat_id, $texto);
                     }
-                    break;
+
+                    return $texto;
 
                 case 'volta':
                     if (count($args) == 1) {
@@ -247,6 +258,8 @@ class Roteador
 
                         TelegramConnect::sendMessage($chat_id, $texto);
 
+                        return $texto;
+
 
                     } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
 
@@ -281,7 +294,9 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s"  : "") . " indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
+                            $texto = "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s"  : "") . " indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location;
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
 
                         }
                     } elseif ((count($args) == 4) && !(strtolower($args[3]) === 'pechincha') && is_numeric($args[2])) {
@@ -314,13 +329,23 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '1');
 
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s" : "") . " indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location);
+                            $texto = "@" . $username . " oferece carona de volta às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s" : "") . " indo até " . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location;
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
+
+                            return $texto;
 
                         } else {
-                            TelegramConnect::sendMessage($chat_id, "Horário inválido.");
+
+                            $texto = "Horário Inválido";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         }
                     } else {
-                        TelegramConnect::sendMessage($chat_id, "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 macembu");
+
+                        $texto = "Uso: /volta [horario] [vagas] [local] \nEx: /volta 15:00 2 macembu";
+
+                        TelegramConnect::sendMessage($chat_id, $texto);
                     }
                     break;
 
@@ -400,90 +425,110 @@ class Roteador
                     }
 
                     TelegramConnect::sendMessage($chat_id, $texto);
-                    break;
+
+                    return $texto;
 
                 case 'vagas':
                     if (count($args) == 3) {
                         $spots = $args[2];
                         if ($args[1] == 'ida') {
                             $dao->updateSpots($chat_id, $user_id, $spots, '0');
-			    if ($spots === '0') {
-				TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para " . $spots . "\nConsidere usar o comando /lotou");    
-			    } else {
-			    	TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para " . $spots);
-			    }	
+                            if ($spots === '0') {
+                                $texto = "@" . $username . " atualizou o número de vagas de ida para " . $spots . "\nConsidere usar o comando /lotou";
+
+                                TelegramConnect::sendMessage($chat_id, $texto);
+
+                            } else {
+                                $texto = "@" . $username . " atualizou o número de vagas de ida para " . $spots;
+
+                                TelegramConnect::sendMessage($chat_id, $texto);
+
+                            }
                         } elseif ($args[1] == 'volta') {
                             $dao->updateSpots($chat_id, $user_id, $spots, '1');
-			    if ($spots === '0') {
-				TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para " . $spots . "\nConsidere usar o comando /lotou");    
-			    } else {	
-                            	TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para " . $spots);
-			    }
+                            if ($spots === '0') {
+
+                                $texto = "@" . $username . " atualizou o número de vagas de volta para " . $spots . "\nConsidere usar o comando /lotou";
+
+                                TelegramConnect::sendMessage($chat_id, $texto);
+
+                            } else {
+                                $texto = "@" . $username . " atualizou o número de vagas de volta para " . $spots;
+                                TelegramConnect::sendMessage($chat_id, $texto);
+                            }
                         } else {
-                            TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
+                            $texto = "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         }
                     } else {
-                        TelegramConnect::sendMessage($chat_id, "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2");
+                        $texto = "Formato: /vagas [ida|volta] [vagas]\nEx: /vagas ida 2";
+
+                        TelegramConnect::sendMessage($chat_id, $texto);
                     }
-                    break;
+                    return $texto;
 
                 case 'lotou':
                     if (count($args) == 2) {
                         if ($args[1] == 'ida') {
                             $dao->updateSpots($chat_id, $user_id, '0', '0');
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de ida para 0");
+
+                            $texto = "@" . $username . " atualizou o número de vagas de ida para 0";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         } elseif ($args[1] == 'volta') {
                             $dao->updateSpots($chat_id, $user_id, '0', '1');
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " atualizou o número de vagas de volta para 0");
+
+                            $texto = "@" . $username . " atualizou o número de vagas de volta para 0";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         } else {
-                            TelegramConnect::sendMessage($chat_id, "Formato: /lotou [ida|volta]\nEx: /lotou ida");
+                            $texto = "Formato: /lotou [ida|volta]\nEx: /lotou ida";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         }
                     } else {
-                        TelegramConnect::sendMessage($chat_id, "Formato: /lotou [ida|volta]\nEx: /lotou ida");
+                        $texto = "Formato: /lotou [ida|volta]\nEx: /lotou ida";
+
+                        TelegramConnect::sendMessage($chat_id, $texto);
                     }
-                    break;
+                    return $texto;
 
                 case 'remover':
                     if (count($args) == 2) {
                         if ($args[1] == 'ida') {
                             $dao->removeCarpool($chat_id, $user_id, '0');
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " removeu a carona de ida");
+
+                            $texto = "@" . $username . " removeu a carona de ida";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         } elseif ($args[1] == 'volta') {
                             $dao->removeCarpool($chat_id, $user_id, '1');
-                            TelegramConnect::sendMessage($chat_id, "@" . $username . " removeu a carona de volta");
+
+                            $texto = "@" . $username . " removeu a carona de volta";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         } elseif ($args[1] == 'aviso' && TelegramConnect::isAdmin($chat_id, $user_id)) {
                             $dao->removerAviso($chat_id);
                         } else {
-                            TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
+
+                            $texto = "Formato: /remover [ida|volta]";
+
+                            TelegramConnect::sendMessage($chat_id, $texto);
                         }
                     } else {
-                        TelegramConnect::sendMessage($chat_id, "Formato: /remover [ida|volta]");
-                    }
+                        $texto = "Formato: /remover [ida|volta]";
 
-                    break;
-                case 'picpay':
-                    if (count($args) == 1) {
-                        $resultado = $dao->insertMeioPagamento($chat_id, $user_id, 'picpay');
-
-                        error_log($resultado);
-
-                        $texto = $resultado ? "@" . $username . " informou que aceita PicPay" : "@" . $username . " informou que <b>NÃO</b> aceita PicPay";
                         TelegramConnect::sendMessage($chat_id, $texto);
                     }
-                    break;
-                case 'carpool':
-                    if (count($args) == 1) {
-                        $resultado = $dao->insertMeioPagamento($chat_id, $user_id, 'carpool');
 
-                        $texto = $resultado ? "@" . $username . " informou que aceita Waze Carpool" : "@" . $username . " informou que <b>NÃO</b> aceita Waze Carpool";
-                        TelegramConnect::sendMessage($chat_id, $texto);
-                    }
-                    break;
+                    return $texto;
 		        case 'sobre':
                     if (count($args) == 1) {
 
                         $texto = "<a href='https://github.com/waltersfilho/carpool-bot'>Teste</a>";
                         TelegramConnect::sendMessage($chat_id, $texto);
+                        return $texto;
                     }
                     break;
 
@@ -507,6 +552,8 @@ class Roteador
                         }
                         
                         TelegramConnect::sendMessage($chat_id, $header);
+
+                        return $header;
                         
                     }
                     else if(TelegramConnect::isAdmin($chat_id, $user_id)){
