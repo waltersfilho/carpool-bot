@@ -2,3 +2,4 @@
 #RewriteBase /api
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^(.*)$ index.php [QSA, L]
+Header set Access-Control-Allow-Origin "*"
