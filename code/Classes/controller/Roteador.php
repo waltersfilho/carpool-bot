@@ -124,7 +124,7 @@ class Roteador
                     $texto = "Versão 1.3 - ChatId: $chat_id";
 
                     TelegramConnect::sendMessage($chat_id, $texto);
-                    break;
+                    return $texto;
 
                 /*Comandos de viagem*/
                 case 'ida':

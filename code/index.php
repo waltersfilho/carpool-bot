@@ -12,7 +12,9 @@
     $update = file_get_contents('php://input');
     $updateArray = json_decode($update, TRUE);
     
-    Roteador::direcionar($updateArray);
+    $texto = Roteador::direcionar($updateArray);
+
+    echo $texto
 ?>
 
 <h2>CaronasBot</h2>
