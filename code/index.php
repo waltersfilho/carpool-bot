@@ -1,4 +1,6 @@
 <?php
+    header("Access-Control-Allow-Origin: *");
+    
     require_once "Classes/config/Config.php";
     require_once "Classes/controller/Roteador.php";
     require_once "Classes/config/Connection.php";
