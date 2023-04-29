@@ -44,12 +44,12 @@ class Carona
             $plural = $this->spots > 1 ? "s" : "";
 
             if (!$this->route) {
-                return "@" . $this->username . " - " . $horaFormatada . " d" . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+                return "<a href=https://wa.me/" . $this->user_id . ">" . "@" . $this->username .  "</a>" . " - " . $horaFormatada . " d" . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
             } else {
-                return "@" . $this->username . " - " . $horaFormatada . " até " . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
+                return "<a href=https://wa.me/" . $this->user_id . ">" . "@" . $this->username .  "</a>" .  " - " . $horaFormatada . " até " . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
             }
-        } else {
-            return "<i>" . "@ " . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
+        } else { .
+            return "<i><a href=https://wa.me/" . $this->user_id . ">" . "@" . $this->username .  "</a>" . " - " . $horaFormatada . " (Lotado)</i>";
         }
     }
 
