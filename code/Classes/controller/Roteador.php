@@ -117,7 +117,8 @@ class Roteador
 									Ex: Assim como o PicPay, por padrão, todos os caroneiros não aceitam Waze Carpool. Chamando o comando pela primeira vez, é cadastrado que você aceita Waze Carpool.";
 
                     TelegramConnect::sendMessage($chat_id, $help);
-                    break;
+
+                    return $help;
 
                 case 'teste':
                     error_log("teste");
