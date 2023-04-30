@@ -200,7 +200,7 @@ class Roteador
 
                             $dao->createCarpoolWithDetails($chat_id, $user_id, $username, $travel_hour, $timestamp, $spots, $location, '0');
 
-                            $texto = "<a href=\"https://wa.me/" . $user_id . "\">" . "@" . $username .  "</a>" . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s" : "") . " saindo d" . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location;
+                            $texto = "@" . $username . " oferece carona de ida às " . $travel_hour . " com " . $spots . " vaga" . ($spots > 1 ? "s" : "") . " saindo d" . $pontoReferenciaMap->prefixoPontoReferencia($location) . " ". $location;
 
                             TelegramConnect::sendMessage($chat_id, $texto);
                         } else {

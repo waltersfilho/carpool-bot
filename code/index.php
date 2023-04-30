@@ -13,8 +13,6 @@
     $updateArray = json_decode($update, TRUE);
     
     $texto = Roteador::direcionar($updateArray);
-
-    echo $texto
 ?>
 
 <h2>CaronasBot</h2>
