@@ -49,7 +49,7 @@ class Carona
                 return  "@" . $this->username . " - " . $horaFormatada . " até " . $this->pontoReferenciaMap->prefixoPontoReferencia($this->location) . " " . $this->location . " (" . $this->spots . " vaga" . $plural . ")";
             }
         } else {
-            return "<li> @" . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
+            return "<i> @" . $this->username . " - " . $horaFormatada . " (Lotado)</i>";
         }
     }
 
