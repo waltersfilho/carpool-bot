@@ -3,6 +3,7 @@
     class Database{
 
         private $host;
+		private $port;
         private $user;
         private $pass;
         private $dbname;
@@ -12,12 +13,15 @@
         public function __construct(){
 
             $this->host = Config::getBotConfig("DBHost");
+			$this->port   = Config::getBotConfig("DBPort");
             $this->user = Config::getBotConfig("DBUser");
             $this->pass = Config::getBotConfig("DBPass");
             $this->dbname = Config::getBotConfig("DBName");
 
             //Set dsn
-            $dsn = 'pgsql:host=' . $this->host . ';dbname=' . $this->dbname;
+            $dsn = 'pgsql:host=' . $this->host 
+				. ';port=' . $this->port
+				. ';dbname=' . $this->dbname;
 
             //define pdo options
             $options = array(
